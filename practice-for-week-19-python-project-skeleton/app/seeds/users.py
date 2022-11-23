@@ -17,10 +17,10 @@ def seed_users():
         username='bobbie', email='bobbie@aa.io', password='password',first_name="Bobbie", 
         last_name="User", )
     user4 = User(
-        username='Demo', 
-        email='demo@aa.io', 
+        username='Peter', 
+        email='peter@aa.io', 
         password='password', 
-        first_name="Demo", 
+        first_name="Peter", 
         last_name="User", 
         )
     user5 = User(

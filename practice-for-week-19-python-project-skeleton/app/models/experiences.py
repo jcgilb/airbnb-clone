@@ -69,7 +69,7 @@ class ExperienceImage(db.Model):
                            server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    exp_image = db.relationship("ExperienceImage", back_populates="images")
+    exp_image = db.relationship("Experience", back_populates="images")
 
     def to_dict(self):
         return {

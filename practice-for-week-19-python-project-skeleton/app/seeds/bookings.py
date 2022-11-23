@@ -3,7 +3,7 @@ from ..models.bookings import Booking, db
 from sqlalchemy import func
 
 
-def seed_experiences():
+def seed_bookings():
     booking1 = Booking(
         user_id=6,
         exp_id=1,

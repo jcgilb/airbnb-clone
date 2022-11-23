@@ -18,7 +18,7 @@ class Review(db.Model):
     created_at = db.Column(db.DateTime(timezone=True),server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
-    review_images = db.relationship("ExperienceImage", backref="review_image")
+    review_images = db.relationship("ReviewImage", backref="review")
     review_author = db.relationship("User", back_populates="review")
     exp_review = db.relationship("Experience", back_populates="reviews")
 
@@ -41,8 +41,7 @@ class ReviewImage(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(255))
-    review_id = db.Column(db.Integer(), db.ForeignKey(
-        add_prefix_for_prod("reviews.id")), nullable=False)
+    review_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod("reviews.id")), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True),server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
