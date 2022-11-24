@@ -29,6 +29,7 @@ class Review(db.Model):
             'user_id': self.user_id,
             'review_body': self.review_body,
             'stars': self.stars,
+            'review_images': [self.review_image.to_dict() for self.review_image in self.review_images],
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
