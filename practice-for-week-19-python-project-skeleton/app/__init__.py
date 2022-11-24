@@ -2,17 +2,17 @@ import os
 from flask import Flask, render_template, request, session, redirect, request, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
-from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from flask import Flask, render_template
+from flask_wtf.csrf import CSRFProtect, generate_csrf
 from .models import db, User
 from .models.db import ma
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
-from .api.experience_routes import experience_routes
+from .api.review_routes import review_routes
 from .api.booking_routes import booking_routes
-from .seeds import seed_commands
+from .api.experience_routes import experience_routes
 from .config import Config
+from .seeds import seed_commands
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -28,10 +28,11 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
-app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-app.register_blueprint(experience_routes, url_prefix='/api/experiences')
+app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(review_routes, url_prefix='/api/reviews')
 app.register_blueprint(booking_routes, url_prefix='/api/bookings')
+app.register_blueprint(experience_routes, url_prefix='/api/experiences')
 db.init_app(app)
 ma.init_app(app)
 Migrate(app, db)
