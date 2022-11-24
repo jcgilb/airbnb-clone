@@ -18,20 +18,19 @@ def validation_errors_to_error_messages(validation_errors):
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
     return errorMessages
-
-
+    
 @booking_routes.route('/<int:bkg_id>', methods=["GET"])
 def get_one_bkg(bkg_id):
     """Get one booking by id"""
-
-    one_bkg = Booking.query.get(bkg_id)
     
+    one_bkg = Booking.query.get(bkg_id)
+
     if not one_bkg:
         return {"message": ["booking couldn't be found."]}, 404
-  
+
     bkg_in_dict = one_bkg.to_dict()
-    return bkg_in_dict    
-    
+    return bkg_in_dict  
+
 
 @booking_routes.route('/<int:bkg_id>', methods=["PUT"])
 def edit_one_bkg(bkg_id):
@@ -57,12 +56,12 @@ def edit_one_bkg(bkg_id):
 
 @booking_routes.route('/<int:bkg_id>', methods=["DELETE"])
 def delete_one_bkg(bkg_id):
-  """Delete a bkg by id"""
-  bkg = Booking.query.get(bkg_id)
-  if bkg:
-    db.session.delete(bkg)
-    db.session.commit()
-    result = booking_schema.dump(bkg)
-    return "booking deleted successfully.", 200 
-  else:
-    return "booking not found.", 404    
+    """Delete a bkg by id"""
+    bkg = Booking.query.get(bkg_id)
+    if bkg:
+        db.session.delete(bkg)
+        db.session.commit()
+        result = booking_schema.dump(bkg)
+        return "booking deleted successfully.", 200 
+    else:
+        return "booking not found.", 404    

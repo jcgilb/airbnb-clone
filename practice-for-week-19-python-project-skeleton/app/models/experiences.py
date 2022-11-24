@@ -89,7 +89,7 @@ class ExperienceSchema(ma.Schema):
 
 class ExperienceImageSchema(ma.Schema):
     class Meta:
-        fields = ("id", "exp_id", "image_url, preview, created_at, updated_at")
+        fields = ("id", "exp_id", "image_url", "preview", "created_at", "updated_at")
 
 experience_schema = ExperienceSchema()
 experiences_schema = ExperienceSchema(many=True)

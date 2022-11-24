@@ -1,8 +1,8 @@
 // constants
-const REMOVE = "session/REMOVE";
-const GET_ALL = "session/GET_ALL";
-const GET_ONE = "servers/GET_ONE";
-const ADD_UPDATE = "session/ADD_UPDATE";
+const REMOVE = "experiences/REMOVE";
+const GET_ALL = "experiences/GET_ALL";
+const GET_ONE = "experiences/GET_ONE";
+const ADD_UPDATE = "experiences/ADD_UPDATE";
 
 const getAll = (experiences) => ({
   type: GET_ALL,
@@ -39,13 +39,51 @@ export const getAllExperiences = () => async (dispatch) => {
 };
 
 // get one experiences
-export const getOneServer = (expId) => async (dispatch) => {
+export const getOneExperience = (expId) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}`);
   if (response.ok) {
     const data = await response.json();
     dispatch(getOne(data));
   }
   return response;
+};
+
+// create an experiences
+export const createOneExperience = (payload) => async (dispatch) => {
+  const response = await fetch(`/api/experiences`, {
+    methods: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    const experience = await response.json();
+    dispatch(addOrUpdate(experience));
+  }
+  return response;
+};
+
+// update an experiences
+export const updateOneExperience = (expId, payload) => async (dispatch) => {
+  const response = await fetch(`/api/experiences/${expId}`, {
+    methods: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    const experience = await response.json();
+    dispatch(addOrUpdate(experience));
+  }
+  return response;
+};
+
+// delete an experience
+export const deleteSong = (expId) => async (dispatch) => {
+  const response = await fetch(`/api/experiences/${expId}`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    dispatch(remove(expId));
+  }
 };
 
 const initialState = { oneExperience: {} };

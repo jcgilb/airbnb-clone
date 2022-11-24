@@ -146,14 +146,18 @@ def delete_experience(exp_id):
         db.session.delete(exp)
         db.session.commit()
         result = experience_schema.dump(exp)
-        return "experience deleted successfully.", 200 
+        return "Experience deleted successfully.", 200 
     else:
-        return "experience not found.", 404    
+        return "Experience not found.", 404    
 
 
 @experience_routes.route('/<int:exp_id>/bookings', methods=["POST"])
 def create_one_bkg(exp_id):
     """Create a booking"""
+    exp = Experience.query.get(exp_id)
+
+    if not exp: 
+      return "Experience not found.", 404
 
     form = BookingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -172,8 +176,7 @@ def create_one_bkg(exp_id):
         success_response = Booking.query.order_by(Booking.id.desc()).first()
         return jsonify(booking_schema.dump(success_response))
 
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401  
 
 @experience_routes.route('/<int:exp_id>/reviews/<int:rvw_id>', methods=["GET"])
 def get_one_rvw(exp_id, rvw_id):
@@ -217,6 +220,39 @@ def create_one_rvw_img(exp_id, rvw_id):
         return jsonify(review_image_schema.dump(new_review_image))
       else: 
         return "Only the review author can add an image to a review.", 401  
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401    
+
+
+@experience_routes.route('/<int:exp_id>/images', methods=["POST"])
+def create_one_exp_img(exp_id):
+    """Add an image to an experience"""
+
+    experience = Experience.query.get(exp_id)
+    if not experience: 
+      return "Experience does not exist", 404
+
+    form = ExperienceImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+      if experience.host_id == current_user.id:
+        data = form.data
+        preview=data['preview']
+        
+        new_exp_image = ExperienceImage(
+            exp_id=exp_id,
+            image_url=data['image_url'], 
+            preview=preview
+        )
+
+        new_exp_image.preview = preview
+
+        db.session.add(new_exp_image)
+        db.session.commit()
+          
+        return jsonify(experience_image_schema.dump(new_exp_image))
+      else: 
+        return "Only the experience host can add an image to an experience.", 401  
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401    
 
