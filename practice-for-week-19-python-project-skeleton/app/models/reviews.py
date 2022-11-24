@@ -61,9 +61,8 @@ class ReviewSchema(ma.Schema):
             "id",
             "user_id",
             "exp_id",
-            "review_body"
-            "start_date", 
-            "end_date", 
+            "review_body",
+            "stars",
             "created_at", 
             "updated_at")
 
@@ -80,6 +79,6 @@ class ReviewImageSchema(ma.Schema):
 review_schema = ReviewSchema()
 reviews_schema = ReviewSchema(many=True)
 
-review_image_schema = ReviewSchema()
-reviews_images_schema = ReviewSchema(many=True)
+review_image_schema = ReviewImageSchema()
+reviews_images_schema = ReviewImageSchema(many=True)
 

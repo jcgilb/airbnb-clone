@@ -4,7 +4,8 @@ from wtforms.validators import DataRequired, ValidationError
 
 class ReviewForm(FlaskForm):
     exp_id = IntegerField("Experience ID", validators=[DataRequired()])
-    review = StringField("Review", validators=[DataRequired()])
+    user_id = IntegerField("User ID")
+    review_body = StringField("Review", validators=[DataRequired()])
     stars = IntegerField("Stars", validators=[DataRequired()])
 
 
