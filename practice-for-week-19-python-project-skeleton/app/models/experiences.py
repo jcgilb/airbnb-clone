@@ -14,8 +14,8 @@ class Experience(db.Model):
     city = db.Column(db.String(), nullable=False)
     state = db.Column(db.String(), nullable=False)
     country = db.Column(db.String(), nullable=False)
-    lat = db.Column(db.Float(), nullable=False)
-    lng = db.Column(db.Float(), nullable=False)
+    lat = db.Column(db.Float())
+    lng = db.Column(db.Float())
     name = db.Column(db.String(), nullable=False)
     description = db.Column(db.String(), nullable=False)
     price = db.Column(db.Float(), nullable=False)
@@ -47,10 +47,11 @@ class Experience(db.Model):
             'price': self.price,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            'exp_host': self.exp_host.to_dict(),
             'bookings': [self.booking.to_dict() for self.booking in self.bookings],
             'reviews': [self.review.to_dict() for self.review in self.reviews],
             'images': [self.image.to_dict() for self.image in self.images],
-            'exp_host': [self.host.to_dict() for self.host in self.exp_host],
+            # 'exp_host': [self.host.to_dict() for self.host in self.exp_host],
         }
 
 
@@ -83,7 +84,7 @@ class ExperienceImage(db.Model):
 
 class ExperienceSchema(ma.Schema):
     class Meta:
-        fields = ("id", "exp_id", "image_url, preview, created_at, updated_at")
+        fields = ("id", "host_id", "total_exp", "address", "city","lat", "lng", "name", "description", "price", "created_at", "updated_at")
 
 class ExperienceImageSchema(ma.Schema):
     class Meta:

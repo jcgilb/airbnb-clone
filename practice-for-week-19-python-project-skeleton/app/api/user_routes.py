@@ -23,3 +23,23 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:id>/experiences', methods=["GET"])
+def get_host_experiences():
+    """
+    Get all logged in host's experiences, include reviews, images, and bookings
+    """
+    user = User.query.get(current_user.id)
+    if not user:
+        return {"message": ["User couldn't be found."]}, 404
+    exps = user.host_exps
+    exp_list = []
+    for exp in exps:
+        exp_reviews = exp.to_dict()["reviews"]
+        exp_bookings = exp.to_dict()["bookings"]
+        exp_reviews = exp.to_dict()["reviews"]
+        exp_images = exp.to_dict()["images"]
+        exp_in_dict = exp.to_dict()
+        exp_list.append(exp_in_dict)
+
+    return jsonify(exp_list)    

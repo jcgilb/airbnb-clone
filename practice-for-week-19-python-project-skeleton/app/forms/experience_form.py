@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField,StringField, DateField, BooleanField, TextAreaField
+from wtforms import IntegerField, StringField, FloatField, DateField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError
 
 class ExperienceForm(FlaskForm):
@@ -7,8 +7,8 @@ class ExperienceForm(FlaskForm):
     city = StringField("City", validators=[DataRequired()])
     state = StringField("State", validators=[DataRequired()])
     country = StringField("Country", validators=[DataRequired()])
-    lat = IntegerField("Latitude", validators=[DataRequired()])
-    lng = IntegerField("Longitude", validators=[DataRequired()])
+    lat = FloatField("Latitude", validators=[DataRequired()])
+    lng = FloatField("Longitude", validators=[DataRequired()])
     name = StringField("Name", validators=[DataRequired()])
     description = TextAreaField("Description", validators=[DataRequired()])
     price = IntegerField("Price", validators=[DataRequired()])
