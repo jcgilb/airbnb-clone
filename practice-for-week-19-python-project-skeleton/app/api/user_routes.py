@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import User
+from flask_login import login_required, current_user
 
 user_routes = Blueprint('users', __name__)
 
@@ -25,7 +26,7 @@ def user(id):
     return user.to_dict()
 
 @user_routes.route('/<int:id>/experiences', methods=["GET"])
-def get_host_experiences():
+def get_host_experiences(id):
     """
     Get all logged in host's experiences, include reviews, images, and bookings
     """
@@ -43,3 +44,20 @@ def get_host_experiences():
         exp_list.append(exp_in_dict)
 
     return jsonify(exp_list)    
+
+
+@user_routes.route('/<int:id>/bookings', methods=["GET"])
+def get_user_bookings(id):
+    """
+    Get all bookings by user id
+    """
+    user = User.query.get(id)
+    if not user:
+        return {"message": ["User couldn't be found."]}, 404
+    bookings = user.bookings
+    booking_list = []
+    for booking in bookings:
+        bkg_in_dict = booking.to_dict()
+        booking_list.append(bkg_in_dict)
+
+    return jsonify(booking_list)    

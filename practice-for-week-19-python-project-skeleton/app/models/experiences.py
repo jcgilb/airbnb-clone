@@ -11,6 +11,7 @@ class Experience(db.Model):
     host_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod(
         'users.id')), nullable=False)
     address = db.Column(db.String(), nullable=False)
+    est_duration = db.Column(db.Integer(), nullable=False)
     city = db.Column(db.String(), nullable=False)
     state = db.Column(db.String(), nullable=False)
     country = db.Column(db.String(), nullable=False)
@@ -19,8 +20,7 @@ class Experience(db.Model):
     name = db.Column(db.String(), nullable=False)
     description = db.Column(db.String(), nullable=False)
     price = db.Column(db.Float(), nullable=False)
-    created_at = db.Column(db.DateTime(timezone=True),
-                           server_default=func.now())
+    created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     bookings = db.relationship("Booking", back_populates="exp_booking")
@@ -36,6 +36,7 @@ class Experience(db.Model):
         return {
             'id': self.id,
             'host_id': self.host_id,
+            'est_duration': self.est_duration,
             'address': self.address,
             'city': self.city,
             'state': self.state,
@@ -84,7 +85,7 @@ class ExperienceImage(db.Model):
 
 class ExperienceSchema(ma.Schema):
     class Meta:
-        fields = ("id", "host_id", "total_exp", "address", "city","lat", "lng", "name", "description", "price", "created_at", "updated_at")
+        fields = ("id", "host_id", "est_duration", "total_exp", "address", "city","lat", "lng", "name", "description", "price", "created_at", "updated_at")
 
 class ExperienceImageSchema(ma.Schema):
     class Meta:

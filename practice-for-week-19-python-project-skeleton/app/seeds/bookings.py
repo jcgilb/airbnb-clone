@@ -8,35 +8,35 @@ def seed_bookings():
         user_id=6,
         exp_id=1,
         start_date=func.now(),
-        end_date=func.now(),
+        # end_date=func.now(),
         
     )
     booking2 = Booking(
         user_id=7,
         exp_id=2,
         start_date=func.now(),
-        end_date=func.now(),
+        # end_date=func.now(),
         
     )
     booking3 = Booking(
         user_id=8,
         exp_id=3,
         start_date=func.now(),
-        end_date=func.now(),
+        # end_date=func.now(),
         
     )
     booking4 = Booking(
         user_id=8,
         exp_id=4,
         start_date=func.now(),
-        end_date=func.now(),
+        # end_date=func.now(),
         
     )
     booking5 = Booking(
         user_id=10,
         exp_id=5,
         start_date=func.now(), 
-        end_date=func.now()
+        # end_date=func.now()
         
     )
 
