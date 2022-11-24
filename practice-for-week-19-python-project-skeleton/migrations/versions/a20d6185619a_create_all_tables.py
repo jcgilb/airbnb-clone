@@ -1,20 +1,16 @@
-"""empty message
+"""create all tables
 
-Revision ID: 7ba8a80a55fc
+Revision ID: a20d6185619a
 Revises: 
-Create Date: 2022-11-23 15:09:51.862283
+Create Date: 2022-11-23 23:03:16.713947
 
 """
 from alembic import op
 import sqlalchemy as sa
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
-
 
 
 # revision identifiers, used by Alembic.
-revision = '7ba8a80a55fc'
+revision = 'a20d6185619a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,15 +33,17 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     op.create_table('experiences',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('host_id', sa.Integer(), nullable=False),
     sa.Column('address', sa.String(), nullable=False),
+    sa.Column('est_duration', sa.Integer(), nullable=False),
     sa.Column('city', sa.String(), nullable=False),
     sa.Column('state', sa.String(), nullable=False),
     sa.Column('country', sa.String(), nullable=False),
-    sa.Column('lat', sa.Float(), nullable=False),
-    sa.Column('lng', sa.Float(), nullable=False),
+    sa.Column('lat', sa.Float(), nullable=True),
+    sa.Column('lng', sa.Float(), nullable=True),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
@@ -61,7 +59,6 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('exp_id', sa.Integer(), nullable=False),
     sa.Column('start_date', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('end_date', sa.DateTime(timezone=True), nullable=True),
     sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
     sa.ForeignKeyConstraint(['exp_id'], ['experiences.id'], ),
@@ -70,6 +67,9 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE bookings SET SCHEMA {SCHEMA};")
+
+    op.create_index(op.f('ix_bookings_exp_id'), 'bookings', ['exp_id'], unique=False)
+    op.create_index(op.f('ix_bookings_start_date'), 'bookings', ['start_date'], unique=False)
     op.create_table('experience_images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('exp_id', sa.Integer(), nullable=False),
@@ -82,6 +82,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE experience_images SET SCHEMA {SCHEMA};")
+
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('exp_id', sa.Integer(), nullable=False),
@@ -96,6 +97,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
+
     op.create_table('review_images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('image_url', sa.String(length=255), nullable=True),
@@ -107,6 +109,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE review_images SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 
@@ -115,6 +118,8 @@ def downgrade():
     op.drop_table('review_images')
     op.drop_table('reviews')
     op.drop_table('experience_images')
+    op.drop_index(op.f('ix_bookings_start_date'), table_name='bookings')
+    op.drop_index(op.f('ix_bookings_exp_id'), table_name='bookings')
     op.drop_table('bookings')
     op.drop_table('experiences')
     op.drop_table('users')

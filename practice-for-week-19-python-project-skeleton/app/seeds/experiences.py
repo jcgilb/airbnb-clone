@@ -7,6 +7,7 @@ def seed_experiences():
     exp1 = Experience(
         name="Private pottery wheel lesson",
         host_id=1,
+        est_duration=180,
         address="1403 Raleigh St, Denver, CO 80204",
         city="Denver",
         state="Colorado",
@@ -19,6 +20,7 @@ def seed_experiences():
     exp2 = Experience(
         name="Goal-Setting Workshop w/Life Coach",
         host_id=2,
+        est_duration=180,
         address="3330 Brighton Blvd, Denver, CO 80216",
         city="Denver",
         state="Colorado",
@@ -31,6 +33,7 @@ def seed_experiences():
     exp3 = Experience(
         name="Learn Astrophotography in the Mountains",
         host_id=3,
+        est_duration=180,
         address="400 North Parkway, Breckenridge, CO 80424",
         city="Breckenridge",
         state="Colorado",
@@ -43,6 +46,7 @@ def seed_experiences():
     exp4 = Experience(
         name="Alpaca Palooza - Alpaca Encounters",
         host_id=4,
+        est_duration=180,
         address="18300 W Alameda Pkwy, Morrison, CO 80465",
         city="Morrison",
         state="Colorado",
@@ -54,7 +58,8 @@ def seed_experiences():
     )
     exp5 = Experience(
         name="Hike with an Adventure Photographer",
-        host_id=5, 
+        host_id=5,
+        est_duration=180, 
         address="Meeting point will depend on destination.",
         city="Denver",
         state="Colorado",

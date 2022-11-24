@@ -3,6 +3,7 @@ from wtforms import IntegerField, StringField, FloatField, DateField, BooleanFie
 from wtforms.validators import DataRequired, ValidationError
 
 class ExperienceForm(FlaskForm):
+    est_duration = IntegerField("Duration", validators=[DataRequired()])
     address = StringField("Address", validators=[DataRequired()])
     city = StringField("City", validators=[DataRequired()])
     state = StringField("State", validators=[DataRequired()])

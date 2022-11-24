@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request
-from ..forms import ExperienceForm, ExperienceImageForm
+from ..forms import ExperienceForm, ExperienceImageForm, BookingForm
 from app.models.experiences import db, Experience, ExperienceImage, experience_schema, experiences_schema, experience_image_schema, experience_images_schema
 from app.models.bookings import db, Booking, booking_schema, bookings_schema
 from app.models.reviews import db, Review, ReviewImage, review_schema, reviews_schema, review_image_schema, reviews_images_schema
@@ -45,7 +45,7 @@ def get_one_experience(exp_id):
         return {"message": ["Experience couldn't be found."]}, 404
     exp_reviews = one_experience.to_dict()["reviews"]
     exp_bookings = one_experience.to_dict()["bookings"]
-    exp_reviews = one_experience.to_dict()["reviews"]
+    exp_images = one_experience.to_dict()["images"]
 
     exp_in_dict = one_experience.to_dict()
 
@@ -144,4 +144,30 @@ def delete_experience(exp_id):
         return "experience deleted successfully.", 200 
     else:
         return "experience not found.", 404    
+
+
+@experience_routes.route('/<int:exp_id>/bookings', methods=["POST"])
+def create_one_bkg(exp_id):
+    """Create a booking"""
+
+    form = BookingForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        data = form.data
+        new_booking = Booking(
+            exp_id=exp_id,
+            user_id=data['user_id'],
+            start_date=data['start_date']
+        )
+
+        db.session.add(new_booking)
+        db.session.commit()
+
+        success_response = Booking.query.order_by(Booking.id.desc()).first()
+        return jsonify(booking_schema.dump(success_response))
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
 

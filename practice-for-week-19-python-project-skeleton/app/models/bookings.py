@@ -12,9 +12,9 @@ class Booking(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod("users.id")), nullable=False)
     exp_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("experiences.id")), nullable=False)
-    start_date = db.Column(db.DateTime(timezone=True))
-    end_date = db.Column(db.DateTime(timezone=True))
+        add_prefix_for_prod("experiences.id")), nullable=False, index=True)
+    start_date = db.Column(db.String(), index=True)
+    # end_date = db.Column(db.DateTime(timezone=True), unique=True)
     created_at = db.Column(db.DateTime(timezone=True),server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
@@ -27,9 +27,11 @@ class Booking(db.Model):
             'user_id': self.user_id,
             'exp_id': self.exp_id,
             'start_date': self.start_date,
-            'end_date': self.end_date,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at, 
+            'user_booking': self.user_booking.to_dict(), 
+            # 'end_date': self.end_date,
+            # 'exp_booking': self.exp_booking.to_dict(),
         }
 
 class BookingSchema(ma.Schema):
@@ -39,7 +41,7 @@ class BookingSchema(ma.Schema):
             "user_id",
             "exp_id",
             "start_date", 
-            "end_date", 
+            # "end_date", 
             "created_at", 
             "updated_at")
 
