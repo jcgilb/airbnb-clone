@@ -88,7 +88,7 @@ export const deleteBooking = (bkgId) => async (dispatch) => {
 
 const initialState = { oneBooking: {} };
 
-const bookingReducer = (state = initialState, action) => {
+const timeSlotReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case GET_ALL:
@@ -124,4 +124,4 @@ const bookingReducer = (state = initialState, action) => {
   }
 };
 
-export default bookingReducer;
+export default timeSlotReducer;

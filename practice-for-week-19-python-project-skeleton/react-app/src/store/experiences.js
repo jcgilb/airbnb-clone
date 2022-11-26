@@ -77,7 +77,7 @@ export const updateOneExperience = (expId, payload) => async (dispatch) => {
 };
 
 // delete an experience
-export const deleteSong = (expId) => async (dispatch) => {
+export const deleteExperience = (expId) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}`, {
     method: "DELETE",
   });
@@ -100,19 +100,19 @@ const experienceReducer = (state = initialState, action) => {
     case GET_ONE:
       return {
         ...state,
-        oneExperience: { ...action.experience },
+        oneExperience: { ...action.exp },
       };
     case ADD_UPDATE:
-      if (!state[action.experience.id]) {
+      if (!state[action.exp.id]) {
         newState = { ...state };
-        newState[action.experience.id] = action.experience;
+        newState[action.exp.id] = action.exp;
         return newState;
       }
       return {
         ...state,
-        [action.experience.id]: {
-          ...state[action.experience.id],
-          ...action.experience,
+        [action.exp.id]: {
+          ...state[action.exp.id],
+          ...action.exp,
         },
       };
     case REMOVE:

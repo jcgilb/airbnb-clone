@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import session from "./session";
 import bookingReducer from "./bookings";
 import experienceReducer from "./experiences";
+import timeSlotReducer from "./timeSlots";
 
 const rootReducer = combineReducers({
   session,
   experiences: experienceReducer,
   bookings: bookingReducer,
+  times: timeSlotReducer,
 });
 
 let enhancer;

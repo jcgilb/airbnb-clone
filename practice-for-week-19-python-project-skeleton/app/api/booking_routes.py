@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request
-from ..forms import BookingForm, EditBookingForm
-from app.models.experiences import db, Experience, ExperienceImage, experience_schema, experiences_schema, experience_image_schema, experience_images_schema
+from ..forms import BookingForm, EditBookingForm, ExperienceTimeSlot
+from app.models.experiences import db, Experience, ExperienceImage, TimeSlot, time_slot_schema, time_slots_schema, experience_schema, experiences_schema, experience_image_schema, experience_images_schema
 from app.models.reviews import db, Review, ReviewImage, review_schema, reviews_schema, review_image_schema, reviews_images_schema
 from app.models.bookings import db, Booking, booking_schema, bookings_schema
 from flask_login import login_required, current_user
@@ -43,8 +43,8 @@ def edit_one_bkg(bkg_id):
     if form.validate_on_submit():
         data = form.data
 
-        start_date=data['start_date']
-        bkg.start_date=start_date
+        time_slot_id=data['time_slot_id']
+        bkg.time_slot_id=time_slot_id
 
         db.session.add(bkg)
         db.session.commit()
@@ -52,6 +52,28 @@ def edit_one_bkg(bkg_id):
         return jsonify(booking_schema.dump(bkg))
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# @booking_routes.route('/<int:bkg_id>', methods=["PUT"])
+# def edit_one_bkg(bkg_id):
+#     """Edit a booking"""
+
+#     form = EditBookingForm()
+#     bkg = Booking.query.get(bkg_id)
+#     form['csrf_token'].data = request.cookies['csrf_token']
+
+#     if form.validate_on_submit():
+#         data = form.data
+
+#         start_date=data['start_date']
+#         bkg.start_date=start_date
+
+#         db.session.add(bkg)
+#         db.session.commit()
+        
+#         return jsonify(booking_schema.dump(bkg))
+
+#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @booking_routes.route('/<int:bkg_id>', methods=["DELETE"])

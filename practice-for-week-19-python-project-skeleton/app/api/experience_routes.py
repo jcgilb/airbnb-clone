@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request
-from ..forms import ExperienceForm, ExperienceImageForm, BookingForm, ReviewForm, ReviewImageForm
-from app.models.experiences import db, Experience, ExperienceImage, experience_schema, experiences_schema, experience_image_schema, experience_images_schema
+from ..forms import ExperienceForm, ExperienceImageForm, BookingForm, ReviewForm, ReviewImageForm, ExperienceTimeSlot
+from app.models.experiences import db, Experience, ExperienceImage, TimeSlot, experience_schema, experiences_schema, experience_image_schema, experience_images_schema, time_slot_schema, time_slots_schema
 from app.models.bookings import db, Booking, booking_schema, bookings_schema
 from app.models.reviews import db, Review, ReviewImage, review_schema, reviews_schema, review_image_schema, reviews_images_schema
 from flask_login import login_required, current_user
@@ -150,6 +150,141 @@ def delete_experience(exp_id):
     else:
         return "Experience not found.", 404    
 
+@experience_routes.route('/<int:exp_id>/slots', methods=["GET"])
+def get_time_slots(exp_id):
+    """
+    Get all time slots based on experience id.
+    """
+    exp = Experience.query.get(exp_id)
+    time_slots = exp.time_slots
+
+    if not exp: 
+      return "Experience does not exist.", 404
+
+    available_times = []
+    for slot in time_slots:
+        available_times.append(slot.to_dict())
+
+    return jsonify(available_times)  
+
+@experience_routes.route('/<int:exp_id>/slots/<int:slot_id>', methods=["DELETE"])
+def delete_time_slot(exp_id, slot_id):
+    """
+    Get all time slots based on experience id.
+    """
+    exp = Experience.query.get(exp_id)
+    # time_slots = exp.time_slots
+    slot = TimeSlot.query.get(slot_id)
+  
+    if not exp: 
+      return "Experience does not exist.", 404
+    if not slot: 
+      return "Time slot does not exist.", 404 
+      
+    if slot and current_user.id == exp.host_id:   
+      
+      db.session.delete(slot)
+      db.session.commit()
+      return "Successfully deleted.", 200
+
+    else: 
+      return "Unauthorized.", 401           
+
+@experience_routes.route('/<int:exp_id>/slots', methods=["POST"])
+def create_one_slot(exp_id):
+    """Create a time_slot for a user to book"""
+    exp = Experience.query.get(exp_id)
+    duration = int(exp.est_duration)
+
+    if not exp: 
+      return "Experience not found.", 404
+
+    form = ExperienceTimeSlot()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        data = form.data
+        new_time_slot = TimeSlot(
+            exp_id=exp_id,
+            start=data['start'], 
+            end= int(data['start']) + (duration*60000)
+        )
+
+        print(new_time_slot.start, "start*************")
+        print(new_time_slot.end, "end*************")
+
+        # new_time_slot = TimeSlot(
+        #     exp_id=exp_id,
+        #     start_time=data['start_time'], 
+        #     end_time=data['end_time'], 
+        #     start_date=data['start_date'], 
+        #     end_date=data['end_date']
+        # )
+
+        db.session.add(new_time_slot)
+        db.session.commit()
+
+        success_response = TimeSlot.query.order_by(TimeSlot.id.desc()).first()
+        return jsonify(time_slot_schema.dump(success_response))
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401  
+
+
+@experience_routes.route('/<int:exp_id>/slots/<int:slot_id>', methods=["PUT"])
+def edit_one_slot(exp_id, slot_id):
+    """Edit a time_slot for a user to book"""
+    exp = Experience.query.get(exp_id)
+    slot = TimeSlot.query.get(slot_id)
+    duration = int(exp.est_duration)
+
+    if not exp: 
+      return "Experience not found.", 404
+
+    form = ExperienceTimeSlot()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        data = form.data
+
+        exp_id=exp_id
+        start=data['start_time']
+        end=int(start) + (duration*60000)
+        # start_date=data['start_date']
+        # end_date=data['end_date']
+
+        slot.exp_id=exp_id
+        slot.start=start
+        slot.end=str(end)
+        # slot.start_date=start_date
+        # slot.end_date=end_date
+
+        db.session.add(slot)
+        db.session.commit()
+
+        success_response = TimeSlot.query.order_by(TimeSlot.id.desc()).first()
+        return jsonify(time_slot_schema.dump(success_response))
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401  
+
+@experience_routes.route('/<int:exp_id>/bookings', methods=["GET"])
+def get_exp_bookings(exp_id):
+    """
+    Get all bookings based on experience id.
+    """
+    exp = Experience.query.get(exp_id)
+    bookings = exp.bookings
+  
+    if not exp: 
+      return "Experience does not exist.", 404
+    if not bookings: 
+      return "No time slots have been booked.", 404 
+
+    bkg_list = []
+    for booking in bookings:
+      bkg_list.append(booking.to_dict())
+
+    return jsonify(bkg_list)             
+
 
 @experience_routes.route('/<int:exp_id>/bookings', methods=["POST"])
 def create_one_bkg(exp_id):
@@ -158,7 +293,7 @@ def create_one_bkg(exp_id):
 
     if not exp: 
       return "Experience not found.", 404
-
+    
     form = BookingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -167,8 +302,20 @@ def create_one_bkg(exp_id):
         new_booking = Booking(
             exp_id=exp_id,
             user_id=data['user_id'],
-            start_date=data['start_date']
+            time_slot_id=data['time_slot_id']
         )
+
+        bookings = exp.bookings
+        time_slots = exp.time_slots
+        for booking in bookings: 
+          if booking.user_id == new_booking.user_id: 
+            if booking.time_slot_id == new_booking.time_slot_id:
+              return "This user has already booked this time slot.", 400
+          if booking.time_slot_id == new_booking.time_slot_id:
+              return "This time slot has already been booked.", 400 
+        for time_slot in time_slots: 
+          if time_slot.id != new_booking.time_slot_id:
+              return "This time slot does not exist for this experience.", 404       
 
         db.session.add(new_booking)
         db.session.commit()
@@ -177,6 +324,34 @@ def create_one_bkg(exp_id):
         return jsonify(booking_schema.dump(success_response))
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401  
+
+
+# @experience_routes.route('/<int:exp_id>/bookings', methods=["POST"])
+# def create_one_bkg(exp_id):
+#     """Create a booking"""
+#     exp = Experience.query.get(exp_id)
+
+#     if not exp: 
+#       return "Experience not found.", 404
+
+#     form = BookingForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+
+#     if form.validate_on_submit():
+#         data = form.data
+#         new_booking = Booking(
+#             exp_id=exp_id,
+#             user_id=data['user_id'],
+#             start_date=data['start_date']
+#         )
+
+#         db.session.add(new_booking)
+#         db.session.commit()
+
+#         success_response = Booking.query.order_by(Booking.id.desc()).first()
+#         return jsonify(booking_schema.dump(success_response))
+
+#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401  
 
 @experience_routes.route('/<int:exp_id>/reviews/<int:rvw_id>', methods=["GET"])
 def get_one_rvw(exp_id, rvw_id):
