@@ -15,7 +15,12 @@ class ExperienceForm(FlaskForm):
     price = IntegerField("Price", validators=[DataRequired()])
     
 class ExperienceImageForm(FlaskForm):
-    exp_id = IntegerField("Review ID", validators=[DataRequired()])
+    exp_id = IntegerField("Experience ID")
     image_url = StringField("Image URL", validators=[DataRequired()])
-    preview = BooleanField("Preview", validators=[DataRequired()])
+    preview = BooleanField("Preview", default=False)
+
+class ExperienceTimeSlot(FlaskForm):
+    exp_id = IntegerField("Experience ID")
+    start = StringField("Start Date/Time")
+    end = StringField("End Date/Time")
 

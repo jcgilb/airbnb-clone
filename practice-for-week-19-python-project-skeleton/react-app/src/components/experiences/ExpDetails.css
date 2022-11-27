@@ -1,0 +1,105 @@
+.details-images {
+  display: flex;
+  flex-direction: row;
+  margin-top: 28px;
+}
+
+.pic3-pic4 {
+  display: flex;
+  flex-direction: column;
+}
+
+.pic1 {
+  height: 418px;
+  width: 307px;
+  object-fit: cover;
+  border: 1px solid rgb(221, 237, 170);
+  padding: 8px;
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+}
+
+.pic2 {
+  height: 418px;
+  width: 307px;
+  object-fit: cover;
+  border: 1px solid rgb(221, 237, 170);
+  padding: 8px;
+}
+
+.pic3,
+.pic4 {
+  height: 201px;
+  width: 146px;
+  object-fit: cover;
+  border: 1px solid rgb(221, 237, 170);
+  padding: 8px;
+}
+
+.pic5 {
+  height: 418px;
+  width: 307px;
+  object-fit: cover;
+  border: 1px solid rgb(221, 237, 170);
+  padding: 8px;
+  border-top-right-radius: 5%;
+  border-bottom-right-radius: 5%;
+}
+
+.details-dates {
+  display: flex;
+  flex-direction: row;
+}
+
+.available-date {
+  height: 172px;
+  width: 162px;
+  object-fit: cover;
+  border: 1px solid rgb(221, 237, 170);
+  padding: 24px;
+  border-radius: 5%;
+  margin: 8px;
+}
+
+.book-exp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 18px;
+  width: 68px;
+  border-radius: 10px;
+  background-color: rgb(255, 22, 84);
+  padding: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  /* background-color: rgb(221, 237, 170); */
+  /* background-color: rgb(147, 181, 198); */
+}
+
+.details-title {
+  display: flex;
+  flex-direction: row;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.43;
+}
+
+.details {
+  display: flex;
+  flex-direction: row;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.43;
+  margin-top: 35px;
+}
+
+hr {
+  background-color: rgb(221, 237, 170);
+  margin-top: 28px;
+  border: none;
+  height: 1px;
+}

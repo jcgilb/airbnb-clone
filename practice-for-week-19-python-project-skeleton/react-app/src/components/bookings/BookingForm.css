@@ -1,0 +1,65 @@
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(224, 224, 224);
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 20px;
+  z-index: 3;
+  padding-bottom: 20px;
+}
+
+.book-exp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 30px;
+  width: 68px;
+  border-radius: 10px;
+  background-color: rgb(255, 22, 84);
+  padding: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.book-exp-confirm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+  background-color: rgb(255, 22, 84);
+  padding: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+.details-title {
+  display: flex;
+  flex-direction: row;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.43;
+}
+
+.booking-details {
+  display: flex;
+  flex-direction: row;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.43;
+  margin-top: 35px;
+}

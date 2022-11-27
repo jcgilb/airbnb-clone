@@ -1,0 +1,123 @@
+import React, { useEffect, useState } from "react";
+import { useDeferredValue } from "react";
+import DateTimePicker from "react-datetime-picker";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { getAllExperiences, getOneExperience } from "../../store/experiences";
+
+import { getAllSlots, createOneSlot } from "../../store/timeSlots";
+import "./ExpTimeSlots.css";
+
+const ExpTimeSlots = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [errors, setErrors] = useState();
+  const [expId, setExpId] = useState(null);
+  const [timeSlot, setTimeSlot] = useState();
+  const [now, setNow] = useState(new Date());
+  const [end, setEnd] = useState(new Date());
+  const [expSelect, setExpSelect] = useState();
+  const [start, setStart] = useState(new Date());
+  const [duration, setDuration] = useState();
+
+  // get all experiences
+  useEffect(() => {
+    dispatch(getAllExperiences());
+  }, [dispatch, expId]);
+
+  // get the user and the user's experiences
+  const experiences = useSelector((state) => state.experiences);
+  const user = useSelector((state) => state.session.user);
+  const userExperiences = Object.values(experiences).filter(
+    (exp) => exp.host_id === user.id
+  );
+
+  // parse the date string to send to the database
+  useEffect(() => {
+    setStart(Date.parse(timeSlot));
+  }, [timeSlot]);
+
+  // get the id from the name of the selected experience
+  useEffect(() => {
+    let selected = userExperiences?.find((exp) => exp?.name == expSelect);
+    setExpId(selected?.id);
+    setDuration(selected?.est_duration);
+    console.log(duration, "duration");
+  }, [expSelect, userExperiences]);
+
+  // update selected experience
+  const updateExp = (e) => setExpSelect(e.target.value);
+
+  // set validation errors
+  useEffect(() => {
+    const err = [];
+    setErrors(err);
+    if (!timeSlot) err.push("Select your availability.");
+    if (Date.parse(timeSlot) < Date.parse(now))
+      err.push("Select a time in the future.");
+    if (!expSelect) err.push("Select an experience.");
+
+    setErrors(err);
+  }, [timeSlot, expSelect, start]);
+
+  // send the information to the database
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newTimeSlot = {
+      exp_id: expId,
+      start: start,
+    };
+
+    console.log(newTimeSlot, "payload data");
+
+    let slot = await dispatch(createOneSlot(expId, newTimeSlot));
+    if (slot) {
+      if (errors.length === 0) return history.push(`/dates`);
+    }
+  };
+
+  return (
+    <div className="date-time-picker">
+      <form className="" onSubmit={handleSubmit}>
+        <div className="date-time-picker">
+          Select a date and time to host your experience
+        </div>
+        <select
+          onChange={updateExp}
+          value={expSelect}
+          placeholder="Select an experience"
+        >
+          <option value="" disabled selected>
+            Select an experience...
+          </option>
+          {userExperiences.map((exp) => (
+            <option key={exp.name}>{exp.name}</option>
+          ))}
+        </select>
+        <div>
+          <DateTimePicker
+            onChange={(datetime) => setTimeSlot(datetime)}
+            value={timeSlot}
+          />
+        </div>
+        <ul className="errors">
+          {errors?.length > 0 &&
+            errors.map((err) => (
+              <div id="err" key={err}>
+                {err}
+              </div>
+            ))}
+        </ul>
+        <button
+          className="upload-submit"
+          type="submit"
+          disabled={!!errors?.length}
+        >
+          Submit availability
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default ExpTimeSlots;
