@@ -9,6 +9,7 @@ import {
   getOneExperience,
 } from "../../store/experiences.js";
 import "./ExpDetails.css";
+import AvailableTimes from "../timeSlots/AvailableTimes.js";
 
 const ExperienceDetails = () => {
   const history = useHistory();
@@ -81,40 +82,9 @@ const ExperienceDetails = () => {
       <div className="details-description">{exp?.description}</div>
       <hr></hr>
       <div className="details">Choose from available dates</div>
-      <div className="details-dates">
-        <div className="available-date">
-          <div>week, month day</div>
-          <div>start time - end time</div>
-          <div>${exp.price}/person</div>
-          <div className="book-exp">Choose</div>
-        </div>
-        <div className="available-date">
-          <div>week, month day</div>
-          <div>start time - end time</div>
-          <div>${exp.price}/person</div>
-          <div className="book-exp">Choose</div>
-        </div>
-        <div className="available-date">
-          <div>week, month day</div>
-          <div>start time - end time</div>
-          <div>${exp.price}/person</div>
-          <div className="book-exp">Choose</div>
-        </div>
-        <div className="available-date">
-          <div>week, month day</div>
-          <div>start time - end time</div>
-          <div>${exp.price}/person</div>
-          <div className="book-exp">Choose</div>
-        </div>
-        <div className="available-date">
-          <div>week, month day</div>
-          <div>start time - end time</div>
-          <div>${exp.price}/person</div>
-          <div className="book-exp">Choose</div>
-        </div>
-      </div>
+      <AvailableTimes />
       <div className="details-map">
-        <LoadScript
+        {/* <LoadScript
           googleMapsApiKey="AIzaSyC44LmEfw4hs78DkfdGjAnAXbL6PO8-AUQ"
           // libraries={libraries}
         >
@@ -123,8 +93,8 @@ const ExperienceDetails = () => {
             center={center}
             zoom={10}
             // onLoad={onMapLoad}
-          >
-            {/* {markers.map((marker) => (
+          > */}
+        {/* {markers.map((marker) => (
               <Marker
                 key={marker.time.toISOString()}
                 position={{ lat: marker.lat, lng: marker.lng }}
@@ -133,8 +103,8 @@ const ExperienceDetails = () => {
                 }}
               />
             ))} */}
-          </GoogleMap>
-        </LoadScript>
+        {/* </GoogleMap> */}
+        {/* </LoadScript> */}
       </div>
     </div>
   );

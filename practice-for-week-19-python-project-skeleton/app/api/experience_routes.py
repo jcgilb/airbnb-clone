@@ -170,7 +170,7 @@ def get_time_slots(exp_id):
 @experience_routes.route('/<int:exp_id>/slots/<int:slot_id>', methods=["DELETE"])
 def delete_time_slot(exp_id, slot_id):
     """
-    Get all time slots based on experience id.
+    Delete a time slot based on id.
     """
     exp = Experience.query.get(exp_id)
     # time_slots = exp.time_slots
@@ -207,11 +207,8 @@ def create_one_slot(exp_id):
         new_time_slot = TimeSlot(
             exp_id=exp_id,
             start=data['start'], 
-            end= int(data['start']) + (duration*60000)
+            end=int(data['start']) + (duration*60000)
         )
-
-        print(new_time_slot.start, "start*************")
-        print(new_time_slot.end, "end*************")
 
         # new_time_slot = TimeSlot(
         #     exp_id=exp_id,
@@ -304,6 +301,7 @@ def create_one_bkg(exp_id):
             user_id=data['user_id'],
             time_slot_id=data['time_slot_id']
         )
+        print(new_booking.time_slot_id, "new booking time slot id*************")
 
         bookings = exp.bookings
         time_slots = exp.time_slots
@@ -313,9 +311,7 @@ def create_one_bkg(exp_id):
               return "This user has already booked this time slot.", 400
           if booking.time_slot_id == new_booking.time_slot_id:
               return "This time slot has already been booked.", 400 
-        for time_slot in time_slots: 
-          if time_slot.id != new_booking.time_slot_id:
-              return "This time slot does not exist for this experience.", 404       
+        
 
         db.session.add(new_booking)
         db.session.commit()

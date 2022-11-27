@@ -51,7 +51,7 @@ export const getOneBooking = (bkgId) => async (dispatch) => {
 // create a booking
 export const createOneBooking = (expId, payload) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}/bookings`, {
-    methods: "POST",
+    method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
@@ -65,7 +65,7 @@ export const createOneBooking = (expId, payload) => async (dispatch) => {
 // update a booking
 export const updateOneBooking = (bkgId, payload) => async (dispatch) => {
   const response = await fetch(`/api/bookings/${bkgId}`, {
-    methods: "PUT",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });

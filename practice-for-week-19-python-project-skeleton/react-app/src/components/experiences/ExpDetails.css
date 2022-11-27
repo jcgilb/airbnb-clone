@@ -73,6 +73,7 @@
   background-color: rgb(255, 22, 84);
   padding: 8px;
   font-weight: 500;
+  cursor: pointer;
   /* background-color: rgb(221, 237, 170); */
   /* background-color: rgb(147, 181, 198); */
 }

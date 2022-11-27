@@ -51,7 +51,7 @@ export const getOneExperience = (expId) => async (dispatch) => {
 // create an experiences
 export const createOneExperience = (payload) => async (dispatch) => {
   const response = await fetch(`/api/experiences`, {
-    methods: "POST",
+    method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
@@ -65,7 +65,7 @@ export const createOneExperience = (payload) => async (dispatch) => {
 // update an experiences
 export const updateOneExperience = (expId, payload) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}`, {
-    methods: "PUT",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });

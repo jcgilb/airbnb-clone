@@ -1,123 +1,128 @@
 // constants
-const REMOVE = "bookings/REMOVE";
-const GET_ALL = "bookings/GET_ALL";
-const GET_ONE = "bookings/GET_ONE";
-const ADD_UPDATE = "bookings/ADD_UPDATE";
+const REMOVE = "slots/REMOVE";
+const GET_ALL = "slots/GET_ALL";
+const GET_ONE = "slots/GET_ONE";
+const ADD_UPDATE = "slots/ADD_UPDATE";
 
-const getAll = (bookings) => ({
+const getAll = (slots) => ({
   type: GET_ALL,
-  bookings,
+  slots,
 });
 
-const getOne = (booking) => {
+const getOne = (slot) => {
   return {
     type: GET_ONE,
-    booking,
+    slot,
   };
 };
 
-const addOrUpdate = (booking) => {
+const addOrUpdate = (slot) => {
   return {
     type: ADD_UPDATE,
-    booking,
+    slot,
   };
 };
 
-const remove = (bkgId) => ({
+const remove = (slotId) => ({
   type: REMOVE,
-  bkgId,
+  slotId,
 });
 
-// get all listed bookings
-export const getAllBookings = () => async (dispatch) => {
-  const response = await fetch("/api/bookings");
+// get all listed slots
+export const getAllSlots = (expId) => async (dispatch) => {
+  const response = await fetch(`/api/experiences/${expId}/slots`);
   if (response.ok) {
-    const data = await response.json();
-    dispatch(getAll(data));
+    const slots = await response.json();
+    console.log(slots, "slots in thunk");
+    dispatch(getAll(slots));
+    console.log(slots, "slots in thunk");
   }
   return response;
 };
 
-// get one booking
-export const getOneBooking = (bkgId) => async (dispatch) => {
-  const response = await fetch(`/api/bookings/${bkgId}`);
+// // get one booking
+// export const getOneBooking = (bkgId) => async (dispatch) => {
+//   const response = await fetch(`/api/bookings/${bkgId}`);
+//   if (response.ok) {
+//     const data = await response.json();
+//     dispatch(getOne(data));
+//   }
+//   return response;
+// };
+
+// create a time slot
+export const createOneSlot = (expId, newTimeSlot) => async (dispatch) => {
+  const response = await fetch(`/api/experiences/${expId}/slots`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newTimeSlot),
+  });
   if (response.ok) {
-    const data = await response.json();
-    dispatch(getOne(data));
+    const slot = await response.json();
+    console.log("time slot in thunk", slot);
+    dispatch(addOrUpdate(slot));
+    return slot;
   }
-  return response;
 };
 
-// create a booking
-export const createOneBooking = (expId, payload) => async (dispatch) => {
-  const response = await fetch(`/api/experiences/${expId}/bookings`, {
-    methods: "POST",
+// update a time slot
+export const updateOneSlot = (expId, slotId, payload) => async (dispatch) => {
+  const response = await fetch(`/api/experiences/${expId}/slots/${slotId}`, {
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
   if (response.ok) {
-    const booking = await response.json();
-    dispatch(addOrUpdate(booking));
+    const slot = await response.json();
+    dispatch(addOrUpdate(slot));
   }
   return response;
 };
 
-// update a booking
-export const updateOneBooking = (bkgId, payload) => async (dispatch) => {
-  const response = await fetch(`/api/bookings/${bkgId}`, {
-    methods: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  if (response.ok) {
-    const booking = await response.json();
-    dispatch(addOrUpdate(booking));
-  }
-  return response;
-};
-
-// delete an booking
-export const deleteBooking = (bkgId) => async (dispatch) => {
-  const response = await fetch(`/api/bookings/${bkgId}`, {
+// delete an time slot
+export const deleteSlot = (expId, slotId) => async (dispatch) => {
+  const response = await fetch(`/api/experiences/${expId}/slots/${slotId}`, {
     method: "DELETE",
   });
   if (response.ok) {
-    dispatch(remove(bkgId));
+    dispatch(remove(slotId));
   }
 };
 
-const initialState = { oneBooking: {} };
+const initialState = {};
 
 const timeSlotReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case GET_ALL:
       newState = { ...state };
-      action.bookings.forEach((bkg) => {
-        newState[bkg.id] = bkg;
+
+      console.log(action.slots, "aaaaaaaaaaaaaaaaaaaaaaaaa");
+      action.slots.forEach((slot) => {
+        newState[slot.id] = slot;
       });
       return newState;
-    case GET_ONE:
-      return {
-        ...state,
-        oneBooking: { ...action.booking },
-      };
+    // case GET_ONE:
+    //   return {
+    //     ...state,
+    //     oneBooking: { ...action.booking },
+    //   };
     case ADD_UPDATE:
-      if (!state[action.booking.id]) {
+      if (!state[action.slot.id]) {
         newState = { ...state };
-        newState[action.booking.id] = action.booking;
+        newState[action.slot.id] = action.slot;
         return newState;
       }
       return {
         ...state,
-        [action.booking.id]: {
-          ...state[action.booking.id],
-          ...action.booking,
+        [action.slot.id]: {
+          ...state[action.slot.id],
+          ...action.slot,
         },
       };
     case REMOVE:
       newState = { ...state };
-      delete newState[action.bkgId];
+      delete newState[action.slotId];
       return newState;
     default:
       return state;
