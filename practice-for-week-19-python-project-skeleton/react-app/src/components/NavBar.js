@@ -1,15 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import LoginFormModal from "./auth/LoginFormModal";
 import SignupFormModal from "./auth/SignupFormModal";
 import UserProfile from "./users/UserProfile";
+import { getAllExperiences } from "../store/experiences";
 
 const NavBar = ({ loaded }) => {
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
+  const dispatch = useDispatch();
   let sessionLinks;
+
+  useEffect(() => {
+    dispatch(getAllExperiences());
+  }, []);
+
+  const experiences = useSelector((state) => state.experiences.experiences);
 
   // if a user is logged in
   if (user) {

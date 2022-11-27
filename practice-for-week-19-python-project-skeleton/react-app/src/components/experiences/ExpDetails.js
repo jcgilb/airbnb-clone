@@ -10,17 +10,27 @@ import {
 } from "../../store/experiences.js";
 import "./ExpDetails.css";
 import AvailableTimes from "../timeSlots/AvailableTimes.js";
+import UpdateExp from "./UpdateExp.js";
+import User from "../User.js";
 
 const ExperienceDetails = () => {
-  const history = useHistory();
-  const { expId } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
+  let { expId } = useParams();
+  expId = parseInt(expId);
 
   useEffect(() => {
     dispatch(getOneExperience(expId));
   }, [dispatch]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(getOneExperience());
+    };
+  }, []);
+
   const exp = useSelector((state) => state.experiences.oneExperience);
+  const user = useSelector((state) => state.session.user);
   const expImgArr = exp["images"];
 
   const getAvgStars = (exp) => {};
@@ -74,8 +84,14 @@ const ExperienceDetails = () => {
         <img className="pic5" alt="img" src={expImgArr[4]?.image_url}></img>
       </div>
       <div className="details">
-        Experience hosted by {exp["exp_host"]?.first_name}
+        <div>Experience hosted by {exp["exp_host"]?.first_name}</div>
+        {exp.host_id === user.id && (
+          <div onClick={(e) => history.push(`/experiences/${expId}/edit`)}>
+            Edit experience details
+          </div>
+        )}
       </div>
+
       <div className="details-duration">{exp?.est_duration / 60} hours</div>
       <hr></hr>
       <div className="details">What you'll do</div>

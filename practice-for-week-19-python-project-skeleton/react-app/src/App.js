@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
@@ -13,10 +13,20 @@ import ExperienceDetails from "./components/experiences/ExpDetails";
 import ExpTimeSlots from "./components/experiences/ExpTimeSlots";
 import NewExperience from "./components/experiences/NewExperience";
 import UserProfile from "./components/users/UserProfile";
+import UpdateExp from "./components/experiences/UpdateExp";
+import { getAllExperiences } from "./store/experiences";
+import DeleteExperience from "./components/experiences/DeleteExp";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllExperiences());
+  }, [loaded]);
+
+  const experiences = useSelector((state) => state.experiences.experiences);
+  const expArr = Object.values(experiences);
 
   useEffect(() => {
     (async () => {
@@ -40,7 +50,7 @@ function App() {
           <SignUpForm />
         </Route>
         <Route path="/experiences" exact={true}>
-          <ExploreExperiences />
+          <ExploreExperiences loaded={loaded} expArr={expArr} />
         </Route>
         <Route path="/experiences/new" exact={true}>
           <NewExperience />
@@ -48,11 +58,17 @@ function App() {
         <Route path="/experiences/:expId" exact={true}>
           <ExperienceDetails />
         </Route>
+        <Route path="/experiences/:expId/edit" exact={true}>
+          <UpdateExp />
+        </Route>
+        <Route path="/experiences/:expId/delete" exact={true}>
+          <DeleteExperience />
+        </Route>
+        <Route path="/experiences/:expId/dates" exact={true}>
+          <ExpTimeSlots />
+        </Route>
         <Route path="/users/:userId" exact={true}>
           <UserProfile />
-        </Route>
-        <Route path="/dates" exact={true}>
-          <ExpTimeSlots />
         </Route>
         <Route path="/" exact={true}>
           <h1>My Home Page</h1>

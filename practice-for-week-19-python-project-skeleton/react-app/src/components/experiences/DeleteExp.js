@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import {
@@ -9,12 +9,13 @@ import {
 const DeleteExperience = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [showDelete, setShowDelete] = useState(false);
 
   // identify the song from the url
   let { expId } = useParams();
   expId = parseInt(expId);
 
-  const experiences = useSelector((state) => state.experiences);
+  const experiences = useSelector((state) => state.experiences.experiences);
 
   // get songs
   useEffect(() => {
@@ -28,11 +29,13 @@ const DeleteExperience = () => {
     return history.push(`/experiences`);
   };
 
-  if (!Object.values(experiences).length) return null;
-
   return (
     <>
-      <i class="fa-regular fa-trash-can" onClick={handleClick}></i>
+      <i
+        class="fa-regular fa-trash-can"
+        onClick={() => setShowDelete(true)}
+      ></i>
+      {showDelete && <div onClick={handleClick}>Delete this experience</div>}
     </>
   );
 };

@@ -104,7 +104,11 @@ export const deleteExperience = (expId) => async (dispatch) => {
   }
 };
 
-const initialState = { oneExperience: {}, userExperiences: {} };
+const initialState = {
+  experiences: {},
+  oneExperience: {},
+  userExperiences: {},
+};
 
 const experienceReducer = (state = initialState, action) => {
   let newState;
@@ -112,7 +116,7 @@ const experienceReducer = (state = initialState, action) => {
     case GET_ALL:
       newState = { ...state };
       action.experiences.forEach((exp) => {
-        newState[exp.id] = exp;
+        newState.experiences[exp.id] = exp;
       });
       return newState;
 
@@ -129,18 +133,15 @@ const experienceReducer = (state = initialState, action) => {
         oneExperience: { ...action.exp },
       };
     case ADD_UPDATE:
-      if (!state[action.exp.id]) {
+      if (!state.experiences[action.exp.id]) {
         newState = { ...state };
-        newState[action.exp.id] = action.exp;
+        newState.experiences[action.exp.id] = action.exp;
+        return newState;
+      } else {
+        newState = { ...state };
+        newState.experiences[action.exp.id] = action.exp;
         return newState;
       }
-      return {
-        ...state,
-        [action.exp.id]: {
-          ...state[action.exp.id],
-          ...action.exp,
-        },
-      };
     case REMOVE:
       newState = { ...state };
       delete newState[action.expId];

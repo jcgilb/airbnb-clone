@@ -37,7 +37,7 @@ const UserProfile = () => {
   const bookings = useSelector((state) => state.bookings.userBookings);
   const experiences = useSelector((state) => state.experiences.userExperiences);
   const oneUser = users.find((person) => person.id === parseInt(userId));
-  const allExps = useSelector((state) => state.experiences);
+  const allExps = useSelector((state) => state.experiences.experiences);
   const user = useSelector((state) => state.session.user);
   const expArray = Object.values(experiences);
   const bkgArray = Object.values(bookings);
