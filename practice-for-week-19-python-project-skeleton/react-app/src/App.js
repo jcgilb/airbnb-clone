@@ -48,11 +48,11 @@ function App() {
         <Route path="/experiences/:expId" exact={true}>
           <ExperienceDetails />
         </Route>
+        <Route path="/users/:userId" exact={true}>
+          <UserProfile />
+        </Route>
         <Route path="/dates" exact={true}>
           <ExpTimeSlots />
-        </Route>
-        <Route path="/users" exact={true}>
-          <UserProfile />
         </Route>
         <Route path="/" exact={true}>
           <h1>My Home Page</h1>

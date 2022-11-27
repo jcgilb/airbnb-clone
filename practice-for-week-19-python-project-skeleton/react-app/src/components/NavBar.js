@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import LoginFormModal from "./auth/LoginFormModal";
 import SignupFormModal from "./auth/SignupFormModal";
+import UserProfile from "./users/UserProfile";
 
 const NavBar = ({ loaded }) => {
   const user = useSelector((state) => state.session.user);
@@ -25,7 +26,6 @@ const NavBar = ({ loaded }) => {
 
           <div className="logout">
             <LogoutButton />
-            {"Logout"}
           </div>
         </div>
       </div>

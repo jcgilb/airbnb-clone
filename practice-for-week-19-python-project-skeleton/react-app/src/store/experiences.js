@@ -2,12 +2,20 @@
 const REMOVE = "experiences/REMOVE";
 const GET_ALL = "experiences/GET_ALL";
 const GET_ONE = "experiences/GET_ONE";
+const USER_EXPS = "bookings/USER_EXPS";
 const ADD_UPDATE = "experiences/ADD_UPDATE";
 
 const getAll = (experiences) => ({
   type: GET_ALL,
   experiences,
 });
+
+const getUserExps = (experiences) => {
+  return {
+    type: USER_EXPS,
+    experiences,
+  };
+};
 
 const getOne = (exp) => {
   return {
@@ -34,6 +42,16 @@ export const getAllExperiences = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(getAll(data));
+  }
+  return response;
+};
+
+// get user experiences
+export const getUserExperiences = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/users/${userId}/experiences`);
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getUserExps(data));
   }
   return response;
 };
@@ -86,7 +104,7 @@ export const deleteExperience = (expId) => async (dispatch) => {
   }
 };
 
-const initialState = { oneExperience: {} };
+const initialState = { oneExperience: {}, userExperiences: {} };
 
 const experienceReducer = (state = initialState, action) => {
   let newState;
@@ -95,6 +113,14 @@ const experienceReducer = (state = initialState, action) => {
       newState = { ...state };
       action.experiences.forEach((exp) => {
         newState[exp.id] = exp;
+      });
+      return newState;
+
+    case USER_EXPS:
+      newState = { ...state };
+      newState.userExperiences = {};
+      action.experiences.forEach((exp) => {
+        newState.userExperiences[exp.id] = exp;
       });
       return newState;
     case GET_ONE:

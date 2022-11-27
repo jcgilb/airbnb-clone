@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   border: 3px solid hotpink;
 }
@@ -43,4 +43,12 @@
   height: 90%;
   width: 50%;
   border: 3px solid forestgreen;
+}
+
+.user-image {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border: 1px solid hotpink;
+  border-radius: 50%;
 }

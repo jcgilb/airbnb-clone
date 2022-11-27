@@ -2,12 +2,20 @@
 const REMOVE = "bookings/REMOVE";
 const GET_ALL = "bookings/GET_ALL";
 const GET_ONE = "bookings/GET_ONE";
+const USER_BKGS = "bookings/USER_BKGS";
 const ADD_UPDATE = "bookings/ADD_UPDATE";
 
 const getAll = (bookings) => ({
   type: GET_ALL,
   bookings,
 });
+
+const getUserBkgs = (bookings) => {
+  return {
+    type: USER_BKGS,
+    bookings,
+  };
+};
 
 const getOne = (booking) => {
   return {
@@ -34,6 +42,16 @@ export const getAllBookings = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(getAll(data));
+  }
+  return response;
+};
+
+// get user bookings
+export const getUserBookings = (id) => async (dispatch) => {
+  const response = await fetch(`/api/users/${id}/bookings`);
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getUserBkgs(data));
   }
   return response;
 };
@@ -86,7 +104,7 @@ export const deleteBooking = (bkgId) => async (dispatch) => {
   }
 };
 
-const initialState = { oneBooking: {} };
+const initialState = { oneBooking: {}, userBookings: {} };
 
 const bookingReducer = (state = initialState, action) => {
   let newState;
@@ -95,6 +113,13 @@ const bookingReducer = (state = initialState, action) => {
       newState = { ...state };
       action.bookings.forEach((bkg) => {
         newState[bkg.id] = bkg;
+      });
+      return newState;
+    case USER_BKGS:
+      newState = { ...state };
+      newState.userBookings = {};
+      action.bookings.forEach((bkg) => {
+        newState.userBookings[bkg.id] = bkg;
       });
       return newState;
     case GET_ONE:
