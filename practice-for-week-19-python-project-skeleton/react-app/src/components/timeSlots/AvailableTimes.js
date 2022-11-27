@@ -43,6 +43,9 @@ const AvailableTimes = () => {
   // get the experience
   useEffect(() => {
     dispatch(getOneExperience(expId));
+    return () => {
+      setShowAll(false);
+    };
   }, []);
 
   // send the information to the database

@@ -57,6 +57,7 @@ const UserProfile = () => {
     let start = date.slice(16, 18);
     let monthDay = date.slice(4, 10);
     if (parseInt(start) < 12) start = start.concat("AM");
+    if (parseInt(start) === 12) start = start.concat("PM");
     if (parseInt(start) > 12) start = String(parseInt(start) - 12).concat("PM");
     return (
       <div onClick={(e) => history.push(`/experiences/${oneExp?.id}`)}>

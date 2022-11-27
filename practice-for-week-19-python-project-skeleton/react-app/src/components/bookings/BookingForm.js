@@ -34,7 +34,7 @@ function BookingForm({ exp, expId, end, slot, start, week, monthDay }) {
     const booking = await dispatch(createOneBooking(expId, payload));
 
     if (booking) {
-      return history.push(`/users/${user.id}/bookings`);
+      return history.push(`/users/${user.id}`);
     }
   };
 

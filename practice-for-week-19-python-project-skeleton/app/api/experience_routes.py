@@ -319,6 +319,12 @@ def create_one_bkg(exp_id):
         db.session.add(new_booking)
         db.session.commit()
 
+        time_slot = TimeSlot.query.get(new_booking.time_slot_id)
+        time_slot.booked = True
+
+        db.session.add(time_slot)
+        db.session.commit()
+
         success_response = Booking.query.order_by(Booking.id.desc()).first()
         return jsonify(booking_schema.dump(success_response))
 
