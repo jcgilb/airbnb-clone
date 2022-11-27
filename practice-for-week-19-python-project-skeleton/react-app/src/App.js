@@ -11,6 +11,8 @@ import { authenticate } from "./store/session";
 import ExploreExperiences from "./components/experiences/ExploreExp";
 import ExperienceDetails from "./components/experiences/ExpDetails";
 import ExpTimeSlots from "./components/experiences/ExpTimeSlots";
+import NewExperience from "./components/experiences/NewExperience";
+import UserProfile from "./components/users/UserProfile";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -40,11 +42,17 @@ function App() {
         <Route path="/experiences" exact={true}>
           <ExploreExperiences />
         </Route>
+        <Route path="/experiences/new" exact={true}>
+          <NewExperience />
+        </Route>
         <Route path="/experiences/:expId" exact={true}>
           <ExperienceDetails />
         </Route>
         <Route path="/dates" exact={true}>
           <ExpTimeSlots />
+        </Route>
+        <Route path="/users" exact={true}>
+          <UserProfile />
         </Route>
         <Route path="/" exact={true}>
           <h1>My Home Page</h1>

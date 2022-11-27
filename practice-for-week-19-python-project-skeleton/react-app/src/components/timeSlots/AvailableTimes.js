@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-
-import { getAllSlots } from "../../store/timeSlots";
-import { createOneBooking } from "../../store/bookings";
 import { getOneExperience } from "../../store/experiences";
-import "../experiences/ExpDetails.css";
+import BookingFormModal from "../bookings/BookingModal";
+import { getAllSlots } from "../../store/timeSlots";
+import BookingForm from "../bookings/BookingForm";
 import { bindActionCreators } from "redux";
+import { Modal } from "../../context/Modal";
+import "../experiences/ExpDetails.css";
 
 const AvailableTimes = () => {
   const history = useHistory();
@@ -17,6 +18,7 @@ const AvailableTimes = () => {
   const [monthDay, setMonthDay] = useState();
   const [timeSlot, setTimeSlot] = useState();
   const [startTime, setStartTime] = useState();
+  const [showModal, setShowModal] = useState(false);
 
   // get the user and the experience
   const user = useSelector((state) => state.session.user);
@@ -34,7 +36,6 @@ const AvailableTimes = () => {
     const high = rest.filter((n) => parseInt(n.start) > parseInt(pivot.start));
     return [...qsort(low), pivot, ...qsort(high)];
   }
-  console.log(qsort(sorted), "sorted");
 
   // get the experience
   useEffect(() => {
@@ -42,26 +43,6 @@ const AvailableTimes = () => {
   }, []);
 
   // send the information to the database
-  const bookTimeSlot = async (e, slot) => {
-    console.log("hi");
-    setTimeSlot(slot);
-    e.preventDefault();
-
-    console.log(exp.id, "expId");
-    console.log(user.id, "user.id");
-    console.log(slot.id, "slot.id");
-    const payload = {
-      exp_id: exp.id,
-      user_id: user.id,
-      time_slot_id: slot.id,
-    };
-    const booking = await dispatch(createOneBooking(expId, payload));
-
-    if (booking) {
-      return history.push(`/experiences/${expId}`);
-    }
-  };
-
   const fiveSlots = sorted?.slice(0, 5);
   const availabileTimes = fiveSlots?.map((slot) => {
     let dateEnd = String(new Date(parseInt(slot.end)));
@@ -92,13 +73,6 @@ const AvailableTimes = () => {
       end = String(parseInt(end) - 12).concat("PM");
     }
 
-    let buttonText;
-    exp?.bookings.forEach((bkg) => {
-      if (bkg.user_id === user.id) {
-        buttonText = "Booked";
-      } else buttonText = "Choose";
-    });
-
     return (
       <div className="available-date">
         <div>
@@ -108,9 +82,23 @@ const AvailableTimes = () => {
           {start} - {end}
         </div>
         <div>${exp?.price}/person</div>
-        <div className="book-exp" onClick={(e) => bookTimeSlot(e, slot)}>
-          {buttonText}
-        </div>
+        <button className="book-exp" onClick={() => setShowModal(true)}>
+          Choose
+        </button>
+
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            <BookingForm
+              exp={exp}
+              end={end}
+              slot={slot}
+              week={week}
+              start={start}
+              expId={expId}
+              monthDay={monthDay}
+            />
+          </Modal>
+        )}
       </div>
     );
   });

@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
+import LoginFormModal from "./auth/LoginFormModal";
+import SignupFormModal from "./auth/SignupFormModal";
 
 const NavBar = ({ loaded }) => {
   const user = useSelector((state) => state.session.user);
@@ -17,7 +19,7 @@ const NavBar = ({ loaded }) => {
           <NavLink className="profile" exact to={`/users/${user?.id}`}>
             User profile
           </NavLink>
-          <NavLink className="create-exp" exact to="/new">
+          <NavLink className="create-exp" exact to="/experiences/new">
             Host an experience
           </NavLink>
 
@@ -32,10 +34,10 @@ const NavBar = ({ loaded }) => {
     // show login and signup buttons if not logged in
     sessionLinks = (
       <div className="login-signup-links">
-        {/* <LoginFormModal /> */}
-        <div id="login">Login</div>
-        {/* <SignupFormModal /> */}
-        <div id="signup">Signup</div>
+        <LoginFormModal />
+        {/* <div id="login">Login</div> */}
+        <SignupFormModal />
+        {/* <div id="signup">Signup</div> */}
       </div>
     );
   }
