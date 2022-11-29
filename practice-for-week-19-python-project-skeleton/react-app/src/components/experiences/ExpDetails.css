@@ -7,6 +7,39 @@
 .pic3-pic4 {
   display: flex;
   flex-direction: column;
+  min-height: 418px;
+}
+
+.pic-1 {
+  height: 418px;
+  width: 307px;
+  object-fit: cover;
+  padding: 8px;
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+}
+
+.pic-2 {
+  height: 418px;
+  width: 307px;
+  object-fit: cover;
+  padding: 8px;
+}
+
+.pic-3,
+.pic-4 {
+  height: 201px;
+  width: 146px;
+  object-fit: cover;
+  padding: 8px;
+}
+.pic-5 {
+  height: 418px;
+  width: 307px;
+  object-fit: cover;
+  padding: 8px;
+  border-top-right-radius: 5%;
+  border-bottom-right-radius: 5%;
 }
 
 .pic1 {
@@ -18,7 +51,6 @@
   border-top-left-radius: 5%;
   border-bottom-left-radius: 5%;
 }
-
 .pic2 {
   height: 418px;
   width: 307px;

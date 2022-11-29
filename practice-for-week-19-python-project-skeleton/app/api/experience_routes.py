@@ -581,6 +581,7 @@ def delete_a_exp_image(exp_id, img_id):
     """Delete an experience image"""
 
     experience = Experience.query.get(exp_id)
+    image = ExperienceImage.query.get(img_id)
     images = experience.images
 
     if not experience: 
@@ -588,13 +589,15 @@ def delete_a_exp_image(exp_id, img_id):
     if not images: 
       return "Experience has no images", 404
 
-    if experience.host_id == current_user.id: 
+    if experience.host_id == current_user.id:
+
       for img in images: 
-        if (img.id == img_id):
+        img_dict = img.to_dict()
+        if (img_dict["id"] == img_id):
           db.session.delete(img)
           db.session.commit()
           return "Image successfully deleted.", 200
-        else: 
-          return "Image not found", 404
+      else: 
+        return "Image not found", 404
     else: 
       return "Permission denied.", 401                 

@@ -10,7 +10,7 @@ import {
 } from "../../store/experiences.js";
 import "./ExpDetails.css";
 import DeleteExperience from "./DeleteExp.js";
-import ExpImages from "../images/FirstExpImage.js";
+import ExpImages from "../images/ExpImage.js";
 import "./NewExp.css";
 
 const UpdateExp = () => {
@@ -224,7 +224,7 @@ const UpdateExp = () => {
         </form>
         <DeleteExperience />
         <div>
-          <ExpImages preview={false} />
+          <ExpImages />
         </div>
       </div>
     </>

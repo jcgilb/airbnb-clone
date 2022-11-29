@@ -2,10 +2,15 @@ import React from "react";
 import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
+import {
+  getAllExperiences,
+  getOneExperience,
+} from "../../store/experiences.js";
 import { ceateExpImage } from "../../store/images.js";
 
-const AddExpImages = ({ preview }) => {
+const ExpImages = () => {
   const [validationErrors, setValidationErrors] = useState([]);
+  const [preview, setPreview] = useState(false);
   const [imageUrl, setImageUrl] = useState();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,7 +32,7 @@ const AddExpImages = ({ preview }) => {
     let payload = {
       exp_id: expId,
       image_url: imageUrl,
-      preview: false,
+      preview: true,
     };
 
     let img = await dispatch(ceateExpImage(expId, payload)).catch(
@@ -37,8 +42,8 @@ const AddExpImages = ({ preview }) => {
       }
     );
     if (img) {
-      if (validationErrors.length === 0)
-        return history.push(`/experiences/${expId}`);
+      if (validationErrors.length === 0) dispatch(getOneExperience(expId));
+      return history.push(`/experiences/${expId}`);
     }
   };
 
@@ -60,10 +65,10 @@ const AddExpImages = ({ preview }) => {
             ))}
         </ul>
         <button className="" type="submit" disabled={!!validationErrors.length}>
-          Add preview image
+          Upload image
         </button>
       </form>
     </div>
   );
 };
-export default AddExpImages;
+export default ExpImages;

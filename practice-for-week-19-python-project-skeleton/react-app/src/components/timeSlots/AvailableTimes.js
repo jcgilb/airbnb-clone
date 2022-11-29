@@ -165,7 +165,7 @@ const AvailableTimes = () => {
           View less <i className="fa-solid fa-chevron-up"></i>
         </div>
       )}
-      {exp.host_id === user.id && (
+      {exp.host_id === user?.id && (
         <div onClick={(e) => history.push(`/experiences/${expId}/dates`)}>
           Add dates <i className="fa-solid fa-plus"></i>
         </div>
