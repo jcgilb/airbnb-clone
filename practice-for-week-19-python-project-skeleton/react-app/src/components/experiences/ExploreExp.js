@@ -20,8 +20,8 @@ const ExploreExperiences = () => {
     fetchData();
   }, []);
 
-  const getPreviewImage = (exp) => {
-    let image = exp["images"]?.find((img) => img.preview == false);
+  const getFirstImage = (exp) => {
+    let image = exp["images"][0];
     console.log(image?.image_url, "image");
     return <img className="exp-img" alt={exp.id} src={image?.image_url}></img>;
   };
@@ -42,7 +42,7 @@ const ExploreExperiences = () => {
         {expArr.map((exp) => (
           <div className="exp-card">
             <div key={"image"} onClick={() => getExpDetails(exp.id)}>
-              {getPreviewImage(exp)}
+              {getFirstImage(exp)}
             </div>
             <div key={exp.id} onClick={() => getExpDetails(exp.id)}>
               {exp?.name}
