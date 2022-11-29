@@ -31,7 +31,7 @@ export const ceateExpImage = (expId, payload) => async (dispatch) => {
 };
 
 // delete an image
-export const deleteimage = (expId, imgId) => async (dispatch) => {
+export const deleteExpImage = (expId, imgId) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}/images/${imgId}`, {
     method: "DELETE",
   });

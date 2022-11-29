@@ -11,7 +11,7 @@ import {
 } from "../../store/experiences.js";
 import "./ExpDetails.css";
 import AvailableTimes from "../timeSlots/AvailableTimes.js";
-import ExpImages from "../images/FirstExpImage.js";
+import ExpImages from "../images/ExpImage.js";
 
 const NewExperience = () => {
   // getters and setters for the form
