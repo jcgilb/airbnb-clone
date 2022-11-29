@@ -51,7 +51,11 @@ const DeleteExpImg = ({ imgId, user, exp }) => {
   return (
     <>
       <i className="fa-solid fa-x" onClick={() => setShowDelete(true)}></i>
-      {showDelete && <div onClick={handleClick}>Delete image</div>}
+      {showDelete && (
+        <div className="confirm-delete" onClick={handleClick}>
+          Delete image
+        </div>
+      )}
     </>
   );
 };
