@@ -146,129 +146,48 @@ def seed_experience_images():
 def seed_time_slots():
     time_slot1 = TimeSlot(
         exp_id=1,
-        start="1:00", 
-        end="3:00", 
+        start=1672531200007, 
         
     )
     time_slot2 = TimeSlot(
         exp_id=2,
-        start="4:00", 
-        end="7:00", 
+        start=1672531200010, 
     )
     time_slot3 = TimeSlot(
         exp_id=3,
-        start="1:00", 
-        end="3:00", 
+        start=1672531200900,
     )
     time_slot4 = TimeSlot(
         exp_id=4,
-        start="4:00", 
-        end="7:00", 
+        start=1672531200900,
     )
 
     time_slot5 = TimeSlot(
         exp_id=5,
-        start="1:00", 
-        end="3:00", 
+        start=1672531200080, 
     )
     time_slot6 = TimeSlot(
         exp_id=1,
-        start="4:00", 
-        end="7:00", 
+        start=1672531200800, 
     )
     time_slot7 = TimeSlot(
         exp_id=2,
-        start="1:00", 
-        end="3:00", 
+        start=1672531200060, 
     )
     time_slot8 = TimeSlot(
         exp_id=3,
-        start="4:00", 
-        end="7:00", 
+        start=1672531200060,
     )
     time_slot9 = TimeSlot(
         exp_id=4,
-        start="1:00", 
-        end="3:00", 
+        start=1672531200003, 
     )
 
     time_slot10 = TimeSlot(
         exp_id=5,
-        start="4:00", 
-        end="7:00", 
+        start=1672531200002, 
     )    
-    # time_slot1 = TimeSlot(
-    #     exp_id=1,
-    #     start_time="1:00", 
-    #     end_time="3:00", 
-    #     start_date="Monday", 
-    #     end_date="Monday"
-    # )
-    # time_slot2 = TimeSlot(
-    #     exp_id=2,
-    #     start_time="4:00", 
-    #     end_time="7:00", 
-    #     start_date="Monday", 
-    #     end_date="Monday"
-    # )
-    # time_slot3 = TimeSlot(
-    #     exp_id=3,
-    #     start_time="1:00", 
-    #     end_time="3:00", 
-    #     start_date="Monday", 
-    #     end_date="Monday"
-    # )
-    # time_slot4 = TimeSlot(
-    #     exp_id=4,
-    #     start_time="4:00", 
-    #     end_time="7:00", 
-    #     start_date="Monday", 
-    #     end_date="Monday"
-    # )
-
-    # time_slot5 = TimeSlot(
-    #     exp_id=5,
-    #     start_time="1:00", 
-    #     end_time="3:00", 
-    #     start_date="Monday", 
-    #     end_date="Monday"
-    # )
-    # time_slot6 = TimeSlot(
-    #     exp_id=1,
-    #     start_time="4:00", 
-    #     end_time="7:00", 
-    #     start_date="Monday", 
-    #     end_date="Monday"
-    # )
-    # time_slot7 = TimeSlot(
-    #     exp_id=2,
-    #     start_time="1:00", 
-    #     end_time="3:00", 
-    #     start_date="Monday", 
-    #     end_date="Monday"
-    # )
-    # time_slot8 = TimeSlot(
-    #     exp_id=3,
-    #     start_time="4:00", 
-    #     end_time="7:00", 
-    #     start_date="Monday", 
-    #     end_date="Monday"
-    # )
-    # time_slot9 = TimeSlot(
-    #     exp_id=4,
-    #     start_time="1:00", 
-    #     end_time="3:00", 
-    #     start_date="Monday", 
-    #     end_date="Monday"
-    # )
-
-    # time_slot10 = TimeSlot(
-    #     exp_id=5,
-    #     start_time="4:00", 
-    #     end_time="7:00", 
-    #     start_date="Monday", 
-    #     end_date="Monday"
-    # )    
+    
     db.session.add(time_slot1)
     db.session.add(time_slot2)
     db.session.add(time_slot3)

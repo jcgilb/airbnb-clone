@@ -2,25 +2,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import {
-  deleteExperience,
-  getAllExperiences,
-} from "../../store/experiences.js";
+  deleteBooking,
+  getAllBookings,
+  getUserBookings,
+} from "../../store/bookings.js";
 
-const DeleteExperience = () => {
+const DeleteBooking = ({ bkgId, user, userId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [showDelete, setShowDelete] = useState(false);
 
-  // identify the experience from the url
-  let { expId } = useParams();
-  expId = parseInt(expId);
-
-  const experiences = useSelector((state) => state.experiences.experiences);
-
-  // get experiences
-  useEffect(() => {
-    dispatch(getAllExperiences());
-  }, [dispatch]);
+  const bookings = useSelector((state) => state.bookings.userBookings);
 
   // open menu onClick event
   const openMenu = () => {
@@ -38,11 +30,14 @@ const DeleteExperience = () => {
     return () => document.removeEventListener("click", closeDelete);
   }, [showDelete]);
 
-  // onClick, delete the experience from the url
+  // onClick, delete the song from the url
   const handleClick = async (e) => {
     e.preventDefault();
-    await dispatch(deleteExperience(expId));
-    return history.push(`/experiences`);
+    if (userId === user.id) {
+      await dispatch(deleteBooking(bkgId));
+      dispatch(getUserBookings(userId));
+    }
+    return history.push(`/users/${userId}`);
   };
 
   return (
@@ -51,9 +46,9 @@ const DeleteExperience = () => {
         class="fa-regular fa-trash-can"
         onClick={() => setShowDelete(true)}
       ></i>
-      {showDelete && <div onClick={handleClick}>Delete this experience</div>}
+      {showDelete && <div onClick={handleClick}>Cancel this booking</div>}
     </>
   );
 };
 
-export default DeleteExperience;
+export default DeleteBooking;

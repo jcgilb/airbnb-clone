@@ -16,6 +16,7 @@ import UserProfile from "./components/users/UserProfile";
 import UpdateExp from "./components/experiences/UpdateExp";
 import { getAllExperiences } from "./store/experiences";
 import DeleteExperience from "./components/experiences/DeleteExp";
+import Gaming from "./components/map/Map";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,6 +44,9 @@ function App() {
     <BrowserRouter>
       <NavBar loaded={loaded} />
       <Switch>
+        <Route path="/map" exact={true}>
+          <Gaming />
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>

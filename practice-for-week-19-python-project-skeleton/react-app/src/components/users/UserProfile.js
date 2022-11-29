@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { getAllBookings, getUserBookings } from "../../store/bookings";
 import { getAllExperiences, getUserExperiences } from "../../store/experiences";
+import DeleteBooking from "../bookings/DeleteBooking";
 import "./UserProfile.css";
 
 const UserProfile = () => {
@@ -104,6 +105,9 @@ const UserProfile = () => {
             {bkgArray.map((bkg) => (
               <>
                 <li key={bkg.id}>{bookingInfo(bkg)}</li>
+                {user?.id === userId && (
+                  <DeleteBooking userId={userId} user={user} bkgId={bkg.id} />
+                )}
               </>
             ))}
           </div>

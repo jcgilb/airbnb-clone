@@ -49,11 +49,13 @@
 .details-dates {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .available-date {
   height: 172px;
   width: 162px;
+  min-width: 162px;
   object-fit: cover;
   border: 1px solid rgb(221, 237, 170);
   padding: 24px;
@@ -74,6 +76,23 @@
   padding: 8px;
   font-weight: 500;
   cursor: pointer;
+  /* background-color: rgb(221, 237, 170); */
+  /* background-color: rgb(147, 181, 198); */
+}
+
+.booked-exp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: rgb(79, 103, 0);
+  height: 32px;
+  width: 68px;
+  border-radius: 10px;
+  background-color: rgb(221, 237, 170);
+  padding: 8px;
+  font-weight: 500;
+  border: none;
   /* background-color: rgb(221, 237, 170); */
   /* background-color: rgb(147, 181, 198); */
 }

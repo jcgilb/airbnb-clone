@@ -13,11 +13,7 @@ const AvailableTimes = () => {
   const history = useHistory();
   const { expId } = useParams();
   const dispatch = useDispatch();
-  const [week, setWeek] = useState();
-  const [endTime, setEndTime] = useState();
-  const [monthDay, setMonthDay] = useState();
-  const [timeSlot, setTimeSlot] = useState();
-  const [startTime, setStartTime] = useState();
+  const [formSlot, setFormSlot] = useState();
   const [showAll, setShowAll] = useState(false);
   const [chevDown, setChevDown] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -28,6 +24,18 @@ const AvailableTimes = () => {
   const exp = useSelector((state) => state.experiences.oneExperience);
   const bookings = exp["bookings"];
   const slots = exp["time_slots"];
+
+  // loop through the time slots and bookings to find booked slots
+  for (let i = 0; i < slots.length; i++) {
+    let slot = slots[i];
+    for (let j = 0; j < bookings.length; j++) {
+      let booking = bookings[j];
+      if (slot.id === booking.time_slot_id) {
+        slot.booked = true;
+        console.log(slot, "this slot is booked");
+      }
+    }
+  }
 
   // Sort the slots
   const sorted = exp["time_slots"];
@@ -51,10 +59,18 @@ const AvailableTimes = () => {
   // send the information to the database
   let futureSlots = slots.filter((slot) => slot.start >= now);
   let sortedSlots = qsort(futureSlots);
-  console.log(futureSlots);
-  console.log(sortedSlots);
-  const fiveSlots = sortedSlots?.slice(0, 5);
-  const availabileTimes = fiveSlots?.map((slot) => {
+  let timeSlotArray;
+  if (!showAll) {
+    timeSlotArray = sortedSlots?.slice(0, 5);
+  }
+  if (showAll) {
+    timeSlotArray = sortedSlots;
+  }
+
+  console.log(timeSlotArray, "array");
+
+  const availabileTimes = timeSlotArray.map((slot) => {
+    console.log(slot);
     let dateEnd = String(new Date(parseInt(slot.end)));
     let dateStart = String(new Date(parseInt(slot.start)));
     let end = dateEnd;
@@ -67,6 +83,9 @@ const AvailableTimes = () => {
     start = parseInt(start);
     end = start + parseInt(exp.est_duration / 60);
 
+    if (start < 12) {
+      start = String(start).concat("AM");
+    }
     if (parseInt(start) === 12) {
       start = String(12).concat("PM");
     }
@@ -93,92 +112,40 @@ const AvailableTimes = () => {
           {start} - {end}
         </div>
         <div>${exp?.price}/person</div>
-        <button className="book-exp" onClick={() => setShowModal(true)}>
-          Choose
-        </button>
+        {slot.booked !== true && (
+          <button
+            className="book-exp"
+            onClick={() => {
+              setFormSlot(slot);
+              setShowModal(true);
+            }}
+          >
+            Choose
+          </button>
+        )}
+        {slot.booked === true && (
+          <button
+            className="booked-exp"
+            onClick={() => {
+              setFormSlot(slot);
+            }}
+          >
+            Booked
+          </button>
+        )}
 
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
-            <BookingForm
-              exp={exp}
-              end={end}
-              slot={slot}
-              week={week}
-              start={start}
-              expId={expId}
-              monthDay={monthDay}
-            />
+            <BookingForm exp={exp} slot={formSlot} expId={expId} />
           </Modal>
         )}
       </div>
     );
   });
-
-  const allAvailabileTimes = sortedSlots?.map((slot) => {
-    let dateEnd = String(new Date(parseInt(slot.end)));
-    let dateStart = String(new Date(parseInt(slot.start)));
-    let end = dateEnd;
-    let week = dateStart.slice(0, 3);
-    let year = dateStart.slice(11, 15);
-    let start = dateStart.slice(16, 18);
-    let monthDay = dateStart.slice(4, 10);
-    const minutes = dateStart.slice(22, 24);
-
-    start = parseInt(start);
-    end = start + parseInt(exp.est_duration / 60);
-
-    if (parseInt(start) === 12) {
-      start = String(12).concat("PM");
-    }
-    if (parseInt(end) === 12) {
-      end = String(12).concat("PM");
-    }
-    if (parseInt(start) > 12) {
-      start = String(parseInt(dateStart.slice(16, 18)) - 12).concat("PM");
-
-      if (parseInt(end) > 24) {
-        end = String(parseInt(end) - 24).concat("AM");
-      }
-    }
-    if (parseInt(end) > 12) {
-      end = String(parseInt(end) - 12).concat("PM");
-    }
-
-    return (
-      <div className="available-date">
-        <div>
-          {week}, {monthDay}, {year}
-        </div>
-        <div>
-          {start} - {end}
-        </div>
-        <div>${exp?.price}/person</div>
-        <button className="book-exp" onClick={() => setShowModal(true)}>
-          Choose
-        </button>
-
-        {showModal && (
-          <Modal onClose={() => setShowModal(false)}>
-            <BookingForm
-              exp={exp}
-              end={end}
-              slot={slot}
-              week={week}
-              start={start}
-              expId={expId}
-              monthDay={monthDay}
-            />
-          </Modal>
-        )}
-      </div>
-    );
-  });
-
-  console.log(exp.host_id, user.id);
 
   return (
     <div>
-      {chevDown && slots.length >= 5 && (
+      {chevDown && slots.length > 5 && (
         <div
           onClick={(e) => {
             setShowAll(true);
@@ -203,8 +170,7 @@ const AvailableTimes = () => {
           Add dates <i className="fa-solid fa-plus"></i>
         </div>
       )}
-      {!showAll && <div className="details-dates">{availabileTimes}</div>}
-      {showAll && <div className="details-dates">{allAvailabileTimes}</div>}
+      <div className="details-dates">{availabileTimes}</div>
     </div>
   );
 };

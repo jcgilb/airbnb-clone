@@ -5,38 +5,63 @@ import { Redirect, useHistory } from "react-router-dom";
 import { createOneBooking } from "../../store/bookings";
 import "./BookingForm.css";
 
-function BookingForm({ exp, expId, end, slot, start, week, monthDay }) {
+function BookingForm({ exp, expId, slot }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  // getters and setters for the login form
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  console.log(slot, "this is the time slot");
 
   // get the user and the experience
   const user = useSelector((state) => state.session.user);
   const bookings = exp["bookings"];
-  const slots = exp["time_slots"];
 
   const bookTimeSlot = async (e, slot) => {
-    console.log("hi");
-    // setTimeSlot(slot);
     e.preventDefault();
 
-    console.log(exp.id, "expId");
-    console.log(user.id, "user.id");
-    console.log(slot.id, "slot.id");
     const payload = {
-      exp_id: expId,
+      exp_id: parseInt(expId),
       user_id: user.id,
       time_slot_id: slot.id,
     };
+
+    console.log(expId, payload, "this is what im sending to my thunk");
     const booking = await dispatch(createOneBooking(expId, payload));
 
     if (booking) {
       return history.push(`/users/${user.id}`);
     }
   };
+
+  let dateEnd = String(new Date(parseInt(slot.end)));
+  let dateStart = String(new Date(parseInt(slot.start)));
+  let end = dateEnd;
+  let week = dateStart.slice(0, 3);
+  let year = dateStart.slice(11, 15);
+  let start = dateStart.slice(16, 18);
+  let monthDay = dateStart.slice(4, 10);
+  const minutes = dateStart.slice(22, 24);
+
+  start = parseInt(start);
+  end = start + parseInt(exp.est_duration / 60);
+
+  if (start < 12) {
+    start = String(start).concat("AM");
+  }
+  if (parseInt(start) === 12) {
+    start = String(12).concat("PM");
+  }
+  if (parseInt(end) === 12) {
+    end = String(12).concat("PM");
+  }
+  if (parseInt(start) > 12) {
+    start = String(parseInt(dateStart.slice(16, 18)) - 12).concat("PM");
+
+    if (parseInt(end) > 24) {
+      end = String(parseInt(end) - 24).concat("AM");
+    }
+  }
+  if (parseInt(end) > 12) {
+    end = String(parseInt(end) - 12).concat("PM");
+  }
 
   return (
     <div className="booking-form">
