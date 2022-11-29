@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
-import { GoogleMap, LoadScript, useJsApiLoader } from "@react-google-maps/api";
 
 import {
   getAllExperiences,
@@ -32,36 +31,9 @@ const ExperienceDetails = () => {
   const exp = useSelector((state) => state.experiences.oneExperience);
   const user = useSelector((state) => state.session.user);
   const expImgArr = exp["images"];
+  let imgPlaces = new Array(5);
 
   const getAvgStars = (exp) => {};
-
-  // const containerStyle = {
-  //   width: "400px",
-  //   height: "400px",
-  // };
-
-  // const center = {
-  //   lat: -3.745,
-  //   lng: -38.523,
-  // };
-
-  // const { isLoaded } = useJsApiLoader({
-  //   id: "google-map-script",
-  //   googleMapsApiKey: "AIzaSyA4EVe6k80NNAS-5owOJ4zKJ9rwDJtpYTw",
-  // });
-
-  // const [map, setMap] = useState(null);
-
-  // const onLoad = useCallback(function callback(map) {
-  //   // This is just an example of getting and using the map instance!!! don't just blindly copy!
-  //   const bounds = new window.google.maps.LatLngBounds(center);
-  //   map.fitBounds(bounds);
-  //   setMap(map);
-  // }, []);
-
-  // const onUnmount = useCallback(function callback(map) {
-  //   setMap(null);
-  // }, []);
 
   if (!exp?.id) return null;
 
@@ -75,13 +47,61 @@ const ExperienceDetails = () => {
         </div>
       </div>
       <div className="details-images">
-        <img className="pic1" alt="img" src={expImgArr[0]?.image_url}></img>
-        <img className="pic2" alt="img" src={expImgArr[1]?.image_url}></img>
+        {expImgArr.length >= 1 && (
+          <img className="pic1" alt="img" src={expImgArr[0].image_url}></img>
+        )}
+        {expImgArr.length >= 2 && (
+          <img className="pic2" alt="img" src={expImgArr[1].image_url}></img>
+        )}
         <div className="pic3-pic4">
-          <img className="pic3" alt="img" src={expImgArr[2]?.image_url}></img>
-          <img className="pic4" alt="img" src={expImgArr[3]?.image_url}></img>
+          {expImgArr.length >= 3 && (
+            <img className="pic3" alt="img" src={expImgArr[2].image_url}></img>
+          )}
+          {expImgArr.length >= 4 && (
+            <img className="pic4" alt="img" src={expImgArr[3].image_url}></img>
+          )}
         </div>
-        <img className="pic5" alt="img" src={expImgArr[4]?.image_url}></img>
+        {expImgArr.length >= 5 && (
+          <img className="pic5" alt="img" src={expImgArr[4].image_url}></img>
+        )}
+
+        {expImgArr.length === 0 && user.id === exp.host_id && (
+          <i
+            className="pic1 fa fa-plus"
+            onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+            aria-hidden="true"
+          ></i>
+        )}
+        {!expImgArr[1] && user.id === exp.host_id && (
+          <i
+            className="pic2 fa fa-plus"
+            onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+            aria-hidden="true"
+          ></i>
+        )}
+        <div className="pic3-pic4">
+          {!expImgArr[2] && user.id === exp.host_id && (
+            <i
+              className="pic3 fa fa-plus"
+              onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+              aria-hidden="true"
+            ></i>
+          )}
+          {!expImgArr[3] && user.id === exp.host_id && (
+            <i
+              className="pic4 fa fa-plus"
+              onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+              aria-hidden="true"
+            ></i>
+          )}
+        </div>
+        {!expImgArr[4] && user.id === exp.host_id && (
+          <i
+            className="pic5 fa fa-plus"
+            aria-hidden="true"
+            onClick={() => history.push(`/experiences/${expId}/edit`)}
+          ></i>
+        )}
       </div>
       <div className="details">
         <div>Experience hosted by {exp["exp_host"]?.first_name}</div>
@@ -99,29 +119,6 @@ const ExperienceDetails = () => {
       <hr></hr>
       <div className="details">Choose from available dates</div>
       <AvailableTimes />
-      <div className="details-map">
-        {/* <LoadScript
-          googleMapsApiKey="AIzaSyC44LmEfw4hs78DkfdGjAnAXbL6PO8-AUQ"
-          // libraries={libraries}
-        >
-          <GoogleMap
-            // mapContainerStyle={containerStyle}
-            center={center}
-            zoom={10}
-            // onLoad={onMapLoad}
-          > */}
-        {/* {markers.map((marker) => (
-              <Marker
-                key={marker.time.toISOString()}
-                position={{ lat: marker.lat, lng: marker.lng }}
-                onClick={() => {
-                  setCurSelect(marker);
-                }}
-              />
-            ))} */}
-        {/* </GoogleMap> */}
-        {/* </LoadScript> */}
-      </div>
     </div>
   );
 };

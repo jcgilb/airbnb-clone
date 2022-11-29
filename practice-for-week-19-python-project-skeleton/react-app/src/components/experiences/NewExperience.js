@@ -11,6 +11,7 @@ import {
 } from "../../store/experiences.js";
 import "./ExpDetails.css";
 import AvailableTimes from "../timeSlots/AvailableTimes.js";
+import ExpImages from "../images/FirstExpImage.js";
 
 const NewExperience = () => {
   // getters and setters for the form
@@ -211,6 +212,7 @@ const NewExperience = () => {
             Become a host
           </button>
         </form>
+        <ExpImages />
       </div>
     </>
   );
