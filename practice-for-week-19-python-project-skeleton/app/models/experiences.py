@@ -95,6 +95,7 @@ class TimeSlot(db.Model):
         add_prefix_for_prod('experiences.id')), nullable=False)
     start = db.Column(db.String())
     end = db.Column(db.String())
+    booked = db.Column(db.Boolean(), default=False)
     # start_date = db.Column(db.String())
     # end_date = db.Column(db.String())
 
@@ -107,6 +108,7 @@ class TimeSlot(db.Model):
             'exp_id': self.exp_id,
             'start': self.start,
             'end': self.end,
+            'booked': self.booked,
             # 'start_date': self.start_date,
             # 'end_date': self.end_date
         }
@@ -122,7 +124,7 @@ class ExperienceImageSchema(ma.Schema):
 
 class TimeSlotSchema(ma.Schema):
     class Meta:
-        fields = ("id", "exp_id", "start", "end")        
+        fields = ("id", "exp_id", "start", "end", "booked")        
 
 experience_schema = ExperienceSchema()
 experiences_schema = ExperienceSchema(many=True)

@@ -80,7 +80,16 @@ def edit_one_bkg(bkg_id):
 def delete_one_bkg(bkg_id):
     """Delete a bkg by id"""
     bkg = Booking.query.get(bkg_id)
+    time_slot = TimeSlot.query.get(bkg.time_slot_id)
+
+    if current_user.id != bkg.user_id: 
+        return "You are not authorized to cancel this booking."
+
     if bkg:
+        time_slot.booked = False
+        db.session.add(time_slot)
+        db.session.commit()
+
         db.session.delete(bkg)
         db.session.commit()
         result = booking_schema.dump(bkg)

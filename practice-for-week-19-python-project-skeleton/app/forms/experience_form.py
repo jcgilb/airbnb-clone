@@ -12,7 +12,7 @@ class ExperienceForm(FlaskForm):
     lng = FloatField("Longitude", validators=[DataRequired()])
     name = StringField("Name", validators=[DataRequired()])
     description = TextAreaField("Description", validators=[DataRequired()])
-    price = IntegerField("Price", validators=[DataRequired()])
+    price = FloatField("Price", validators=[DataRequired()])
     
 class ExperienceImageForm(FlaskForm):
     exp_id = IntegerField("Experience ID")

@@ -11,23 +11,26 @@ import {
 } from "../../store/experiences.js";
 import "./ExpDetails.css";
 import AvailableTimes from "../timeSlots/AvailableTimes.js";
+import ExpImages from "../images/FirstExpImage.js";
 
 const NewExperience = () => {
   // getters and setters for the form
+  const presetHours = ["<2", "2-5", "All day"];
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState();
+  const [expState, setExpState] = useState();
   const [estDuration, setEstDuration] = useState("");
   const [country, setCountry] = useState("");
-  const [price, setPrice] = useState();
+  const [cost, setCost] = useState();
   const [validationErrors, setValidationErrors] = useState([]);
   const [hoursSelect, setHoursSelect] = useState([]);
   const [lat, setLat] = useState();
   const [lng, setLng] = useState();
   const [durationSelect, setDurationSelect] = useState();
-  const presetHours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+  const user = useSelector((state) => state.session.user);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -49,22 +52,71 @@ const NewExperience = () => {
     setDescription("");
     setAddress("");
     setCity("");
-    setState();
+    setExpState("");
     setCountry("");
-    setPrice();
+    setCost();
     setEstDuration();
   };
 
   // handle submit onClick event
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newExperience = {};
+    let payload;
+    console.log(durationSelect);
+
+    if (durationSelect === "<2") {
+      payload = {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+        city: city,
+        name: title,
+        state: String(expState),
+        price: cost,
+        country: country,
+        address: address,
+        host_id: user.id,
+        description: description,
+        est_duration: 120,
+      };
+    }
+    if (durationSelect === "2-5") {
+      payload = {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+        city: city,
+        name: title,
+        state: String(expState),
+        price: cost,
+        country: country,
+        address: address,
+        host_id: user.id,
+        description: description,
+        est_duration: 300,
+      };
+    }
+    if (durationSelect === "All day") {
+      payload = {
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+        city: city,
+        name: title,
+        state: String(expState),
+        price: cost,
+        country: country,
+        address: address,
+        host_id: user.id,
+        description: description,
+        est_duration: 0,
+      };
+    }
     revert();
-    let exp = await dispatch(createOneExperience()).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setValidationErrors(data.errors);
-    });
-    if (exp) {
+    let exp = await dispatch(createOneExperience(payload)).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setValidationErrors(data.errors);
+      }
+    );
+    if (exp.id) {
       if (validationErrors.length === 0)
         return history.push(`/experiences/${exp.id}`);
     }
@@ -79,52 +131,58 @@ const NewExperience = () => {
         <br></br>
         <form className="" onSubmit={handleSubmit}>
           <input
-            type="title"
+            type="text"
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <input
-            type="description"
+          <textarea
+            type="text"
             placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
           <input
-            type="address"
+            type="text"
             placeholder="Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
           <input
-            type="city"
+            type="text"
             placeholder="City"
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
           <input
-            type="state"
+            type="text"
             placeholder="State"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
+            value={expState}
+            onChange={(e) => setExpState(e.target.value)}
           />
           <input
-            type="country"
+            type="text"
             placeholder="Country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
           />
           <input
-            type="estDuration"
-            placeholder="Estimated duration"
-            value={estDuration}
-            onChange={(e) => setEstDuration(e.target.value)}
+            type="text"
+            placeholder="Latitude"
+            value={lat}
+            onChange={(e) => setLat(e.target.value)}
           />
           <input
-            type="price"
+            type="text"
+            placeholder="Longitude"
+            value={lng}
+            onChange={(e) => setLng(e.target.value)}
+          />
+          <input
+            type="float"
             placeholder="Price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            value={cost}
+            onChange={(e) => setCost(e.target.value)}
           />
           <select
             onChange={updateDuration}
@@ -154,6 +212,7 @@ const NewExperience = () => {
             Become a host
           </button>
         </form>
+        <ExpImages />
       </div>
     </>
   );

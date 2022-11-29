@@ -3,7 +3,7 @@ import { useDeferredValue } from "react";
 import DateTimePicker from "react-datetime-picker";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getAllExperiences, getOneExperience } from "../../store/experiences";
+import { getUserExperiences, getOneExperience } from "../../store/experiences";
 
 import { getAllSlots, createOneSlot } from "../../store/timeSlots";
 import "./ExpTimeSlots.css";
@@ -20,17 +20,17 @@ const ExpTimeSlots = () => {
   const [start, setStart] = useState(new Date());
   const [duration, setDuration] = useState();
 
-  // get all experiences
-  useEffect(() => {
-    dispatch(getAllExperiences());
-  }, [dispatch, expId]);
-
-  // get the user and the user's experiences
-  const experiences = useSelector((state) => state.experiences);
+  // get the user
   const user = useSelector((state) => state.session.user);
-  const userExperiences = Object.values(experiences).filter(
-    (exp) => exp.host_id === user.id
-  );
+
+  // get user's experiences
+  useEffect(() => {
+    dispatch(getUserExperiences(user.id));
+  }, [dispatch]);
+
+  // create an array of user experiences
+  const userExp = useSelector((state) => state.experiences.userExperiences);
+  const userExperiences = Object.values(userExp);
 
   // parse the date string to send to the database
   useEffect(() => {
@@ -72,7 +72,7 @@ const ExpTimeSlots = () => {
 
     let slot = await dispatch(createOneSlot(expId, newTimeSlot));
     if (slot) {
-      if (errors.length === 0) return history.push(`/dates`);
+      if (errors.length === 0) return history.push(`/experiences/${expId}`);
     }
   };
 

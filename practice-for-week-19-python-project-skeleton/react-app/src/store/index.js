@@ -4,12 +4,14 @@ import session from "./session";
 import bookingReducer from "./bookings";
 import experienceReducer from "./experiences";
 import timeSlotReducer from "./timeSlots";
+import imageReducer from "./images";
 
 const rootReducer = combineReducers({
   session,
   experiences: experienceReducer,
   bookings: bookingReducer,
   times: timeSlotReducer,
+  images: imageReducer,
 });
 
 let enhancer;

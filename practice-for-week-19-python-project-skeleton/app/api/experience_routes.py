@@ -62,15 +62,16 @@ def create_one_experience():
         data = form.data
         new_experience = Experience(
             host_id=current_user.id,
-            address=data['address'],
-            city=data['city'],
-            state=data['state'],
-            country=data['country'],
             lat=data['lat'],
             lng=data['lng'],
             name=data['name'],
+            city=data['city'],
+            price=data['price'],
+            state=data['state'],
+            country=data['country'],
+            address=data['address'],
             description=data['description'],
-            price=data['price']
+            est_duration=data['est_duration']
         )
 
         db.session.add(new_experience)
@@ -96,26 +97,28 @@ def edit_one_experience(exp_id):
         data = form.data
 
         host_id=current_user.id
-        address=data['address']
+        lng=data['lng']
+        lat=data['lat']
+        name=data['name']
         city=data['city']
         state=data['state']
-        country=data['country']
-        lat=data['lat']
-        lng=data['lng']
-        name=data['name']
-        description=data['description']
         price=data['price']
+        country=data['country']
+        address=data['address']
+        description=data['description']
+        est_duration=data['est_duration']
 
-        experience.host_id=host_id
-        experience.address=address
+        experience.lng=lng
+        experience.lat=lat
+        experience.name=name
         experience.city=city
         experience.state=state
-        experience.country=country
-        experience.lat=lat
-        experience.lng=lng
-        experience.name=name
-        experience.description=description
         experience.price=price
+        experience.address=address
+        experience.country=country
+        experience.host_id=host_id
+        experience.description=description
+        experience.est_duration=est_duration
 
         db.session.add(experience)
         db.session.commit()
@@ -164,7 +167,7 @@ def get_time_slots(exp_id):
     available_times = []
     for slot in time_slots:
         available_times.append(slot.to_dict())
-
+    
     return jsonify(available_times)  
 
 @experience_routes.route('/<int:exp_id>/slots/<int:slot_id>', methods=["DELETE"])
@@ -314,6 +317,12 @@ def create_one_bkg(exp_id):
         
 
         db.session.add(new_booking)
+        db.session.commit()
+
+        time_slot = TimeSlot.query.get(new_booking.time_slot_id)
+        time_slot.booked = True
+
+        db.session.add(time_slot)
         db.session.commit()
 
         success_response = Booking.query.order_by(Booking.id.desc()).first()
