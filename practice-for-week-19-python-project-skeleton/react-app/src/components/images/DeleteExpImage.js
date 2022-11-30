@@ -16,13 +16,6 @@ const DeleteExpImg = ({ imgId, user, exp }) => {
   expId = parseInt(expId);
   imgId = parseInt(imgId);
 
-  const experiences = useSelector((state) => state.experiences.experiences);
-
-  // // get experiences
-  // useEffect(() => {
-  //   dispatch(getAllExperiences());
-  // }, [dispatch]);
-
   // open menu onClick event
   const openMenu = () => {
     if (showDelete) return;
@@ -42,7 +35,6 @@ const DeleteExpImg = ({ imgId, user, exp }) => {
   // onClick, delete the experience from the url
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log(expId, imgId, "expid, imgId");
     await dispatch(deleteExpImage(expId, imgId));
     dispatch(getOneExperience(expId));
     return history.push(`/experiences/${expId}`);
