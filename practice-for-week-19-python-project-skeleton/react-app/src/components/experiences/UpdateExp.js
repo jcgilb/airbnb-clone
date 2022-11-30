@@ -135,7 +135,9 @@ const UpdateExp = () => {
     <>
       <br></br>
       <br></br>
-      <div className="exp-datials">Edit experience details below</div>
+      <div className="exp-details">Edit experience details below</div>
+      <br></br>
+      <br></br>
       <div className="form-container">
         <br></br>
         <form className=".exp-form" onSubmit={handleSubmit}>
@@ -257,6 +259,8 @@ const UpdateExp = () => {
           <ExpImages />
         </div>
       </div>
+      <br></br>
+      <br></br>
     </>
   );
 };
