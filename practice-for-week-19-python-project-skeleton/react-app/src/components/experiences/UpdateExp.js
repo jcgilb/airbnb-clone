@@ -53,14 +53,14 @@ const UpdateExp = () => {
 
   // helper function for clearing the form
   const revert = () => {
-    setTitle("");
-    setDescription("");
-    setAddress("");
-    setCity("");
-    setExpState();
-    setCountry("");
     setCost();
+    setCity("");
+    setTitle("");
+    setExpState();
+    setAddress("");
+    setCountry("");
     setEstDuration();
+    setDescription("");
   };
 
   // handle submit onClick event
@@ -72,49 +72,49 @@ const UpdateExp = () => {
     if (durationSelect === "<2") {
       console.log("<2 hours is true");
       payload = {
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
         city: city,
         name: title,
-        state: String(expState),
         price: cost,
         country: country,
         address: address,
         host_id: user.id,
-        description: description,
         est_duration: 120,
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+        state: String(expState),
+        description: description,
       };
     }
     if (durationSelect === "2-5") {
       console.log("2-5 hours is true");
       payload = {
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
         city: city,
         name: title,
-        state: String(expState),
         price: cost,
         country: country,
         address: address,
         host_id: user.id,
-        description: description,
         est_duration: 300,
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+        state: String(expState),
+        description: description,
       };
     }
     if (durationSelect === "All day") {
       console.log("all day hours is true");
       payload = {
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
         city: city,
         name: title,
-        state: String(expState),
         price: cost,
+        est_duration: 0,
         country: country,
         address: address,
         host_id: user.id,
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+        state: String(expState),
         description: description,
-        est_duration: 0,
       };
     }
     console.log(payload);
@@ -138,7 +138,7 @@ const UpdateExp = () => {
       <div className="exp-datials">Edit experience details below</div>
       <div className="create-update-exp">
         <br></br>
-        <form className="" onSubmit={handleSubmit}>
+        <form className=".exp-from" onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Title"
