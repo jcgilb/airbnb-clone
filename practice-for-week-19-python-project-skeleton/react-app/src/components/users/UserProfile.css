@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border: 3px solid hotpink;
+}
+.title {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  width: 100%;
+  border: 3px solid chartreuse;
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+  width: 90%;
+  border: 3px solid aqua;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 50%;
+  border: 3px solid hotpink;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 50%;
+  border: 3px solid rebeccapurple;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 50%;
+  border: 3px solid forestgreen;
+}
+
+.user-image {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border: 1px solid hotpink;
+  border-radius: 50%;
+}

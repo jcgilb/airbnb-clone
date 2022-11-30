@@ -1,0 +1,34 @@
+.fa-x {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  left: 20px;
+  opacity: 50%;
+}
+
+.fa-x:hover {
+  opacity: 100%;
+  color: rgb(255, 22, 84);
+  cursor: pointer;
+}
+.confirm-delete {
+  position: absolute;
+  z-index: 2;
+  top: 30px;
+  left: 20px;
+  opacity: 100%;
+  color: rgb(255, 22, 84);
+  cursor: pointer;
+}
+
+.pic3-pic4 {
+  position: relative;
+}
+
+.pic1,
+.pic2,
+.pic3,
+.pic4,
+.pic5 {
+  position: relative;
+}

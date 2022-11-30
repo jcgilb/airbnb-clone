@@ -1,0 +1,4 @@
+.date-time-picker {
+  display: flex;
+  flex-direction: column;
+}

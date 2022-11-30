@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.explore-title {
+  display: flex;
+  flex-direction: row;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.43;
+}
+
+.flex-row-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.exp-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 307px;
+  max-height: 490px;
+  padding: 8px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.experience-img {
+  display: flex;
+  flex-direction: column;
+  height: 418px;
+  width: 307px;
+  object-fit: cover;
+  border-radius: 5%;
+}

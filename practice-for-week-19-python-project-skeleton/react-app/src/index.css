@@ -1,1 +1,62 @@
-/* TODO Add site wide styles */
+/* Site wide styles */
+/* :root {
+  --prussian-blue: #023047;
+  --blue-green: rgb(33, 158, 188);
+  --light-cornflower-blue: rgb(142, 202, 230);
+  --selective-yellow: rgb(255, 183, 3);
+  --tangerine: rgb(250, 133, 0);
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  size: 16px;
+  font-family: "M PLUS 1", sans-serif;
+}
+
+.root {
+  height: 100%;
+}
+
+/* .overall-container {
+  background-color: rgba(2, 48, 71, 0.1);
+  width: 100%;
+  height: 100%;
+  padding-bottom: 50px;
+  position: relative;
+  z-index: 0;
+}
+
+.inner-container {
+  width: 72.5%;
+  height: 100%;
+  background-color: white;
+  margin: 0 auto;
+  padding-bottom: 150px;
+  position: relative;
+  z-index: 0;
+} */
+
+/* @media screen and (max-width: 1000px) {
+  .overall-container {
+    background: white;
+  }
+
+  .inner-container {
+    width: 100%;
+  }
+
+  footer {
+    padding-left: 1% !important;
+    padding-right: 1% !important;
+  }
+} */
+
+a {
+  text-decoration: none;
+}

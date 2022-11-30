@@ -1,5 +1,5 @@
 from ..models import User, environment, SCHEMA
-from ..models.experiences import Experience, ExperienceImage, db
+from ..models.experiences import Experience, ExperienceImage, TimeSlot, db
 from sqlalchemy import func
 
 
@@ -105,28 +105,28 @@ def seed_experience_images():
         image_url="https://images.flytographer.com/583bcfc3-5aa6-4cc7-ba22-9f539c100126/breckenridge-couples-trip-couple-dog_1024.jpeg", 
         preview=True
     )
-    exp_image1 = ExperienceImage(
+    exp_image6 = ExperienceImage(
         exp_id=1,
         image_url="https://www.jumpintoart.com/uploads/1/0/6/2/10628591/s902277773334188845_p62_i11_w6000.jpeg?width=2560",
         preview=False
     )
-    exp_image2 = ExperienceImage(
+    exp_image7 = ExperienceImage(
         exp_id=2,
         image_url="https://lh3.googleusercontent.com/p/AF1QipNPTeqsY7kYZIpT7SV03kpH7-t_spBeFyea8KVx=s680-w680-h510",
         preview=False
     )
-    exp_image3 = ExperienceImage(
+    exp_image8 = ExperienceImage(
         exp_id=3,
         image_url="https://d2l34t1fl9ccx8.cloudfront.net/media/image/icache/340x/a/l/alpacas-smooth-alpaca.jpg",
         preview=False
     )
-    exp_image4 = ExperienceImage(
+    exp_image9 = ExperienceImage(
         exp_id=4,
         image_url="https://a0.muscache.com/im/pictures/965138e2-fefa-43b3-b6ff-ffb4a9ba0c2b.jpg?im_w=1200", 
         preview=False
     )
 
-    exp_image5 = ExperienceImage(
+    exp_image10 = ExperienceImage(
         exp_id=5,
         image_url="https://dayhikesneardenver.b-cdn.net/wp-content/uploads/2019/12/HollyMandarich-1-dayhikesneardenver-interview.jpg",
         preview=False
@@ -136,7 +136,69 @@ def seed_experience_images():
     db.session.add(exp_image3)
     db.session.add(exp_image4)
     db.session.add(exp_image5)
+    db.session.add(exp_image6)
+    db.session.add(exp_image7)
+    db.session.add(exp_image8)
+    db.session.add(exp_image9)
+    db.session.add(exp_image10)
     db.session.commit()
+
+def seed_time_slots():
+    time_slot1 = TimeSlot(
+        exp_id=1,
+        start=1672531200007, 
+        
+    )
+    time_slot2 = TimeSlot(
+        exp_id=2,
+        start=1672531200010, 
+    )
+    time_slot3 = TimeSlot(
+        exp_id=3,
+        start=1672531200900,
+    )
+    time_slot4 = TimeSlot(
+        exp_id=4,
+        start=1672531200900,
+    )
+
+    time_slot5 = TimeSlot(
+        exp_id=5,
+        start=1672531200080, 
+    )
+    time_slot6 = TimeSlot(
+        exp_id=1,
+        start=1672531200800, 
+    )
+    time_slot7 = TimeSlot(
+        exp_id=2,
+        start=1672531200060, 
+    )
+    time_slot8 = TimeSlot(
+        exp_id=3,
+        start=1672531200060,
+    )
+    time_slot9 = TimeSlot(
+        exp_id=4,
+        start=1672531200003, 
+    )
+
+    time_slot10 = TimeSlot(
+        exp_id=5,
+        start=1672531200002, 
+    )    
+    
+    db.session.add(time_slot1)
+    db.session.add(time_slot2)
+    db.session.add(time_slot3)
+    db.session.add(time_slot4)
+    db.session.add(time_slot5)
+    db.session.add(time_slot6)
+    db.session.add(time_slot7)
+    db.session.add(time_slot8)
+    db.session.add(time_slot9)
+    db.session.add(time_slot10)
+    db.session.commit()    
 
 def undo_experiences():
     if environment == "production":
@@ -155,4 +217,15 @@ def undo_experience_images():
     else:
         db.session.execute("DELETE FROM experience_images")
     db.session.commit()
+
+
+def undo_time_slots():
+    if environment == "production":
+        db.session.execute(
+            f"TRUNCATE table {SCHEMA}.time_slots RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("DELETE FROM time_slots")
+    db.session.commit()
+
+
 
