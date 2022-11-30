@@ -1,55 +1,112 @@
-.exp-form {
+.exp-details {
+  width: 100%;
+  height: 100px;
+}
+
+.form-container {
+  width: 500px;
   display: flex;
+  padding: 20px;
+  margin: 0 auto;
+  align-items: center;
+  border-radius: 10px;
   flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgb(91, 129, 147);
 }
 
-.update-exp-input {
-  margin: 1em;
-  padding-left: 2em;
-  padding-right: 3em;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  width: 40%;
+.exp-name,
+.exp-address,
+.exp-city,
+.exp-state,
+.exp-country,
+.exp-lat,
+.exp-lng,
+.exp-price,
+.exp-img {
+  width: 450px;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }
 
-.update-exp-select {
-  margin: 1em;
-  padding-left: 2em;
-  padding-right: 3em;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  width: 250px;
+.exp-duration {
+  width: 484px;
+  height: 30px;
+  overflow: hidden;
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .price {
-  position: relative;
   display: inline;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-textarea {
-  margin: 1em;
-  padding-left: 2em;
-  padding-right: 1em;
-  padding-top: 1em;
-  padding-bottom: 1em;
+.exp-description {
   resize: none;
   height: 100px;
-  width: 40%;
+  width: 450px;
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-top: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .price:before {
   content: "$";
   position: absolute;
-  top: 20px;
-  left: 25px;
+  top: 0px;
+  left: 10px;
   z-index: 1;
 }
 
+input {
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+input,
+select,
+textarea {
+  outline: none;
+  border: 1px solid rgb(91, 129, 147);
+  border-radius: 5px;
+}
+
+input.exp-price {
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
 .submit {
-  margin: 1em;
-  padding-left: 2em;
-  padding-right: 3em;
-  padding-top: 1em;
-  padding-bottom: 1em;
   width: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.exp-host,
+.exp-image {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 30px;
+  width: 120px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(147, 181, 198);
+  padding: 8px;
+  font-weight: 500;
+  cursor: pointer;
 }

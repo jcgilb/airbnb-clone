@@ -7,6 +7,7 @@ import {
   getOneExperience,
 } from "../../store/experiences.js";
 import { ceateExpImage } from "../../store/images.js";
+import "../experiences/NewExp.css";
 
 const ExpImages = () => {
   const [validationErrors, setValidationErrors] = useState([]);
@@ -48,27 +49,33 @@ const ExpImages = () => {
   };
 
   return (
-    <div>
-      <form className="" onSubmit={handleSubmit}>
+    <form className="exp-form" onSubmit={handleSubmit}>
+      <div>
         <input
+          className="exp-img"
           type="imageUrl"
           placeholder="Image Url"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
         />
-        <ul className="errors">
-          {validationErrors.length > 0 &&
-            validationErrors.map((err) => (
-              <div id="err" key={err}>
-                {err}
-              </div>
-            ))}
-        </ul>
-        <button className="" type="submit" disabled={!!validationErrors.length}>
-          Upload image
-        </button>
-      </form>
-    </div>
+      </div>
+
+      <ul className="errors">
+        {validationErrors.length > 0 &&
+          validationErrors.map((err) => (
+            <div id="err" key={err}>
+              {err}
+            </div>
+          ))}
+      </ul>
+      <button
+        className="exp-image"
+        type="submit"
+        disabled={!!validationErrors.length}
+      >
+        Upload image
+      </button>
+    </form>
   );
 };
 export default ExpImages;

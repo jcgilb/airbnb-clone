@@ -23,7 +23,9 @@ const ExploreExperiences = () => {
   const getFirstImage = (exp) => {
     let image = exp["images"][0];
     console.log(image?.image_url, "image");
-    return <img className="exp-img" alt={exp.id} src={image?.image_url}></img>;
+    return (
+      <img className="experience-img" alt={exp.id} src={image?.image_url}></img>
+    );
   };
 
   const getExpDetails = (id) => {
