@@ -49,7 +49,6 @@ const ExperienceDetails = () => {
       </div>
       <div className="details-images">
         <div className="pic1">
-          <DeleteExpImg user={user} exp={exp} imgId={expImgArr[0].id} />
           {expImgArr.length >= 1 && (
             <>
               <img
