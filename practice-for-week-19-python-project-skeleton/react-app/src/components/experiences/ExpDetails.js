@@ -39,7 +39,7 @@ const ExperienceDetails = () => {
   if (!exp?.id) return null;
 
   return (
-    <div>
+    <div className="details-container">
       <div className="details-title">{exp?.name}</div>
       <div className="details-subtitle">
         <div className="stars">{getAvgStars(exp)}</div>
@@ -147,7 +147,10 @@ const ExperienceDetails = () => {
       <div className="details">
         <div>Experience hosted by {exp["exp_host"]?.first_name}</div>
         {exp.host_id === user?.id && (
-          <div onClick={(e) => history.push(`/experiences/${expId}/edit`)}>
+          <div
+            className="edit-exp-details"
+            onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+          >
             Edit experience details
           </div>
         )}
@@ -159,7 +162,9 @@ const ExperienceDetails = () => {
       <div className="details-description">{exp?.description}</div>
       <hr></hr>
       <div className="details">Choose from available dates</div>
-      <AvailableTimes />
+      <div clasName="slot-details">
+        <AvailableTimes />
+      </div>
     </div>
   );
 };
