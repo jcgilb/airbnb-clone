@@ -126,7 +126,8 @@ const NewExperience = () => {
     <>
       <br></br>
       <br></br>
-      <div className="exp-datials">Host An Experience</div>
+      <div className="exp-details">Host An Experience</div>
+      <br></br>
       <br></br>
       <div className="form-container">
         <form className=".exp-form" onSubmit={handleSubmit}>
@@ -246,6 +247,8 @@ const NewExperience = () => {
         </form>
         <ExpImages />
       </div>
+      <br></br>
+      <br></br>
     </>
   );
 };
