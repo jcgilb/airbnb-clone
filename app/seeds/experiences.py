@@ -206,7 +206,6 @@ def undo_experiences():
     #         f"TRUNCATE table {SCHEMA}.experiences RESTART IDENTITY CASCADE;")
     # else:
     db.session.execute("DELETE FROM experiences")
-
     db.session.commit()
 
 
