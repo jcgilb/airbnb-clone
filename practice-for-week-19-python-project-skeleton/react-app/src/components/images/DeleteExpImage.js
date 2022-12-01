@@ -6,7 +6,7 @@ import { deleteExpImage } from "../../store/images.js";
 import User from "../User.js";
 import "./DeleteImage.css";
 
-const DeleteExpImg = ({ imgId, user, exp }) => {
+const DeleteExpImg = ({ imgId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [showDelete, setShowDelete] = useState(false);

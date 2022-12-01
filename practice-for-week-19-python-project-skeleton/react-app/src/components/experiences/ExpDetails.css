@@ -94,7 +94,7 @@
   width: 162px;
   min-width: 162px;
   object-fit: cover;
-  border: 1px solid rgb(221, 237, 170);
+  border: 1px solid #ddedaa;
   padding: 24px;
   border-radius: 5%;
   margin: 8px;
@@ -109,7 +109,7 @@
   height: 18px;
   width: 68px;
   border-radius: 10px;
-  background-color: rgb(255, 22, 84);
+  background-color: #ff1654;
   padding: 8px;
   font-weight: 500;
   cursor: pointer;
@@ -131,7 +131,7 @@
   font-weight: 500;
   border: none;
   /* background-color: rgb(221, 237, 170); */
-  /* background-color: rgb(147, 181, 198); */
+  /* background-color: #93b5c6; */
 }
 
 .details-title {

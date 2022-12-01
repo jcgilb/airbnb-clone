@@ -37,7 +37,7 @@ const UserProfile = () => {
 
   const bookings = useSelector((state) => state.bookings.userBookings);
   const experiences = useSelector((state) => state.experiences.userExperiences);
-  const oneUser = users.find((person) => person.id === parseInt(userId));
+  const oneUser = users.find((person) => person?.id === parseInt(userId));
   const allExps = useSelector((state) => state.experiences.experiences);
   const user = useSelector((state) => state.session.user);
   const expArray = Object.values(experiences);
@@ -73,12 +73,12 @@ const UserProfile = () => {
   return (
     <>
       <div className="container">
-        {user.id === userId && (
+        {user?.id === userId && (
           <>
             <div className="title">Welcome, {user?.first_name}</div>
           </>
         )}
-        {user.id !== userId && (
+        {user?.id !== userId && (
           <>
             <div className="title">{oneUser?.first_name}'s Profile</div>
           </>

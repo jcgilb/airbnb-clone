@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
@@ -6,8 +6,10 @@ import LoginFormModal from "./auth/LoginFormModal";
 import SignupFormModal from "./auth/SignupFormModal";
 import UserProfile from "./users/UserProfile";
 import { getAllExperiences } from "../store/experiences";
+import "../index.css";
 
 const NavBar = ({ loaded }) => {
+  const [showDropdown, setShowDropdown] = useState(false);
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -19,21 +21,39 @@ const NavBar = ({ loaded }) => {
 
   const experiences = useSelector((state) => state.experiences.experiences);
 
+  // open menu onClick event
+  const openMenu = () => {
+    if (showDropdown) return;
+    setShowDropdown(true);
+  };
+
+  // close the menu if a user clicks anywhere outside of it
+  useEffect(() => {
+    if (!showDropdown) return;
+    const closeDropdown = () => {
+      setShowDropdown(false);
+    };
+    document.addEventListener("click", closeDropdown);
+    return () => document.removeEventListener("click", closeDropdown);
+  }, [showDropdown]);
+
   // if a user is logged in
   if (user) {
     sessionLinks = (
       <div className="session-links">
-        <div id="logged-in-links">
-          {/* TODO: <ProfileButton user={user} /> */}
-          <NavLink className="profile" exact to={`/users/${user?.id}`}>
-            User profile
-          </NavLink>
-          <NavLink className="create-exp" exact to="/experiences/new">
-            Host an experience
-          </NavLink>
-
-          <div className="logout">
-            <LogoutButton />
+        <div onClick={() => history.push("/experiences")} className="explore">
+          Explore
+        </div>
+        <div className="session">
+          <div onClick={() => setShowDropdown(true)} className="hamburger">
+            <hr className="bars" />
+            <hr className="bars" />
+            <hr className="bars" />
+          </div>
+          <div className="profile">
+            <div onClick={() => history.push(`/users/${user?.id}`)}>
+              <i className="fa-solid fa-circle-user fa-2x"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -42,10 +62,11 @@ const NavBar = ({ loaded }) => {
     // show login and signup buttons if not logged in
     sessionLinks = (
       <div className="login-signup-links">
+        <div onClick={() => history.push("/experiences")} className="explore">
+          Explore
+        </div>
         <LoginFormModal />
-        {/* <div id="login">Login</div> */}
         <SignupFormModal />
-        {/* <div id="signup">Signup</div> */}
       </div>
     );
   }
@@ -53,17 +74,35 @@ const NavBar = ({ loaded }) => {
   return (
     <nav>
       <div>
-        <div>
-          <NavLink to="/" exact={true} activeClassName="active">
-            {/* TODO: Logo here */}
-            Home
-          </NavLink>
-          <NavLink className="explore" exact to="/experiences">
-            Explore
-          </NavLink>
+        <div className="logo-search-profile">
+          <div className="logo">
+            <img
+              onClick={() => history.push("/")}
+              className="img-logo"
+              alt="logo"
+              src="../../assets/localXP-logo.jpg"
+            />
+          </div>
+          <div className="profile-dropdown">
+            {sessionLinks}
+
+            {showDropdown && (
+              <div className="show-dropdown">
+                <div
+                  onClick={() => history.push("/experiences/new")}
+                  className="create-exp"
+                >
+                  Host an experience
+                </div>
+                <div className="logout">
+                  <LogoutButton />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="profile-dropdown">{sessionLinks}</div>
       </div>
+      <hr className="navbar"></hr>
     </nav>
   );
 };

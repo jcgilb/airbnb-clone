@@ -1,16 +1,10 @@
 import React from "react";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
-
-import {
-  getAllExperiences,
-  getOneExperience,
-} from "../../store/experiences.js";
+import { useHistory, useParams } from "react-router-dom";
+import { getOneExperience } from "../../store/experiences.js";
 import "./ExpDetails.css";
 import AvailableTimes from "../timeSlots/AvailableTimes.js";
-import UpdateExp from "./UpdateExp.js";
-import User from "../User.js";
 import DeleteExpImg from "../images/DeleteExpImage.js";
 
 const ExperienceDetails = () => {
@@ -32,8 +26,8 @@ const ExperienceDetails = () => {
   const exp = useSelector((state) => state.experiences.oneExperience);
   const user = useSelector((state) => state.session.user);
   const expImgArr = exp["images"];
-  let imgPlaces = new Array(5);
 
+  // TODO: get avg stars
   const getAvgStars = (exp) => {};
 
   if (!exp?.id) return null;
@@ -56,8 +50,20 @@ const ExperienceDetails = () => {
                 alt="img"
                 src={expImgArr[0].image_url}
               ></img>
-              <DeleteExpImg user={user} exp={exp} imgId={expImgArr[0].id} />
+              {user?.id === exp.host_id && (
+                <DeleteExpImg imgId={expImgArr[0].id} />
+              )}
             </>
+          )}
+          {expImgArr.length === 0 && user?.id === exp.host_id && (
+            <i
+              className="pic1 fa fa-plus"
+              style={{
+                border: "1px solid rgb(221, 237, 170)",
+              }}
+              onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+              aria-hidden="true"
+            ></i>
           )}
         </div>
         <div className="pic2">
@@ -68,11 +74,20 @@ const ExperienceDetails = () => {
                 alt="img"
                 src={expImgArr[1].image_url}
               ></img>
-              <DeleteExpImg user={user} exp={exp} imgId={expImgArr[1].id} />
+              {user?.id === exp.host_id && (
+                <DeleteExpImg imgId={expImgArr[1].id} />
+              )}
             </>
           )}
+          {!expImgArr[1] && user?.id === exp.host_id && (
+            <i
+              className="pic2 fa fa-plus"
+              style={{ border: "1px solid rgb(221, 237, 170)" }}
+              onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+              aria-hidden="true"
+            ></i>
+          )}
         </div>
-
         <div className="pic3-pic4">
           {expImgArr.length >= 3 && (
             <div className="pic3">
@@ -81,7 +96,9 @@ const ExperienceDetails = () => {
                 alt="img"
                 src={expImgArr[2].image_url}
               ></img>
-              <DeleteExpImg user={user} exp={exp} imgId={expImgArr[2].id} />
+              {user?.id === exp.host_id && (
+                <DeleteExpImg imgId={expImgArr[2].id} />
+              )}
             </div>
           )}
           {expImgArr.length >= 4 && (
@@ -91,12 +108,22 @@ const ExperienceDetails = () => {
                 alt="img"
                 src={expImgArr[3].image_url}
               ></img>
-              <DeleteExpImg user={user} exp={exp} imgId={expImgArr[3].id} />
+              {user?.id === exp.host_id && (
+                <DeleteExpImg imgId={expImgArr[3].id} />
+              )}
             </div>
           )}
           {!expImgArr[2] && user?.id === exp.host_id && (
             <i
               className="pic-3 fa fa-plus"
+              style={{
+                border: "1px solid rgb(221, 237, 170)",
+                marginLeft: "16px",
+                marginTop: "16px",
+                marginBottom: "8px",
+                height: "184px",
+                width: "128px",
+              }}
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
               aria-hidden="true"
             ></i>
@@ -104,6 +131,13 @@ const ExperienceDetails = () => {
           {!expImgArr[3] && user?.id === exp.host_id && (
             <i
               className="pic-4 fa fa-plus"
+              style={{
+                border: "1px solid rgb(221, 237, 170)",
+                marginTop: "8px",
+                marginLeft: "16px",
+                height: "183px",
+                width: "128px",
+              }}
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
               aria-hidden="true"
             ></i>
@@ -117,32 +151,30 @@ const ExperienceDetails = () => {
                 alt="img"
                 src={expImgArr[4].image_url}
               ></img>
-              <DeleteExpImg user={user?.id} exp={exp} imgId={expImgArr[4].id} />
+              {user?.id === exp.host_id && (
+                <DeleteExpImg
+                  user={user?.id}
+                  exp={exp}
+                  imgId={expImgArr[4].id}
+                />
+              )}
             </>
           )}
+          {!expImgArr[4] && user?.id === exp.host_id && (
+            <i
+              className="pic5 fa fa-plus"
+              aria-hidden="true"
+              style={{
+                border: "1px solid rgb(221, 237, 170)",
+                padding: "none",
+                marginTop: "8px",
+                marginLeft: "8px",
+                height: "400px",
+              }}
+              onClick={() => history.push(`/experiences/${expId}/edit`)}
+            ></i>
+          )}
         </div>
-
-        {expImgArr.length === 0 && user?.id === exp.host_id && (
-          <i
-            className="pic1 fa fa-plus"
-            onClick={(e) => history.push(`/experiences/${expId}/edit`)}
-            aria-hidden="true"
-          ></i>
-        )}
-        {!expImgArr[1] && user?.id === exp.host_id && (
-          <i
-            className="pic2 fa fa-plus"
-            onClick={(e) => history.push(`/experiences/${expId}/edit`)}
-            aria-hidden="true"
-          ></i>
-        )}
-        {!expImgArr[4] && user?.id === exp.host_id && (
-          <i
-            className="pic5 fa fa-plus"
-            aria-hidden="true"
-            onClick={() => history.push(`/experiences/${expId}/edit`)}
-          ></i>
-        )}
       </div>
       <div className="details">
         <div>Experience hosted by {exp["exp_host"]?.first_name}</div>
@@ -162,9 +194,7 @@ const ExperienceDetails = () => {
       <div className="details-description">{exp?.description}</div>
       <hr></hr>
       <div className="details">Choose from available dates</div>
-      <div clasName="slot-details">
-        <AvailableTimes />
-      </div>
+      <AvailableTimes />
     </div>
   );
 };
