@@ -201,30 +201,30 @@ def seed_time_slots():
     db.session.commit()    
 
 def undo_experiences():
-    if environment == "production":
-        db.session.execute(
-            f"TRUNCATE table {SCHEMA}.experiences RESTART IDENTITY CASCADE;")
-    else:
-        db.session.execute("DELETE FROM experiences")
+    # if environment == "production":
+    #     db.session.execute(
+    #         f"TRUNCATE table {SCHEMA}.experiences RESTART IDENTITY CASCADE;")
+    # else:
+    db.session.execute("DELETE FROM experiences")
 
     db.session.commit()
 
 
 def undo_experience_images():
-    if environment == "production":
-        db.session.execute(
-            f"TRUNCATE table {SCHEMA}.experience_images RESTART IDENTITY CASCADE;")
-    else:
-        db.session.execute("DELETE FROM experience_images")
+    # if environment == "production":
+    #     db.session.execute(
+    #         f"TRUNCATE table {SCHEMA}.experience_images RESTART IDENTITY CASCADE;")
+    # else:
+    db.session.execute("DELETE FROM experience_images")
     db.session.commit()
 
 
 def undo_time_slots():
-    if environment == "production":
-        db.session.execute(
-            f"TRUNCATE table {SCHEMA}.time_slots RESTART IDENTITY CASCADE;")
-    else:
-        db.session.execute("DELETE FROM time_slots")
+    # if environment == "production":
+    #     db.session.execute(
+    #         f"TRUNCATE table {SCHEMA}.time_slots RESTART IDENTITY CASCADE;")
+    # else:
+    db.session.execute("DELETE FROM time_slots")
     db.session.commit()
 
 
