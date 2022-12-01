@@ -41,11 +41,18 @@ const NavBar = ({ loaded }) => {
   if (user) {
     sessionLinks = (
       <div className="session-links">
+        <LogoutButton />
         <div onClick={() => history.push("/experiences")} className="explore">
           Explore
         </div>
+        <div
+          onClick={() => history.push("/experiences/new")}
+          className="create-exp"
+        >
+          Host an experience
+        </div>
         <div className="session">
-          <div onClick={() => setShowDropdown(true)} className="hamburger">
+          <div onClick={openMenu} className="hamburger">
             <hr className="bars" />
             <hr className="bars" />
             <hr className="bars" />
@@ -85,18 +92,19 @@ const NavBar = ({ loaded }) => {
           </div>
           <div className="profile-dropdown">
             {sessionLinks}
-
-            <div className="show-dropdown">
-              <div
-                onClick={() => history.push("/experiences/new")}
-                className="create-exp"
-              >
-                Host an experience
+            {showDropdown && (
+              <div className="show-dropdown">
+                <div
+                  onClick={() => history.push("/experiences/new")}
+                  className="create-exp"
+                >
+                  Host an experience
+                </div>
+                <div className="logout">
+                  <LogoutButton />
+                </div>
               </div>
-              <div className="logout">
-                <LogoutButton />
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
