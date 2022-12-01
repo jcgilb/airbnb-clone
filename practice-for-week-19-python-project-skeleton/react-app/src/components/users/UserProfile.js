@@ -62,8 +62,8 @@ const UserProfile = () => {
     if (parseInt(start) > 12) start = String(parseInt(start) - 12).concat("PM");
     return (
       <div onClick={(e) => history.push(`/experiences/${oneExp?.id}`)}>
-        <div>{oneExp?.name}</div>
-        <div>
+        <div className="exp-name-profile">{oneExp?.name}</div>
+        <div className="exp-date-profile">
           {week}, {monthDay}, {year} at {start}
         </div>
       </div>
@@ -77,7 +77,7 @@ const UserProfile = () => {
           <>
             <br />
             <br />
-            <div className="explore-title">Welcome, {user?.first_name}</div>
+            <div className="profile-title">Welcome, {user?.first_name}</div>
             <br />
           </>
         )}
@@ -85,7 +85,7 @@ const UserProfile = () => {
           <>
             <br />
             <br />
-            <div className="explore-title">{oneUser?.first_name}'s Profile</div>
+            <div className="profile-title">{oneUser?.first_name}'s Profile</div>
             <br />
           </>
         )}
@@ -97,9 +97,13 @@ const UserProfile = () => {
             {expArray.map((exp) => (
               <>
                 <li key={exp.id}>
-                  <div onClick={(e) => history.push(`/experiences/${exp.id}`)}>
-                    <div>{exp.name}</div>
+                  <div
+                    className="exp-list-profile"
+                    onClick={(e) => history.push(`/experiences/${exp.id}`)}
+                  >
                     <div>
+                      <div className="exp-name-profile">{exp.name}</div>
+                      <div className="exp-location-profile"></div>
                       {exp.city}, {exp.state}, {exp.country}
                     </div>
                   </div>
@@ -107,15 +111,18 @@ const UserProfile = () => {
               </>
             ))}
           </div>
+          <br />
           <div className="list">
             <div className="title">All Bookings:</div>
             {bkgArray.map((bkg) => (
-              <>
+              <div className="delete-bkg-profile">
                 <li key={bkg.id}>{bookingInfo(bkg)}</li>
                 {user?.id === userId && (
-                  <DeleteBooking userId={userId} user={user} bkgId={bkg.id} />
+                  <div className="delete-bkg">
+                    <DeleteBooking userId={userId} user={user} bkgId={bkg.id} />
+                  </div>
                 )}
-              </>
+              </div>
             ))}
           </div>
           {/* <div className="user-info">

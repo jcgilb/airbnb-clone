@@ -3,23 +3,78 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 90%;
+  width: 92%;
+}
+
+.profile-title {
+  display: flex;
+  flex-direction: row;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.43;
 }
 
 .title {
   display: flex;
   flex-direction: row;
-  height: 100px;
+  height: 40px;
   width: 100%;
-  border: 3px solid chartreuse;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.43;
+}
+
+.exp-name-profile {
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.exp-date-profile {
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.exp-location-profile {
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.delete-bkg-profile {
+  display: flex;
+  flex-direction: row;
+  width: 590px;
+  align-items: space-between;
+  justify-content: space-between;
+  cursor: pointer;
+  border-bottom: 1px solid #5a3a5830;
+}
+
+.exp-list-profile {
+  display: flex;
+  flex-direction: column;
+  width: 590px;
+  align-items: space-between;
+  justify-content: space-between;
+  cursor: pointer;
+  border-bottom: 1px solid #5a3a5830;
+}
+
+.delete-bkg {
+  position: absolute;
+  left: 650px;
+  margin-top: 20px;
 }
 
 .inner-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 90%;
-  width: 100%;
-  border: 3px solid aqua;
+  width: 80%;
 }
 
 .list {
@@ -27,15 +82,13 @@
   flex-direction: column;
   height: 90%;
   width: 50%;
-  border: 3px solid hotpink;
 }
 
 .list {
   display: flex;
   flex-direction: column;
   height: 90%;
-  width: 50%;
-  border: 3px solid rebeccapurple;
+  width: 30%;
 }
 
 .user-info {
