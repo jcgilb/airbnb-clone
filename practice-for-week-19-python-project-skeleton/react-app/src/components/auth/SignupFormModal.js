@@ -17,7 +17,11 @@ function SignupFormModal() {
 
   return (
     <>
-      <button style={myNavLinkStyles} onClick={() => setShowModal(true)}>
+      <button
+        className="signup-button"
+        style={myNavLinkStyles}
+        onClick={() => setShowModal(true)}
+      >
         Create an account
       </button>
       {showModal && (

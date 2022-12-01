@@ -75,18 +75,25 @@ const UserProfile = () => {
       <div className="container">
         {user?.id === userId && (
           <>
-            <div className="title">Welcome, {user?.first_name}</div>
+            <br />
+            <br />
+            <div className="explore-title">Welcome, {user?.first_name}</div>
+            <br />
           </>
         )}
         {user?.id !== userId && (
           <>
-            <div className="title">{oneUser?.first_name}'s Profile</div>
+            <br />
+            <br />
+            <div className="explore-title">{oneUser?.first_name}'s Profile</div>
+            <br />
           </>
         )}
 
         <div className="inner-container">
           <div className="list">
             <div className="title">All Experiences:</div>
+
             {expArray.map((exp) => (
               <>
                 <li key={exp.id}>
@@ -111,19 +118,21 @@ const UserProfile = () => {
               </>
             ))}
           </div>
-          <div className="user-info">
+          {/* <div className="user-info">
             <div className="user-image"></div>
             <div className="user-details">
               {user?.id === userId ? user?.first_name : oneUser?.first_name}{" "}
               {user?.id === userId ? user?.last_name : oneUser?.last_name}{" "}
             </div>
             <div>
-              Total EXP:{" "}
+              Total XP:{" "}
               {user?.id === userId ? user?.total_exp : oneUser?.total_exp}
             </div>
             <div>Badges: {""}</div>
-          </div>
+          </div> */}
         </div>
+        <br />
+        <br />
       </div>
     </>
   );

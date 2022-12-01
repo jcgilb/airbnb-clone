@@ -34,6 +34,8 @@ const ExperienceDetails = () => {
 
   return (
     <div className="details-container">
+      <br />
+      <br />
       <div className="details-title">{exp?.name}</div>
       <div className="details-subtitle">
         <div className="stars">{getAvgStars(exp)}</div>
@@ -47,7 +49,10 @@ const ExperienceDetails = () => {
             <>
               <img
                 className="pic-1"
-                alt="img"
+                alt="img1"
+                onError={(e) => {
+                  e.target.src = "../../assets/default-image-localXP.jpg";
+                }}
                 src={expImgArr[0].image_url}
               ></img>
               {user?.id === exp.host_id && (
@@ -60,6 +65,14 @@ const ExperienceDetails = () => {
               className="pic1 fa fa-plus"
               style={{
                 border: "1px solid rgb(221, 237, 170)",
+                height: "400px",
+                marginTop: "8px",
+                marginLeft: "8px",
+                width: "291px",
+                padding: "none",
+                marginTop: "8px",
+                marginLeft: "8px",
+                marginRight: "16px",
               }}
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
               aria-hidden="true"
@@ -71,7 +84,10 @@ const ExperienceDetails = () => {
             <>
               <img
                 className="pic-2"
-                alt="img"
+                alt="img2"
+                onError={(e) => {
+                  e.target.src = "../../assets/default-image-localXP.jpg";
+                }}
                 src={expImgArr[1].image_url}
               ></img>
               {user?.id === exp.host_id && (
@@ -82,7 +98,15 @@ const ExperienceDetails = () => {
           {!expImgArr[1] && user?.id === exp.host_id && (
             <i
               className="pic2 fa fa-plus"
-              style={{ border: "1px solid rgb(221, 237, 170)" }}
+              style={{
+                border: "1px solid rgb(221, 237, 170)",
+                height: "400px",
+                width: "291px",
+                padding: "none",
+                marginTop: "8px",
+                marginLeft: "8px",
+                marginRight: "16px",
+              }}
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
               aria-hidden="true"
             ></i>
@@ -93,7 +117,7 @@ const ExperienceDetails = () => {
             <div className="pic3">
               <img
                 className="pic-3"
-                alt="img"
+                alt="img3"
                 src={expImgArr[2].image_url}
               ></img>
               {user?.id === exp.host_id && (
@@ -105,7 +129,7 @@ const ExperienceDetails = () => {
             <div className="pic4">
               <img
                 className="pic-4"
-                alt="img"
+                alt="img4"
                 src={expImgArr[3].image_url}
               ></img>
               {user?.id === exp.host_id && (
@@ -121,6 +145,7 @@ const ExperienceDetails = () => {
                 marginLeft: "16px",
                 marginTop: "16px",
                 marginBottom: "8px",
+                marginLeft: "16px",
                 height: "184px",
                 width: "128px",
               }}
@@ -148,7 +173,7 @@ const ExperienceDetails = () => {
             <>
               <img
                 className="pic-5"
-                alt="img"
+                alt="img5"
                 src={expImgArr[4].image_url}
               ></img>
               {user?.id === exp.host_id && (
@@ -170,6 +195,7 @@ const ExperienceDetails = () => {
                 marginTop: "8px",
                 marginLeft: "8px",
                 height: "400px",
+                width: "291px",
               }}
               onClick={() => history.push(`/experiences/${expId}/edit`)}
             ></i>
@@ -188,13 +214,19 @@ const ExperienceDetails = () => {
         )}
       </div>
 
-      <div className="details-duration">{exp?.est_duration / 60} hours</div>
+      <div className="details-duration">
+        {exp?.est_duration === 60
+          ? "All day"
+          : `${exp?.est_duration / 60} hours`}
+      </div>
       <hr></hr>
       <div className="details">What you'll do</div>
       <div className="details-description">{exp?.description}</div>
       <hr></hr>
       <div className="details">Choose from available dates</div>
       <AvailableTimes />
+      <br />
+      <br />
     </div>
   );
 };
