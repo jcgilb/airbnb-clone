@@ -3,7 +3,7 @@
   z-index: 5;
   top: 20px;
   left: 20px;
-  opacity: 50%;
+  opacity: 0.5;
 }
 
 .fa-x:hover {
@@ -16,7 +16,7 @@
   z-index: 2;
   top: 30px;
   left: 20px;
-  opacity: 100%;
+  opacity: 1;
   color: rgb(255, 22, 84);
   cursor: pointer;
 }

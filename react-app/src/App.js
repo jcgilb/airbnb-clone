@@ -40,6 +40,10 @@ function App() {
     return null;
   }
 
+  document.querySelectorAll("iframe").forEach(function (elem) {
+    elem.parentNode.removeChild(elem);
+  });
+
   return (
     <BrowserRouter>
       <NavBar loaded={loaded} />
