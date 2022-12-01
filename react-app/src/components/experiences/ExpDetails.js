@@ -63,16 +63,6 @@ const ExperienceDetails = () => {
           {expImgArr.length === 0 && user?.id === exp.host_id && (
             <i
               className="pic1 fa fa-plus"
-              style={{
-                border: "1px solid rgb(221, 237, 170)",
-                height: "400px",
-                marginLeft: "8px",
-                width: "291px",
-                padding: "none",
-                marginTop: "16px",
-                marginLeft: "8px",
-                marginRight: "16px",
-              }}
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
               aria-hidden="true"
             ></i>
@@ -97,15 +87,6 @@ const ExperienceDetails = () => {
           {!expImgArr[1] && user?.id === exp.host_id && (
             <i
               className="pic2 fa fa-plus"
-              style={{
-                border: "1px solid rgb(221, 237, 170)",
-                height: "400px",
-                width: "291px",
-                padding: "none",
-                marginTop: "8px",
-                marginLeft: "8px",
-                marginRight: "16px",
-              }}
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
               aria-hidden="true"
             ></i>
@@ -139,15 +120,6 @@ const ExperienceDetails = () => {
           {!expImgArr[2] && user?.id === exp.host_id && (
             <i
               className="pic-3 fa fa-plus"
-              style={{
-                border: "1px solid rgb(221, 237, 170)",
-                marginLeft: "16px",
-                marginTop: "16px",
-                marginBottom: "8px",
-                marginLeft: "16px",
-                height: "184px",
-                width: "128px",
-              }}
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
               aria-hidden="true"
             ></i>
@@ -155,13 +127,6 @@ const ExperienceDetails = () => {
           {!expImgArr[3] && user?.id === exp.host_id && (
             <i
               className="pic-4 fa fa-plus"
-              style={{
-                border: "1px solid rgb(221, 237, 170)",
-                marginTop: "8px",
-                marginLeft: "16px",
-                height: "183px",
-                width: "128px",
-              }}
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
               aria-hidden="true"
             ></i>
@@ -186,16 +151,8 @@ const ExperienceDetails = () => {
           )}
           {!expImgArr[4] && user?.id === exp.host_id && (
             <i
-              className="pic5 fa fa-plus"
+              className="pic-5 fa fa-plus"
               aria-hidden="true"
-              style={{
-                border: "1px solid rgb(221, 237, 170)",
-                padding: "none",
-                marginTop: "8px",
-                marginLeft: "8px",
-                height: "400px",
-                width: "291px",
-              }}
               onClick={() => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}
