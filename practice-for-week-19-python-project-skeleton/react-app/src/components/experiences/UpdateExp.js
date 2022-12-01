@@ -20,7 +20,7 @@ const UpdateExp = () => {
   expId = parseInt(expId);
 
   useEffect(() => {
-    dispatch(getOneExperience(expId));
+    // dispatch(getOneExperience(expId));
   }, [dispatch]);
 
   const experience = useSelector((state) => state.experiences.oneExperience);
@@ -42,11 +42,22 @@ const UpdateExp = () => {
   const user = useSelector((state) => state.session.user);
 
   // form validations
+  // form validations
   useEffect(() => {
     const errors = [];
     setValidationErrors(errors);
+    if (!title) errors.push("A title is required.");
+    if (!city) errors.push("A city is required.");
+    if (!cost) errors.push("A price is required.");
+    if (isNaN(cost)) errors.push("Enter a valid price.");
+    if (!country) errors.push("A country is required.");
+    if (!address) errors.push("An address is required.");
+    if (!description) errors.push("A description is required.");
+    if (isNaN(lat) || isNaN(lng))
+      errors.push("Latitude and Longitude must be numbers.");
+
     setValidationErrors(errors);
-  }, []);
+  }, [title, description, cost, address, city, country, lat, lng]);
 
   // set the user albums
   const updateDuration = (e) => setDurationSelect(e.target.value);
@@ -107,7 +118,7 @@ const UpdateExp = () => {
         city: city,
         name: title,
         price: cost,
-        est_duration: 0,
+        est_duration: 60,
         country: country,
         address: address,
         host_id: user.id,
@@ -135,7 +146,9 @@ const UpdateExp = () => {
     <>
       <br></br>
       <br></br>
-      <div className="exp-datials">Edit experience details below</div>
+      <div className="exp-details">Edit experience details below</div>
+      <br></br>
+      <br></br>
       <div className="form-container">
         <br></br>
         <form className=".exp-form" onSubmit={handleSubmit}>
@@ -257,6 +270,8 @@ const UpdateExp = () => {
           <ExpImages />
         </div>
       </div>
+      <br></br>
+      <br></br>
     </>
   );
 };

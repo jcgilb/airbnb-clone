@@ -8,6 +8,7 @@ import BookingForm from "../bookings/BookingForm";
 import { bindActionCreators } from "redux";
 import { Modal } from "../../context/Modal";
 import "../experiences/ExpDetails.css";
+import DeleteTimeSlot from "./DeleteTimeSlots";
 
 const AvailableTimes = () => {
   const history = useHistory();
@@ -50,6 +51,7 @@ const AvailableTimes = () => {
 
   // get the experience
   useEffect(() => {
+    dispatch(getAllSlots(expId));
     dispatch(getOneExperience(expId));
     return () => {
       setShowAll(false);
@@ -102,6 +104,10 @@ const AvailableTimes = () => {
     if (parseInt(end) > 12) {
       end = String(parseInt(end) - 12).concat("PM");
     }
+    if (start == "0AM") {
+      start = "12AM";
+      end = String(parseInt(exp.est_duration / 60)).concat("AM");
+    }
 
     return (
       <div className="available-date">
@@ -139,6 +145,7 @@ const AvailableTimes = () => {
             <BookingForm exp={exp} slot={formSlot} expId={expId} />
           </Modal>
         )}
+        <DeleteTimeSlot slotId={slot.id} />
       </div>
     );
   });

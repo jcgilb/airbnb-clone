@@ -37,7 +37,7 @@ const UserProfile = () => {
 
   const bookings = useSelector((state) => state.bookings.userBookings);
   const experiences = useSelector((state) => state.experiences.userExperiences);
-  const oneUser = users.find((person) => person.id === parseInt(userId));
+  const oneUser = users.find((person) => person?.id === parseInt(userId));
   const allExps = useSelector((state) => state.experiences.experiences);
   const user = useSelector((state) => state.session.user);
   const expArray = Object.values(experiences);
@@ -62,8 +62,8 @@ const UserProfile = () => {
     if (parseInt(start) > 12) start = String(parseInt(start) - 12).concat("PM");
     return (
       <div onClick={(e) => history.push(`/experiences/${oneExp?.id}`)}>
-        <div>{oneExp?.name}</div>
-        <div>
+        <div className="exp-name-profile">{oneExp?.name}</div>
+        <div className="exp-date-profile">
           {week}, {monthDay}, {year} at {start}
         </div>
       </div>
@@ -73,26 +73,37 @@ const UserProfile = () => {
   return (
     <>
       <div className="container">
-        {user.id === userId && (
+        {user?.id === userId && (
           <>
-            <div className="title">Welcome, {user?.first_name}</div>
+            <br />
+            <br />
+            <div className="profile-title">Welcome, {user?.first_name}</div>
+            <br />
           </>
         )}
-        {user.id !== userId && (
+        {user?.id !== userId && (
           <>
-            <div className="title">{oneUser?.first_name}'s Profile</div>
+            <br />
+            <br />
+            <div className="profile-title">{oneUser?.first_name}'s Profile</div>
+            <br />
           </>
         )}
 
         <div className="inner-container">
           <div className="list">
             <div className="title">All Experiences:</div>
+
             {expArray.map((exp) => (
               <>
                 <li key={exp.id}>
-                  <div onClick={(e) => history.push(`/experiences/${exp.id}`)}>
-                    <div>{exp.name}</div>
+                  <div
+                    className="exp-list-profile"
+                    onClick={(e) => history.push(`/experiences/${exp.id}`)}
+                  >
                     <div>
+                      <div className="exp-name-profile">{exp.name}</div>
+                      <div className="exp-location-profile"></div>
                       {exp.city}, {exp.state}, {exp.country}
                     </div>
                   </div>
@@ -100,30 +111,35 @@ const UserProfile = () => {
               </>
             ))}
           </div>
+          <br />
           <div className="list">
             <div className="title">All Bookings:</div>
             {bkgArray.map((bkg) => (
-              <>
+              <div className="delete-bkg-profile">
                 <li key={bkg.id}>{bookingInfo(bkg)}</li>
                 {user?.id === userId && (
-                  <DeleteBooking userId={userId} user={user} bkgId={bkg.id} />
+                  <div className="delete-bkg">
+                    <DeleteBooking userId={userId} user={user} bkgId={bkg.id} />
+                  </div>
                 )}
-              </>
+              </div>
             ))}
           </div>
-          <div className="user-info">
+          {/* <div className="user-info">
             <div className="user-image"></div>
             <div className="user-details">
               {user?.id === userId ? user?.first_name : oneUser?.first_name}{" "}
               {user?.id === userId ? user?.last_name : oneUser?.last_name}{" "}
             </div>
             <div>
-              Total EXP:{" "}
+              Total XP:{" "}
               {user?.id === userId ? user?.total_exp : oneUser?.total_exp}
             </div>
             <div>Badges: {""}</div>
-          </div>
+          </div> */}
         </div>
+        <br />
+        <br />
       </div>
     </>
   );

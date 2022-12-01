@@ -17,6 +17,7 @@ import UpdateExp from "./components/experiences/UpdateExp";
 import { getAllExperiences } from "./store/experiences";
 import DeleteExperience from "./components/experiences/DeleteExp";
 import Gaming from "./components/map/Map";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -75,7 +76,7 @@ function App() {
           <UserProfile />
         </Route>
         <Route path="/" exact={true}>
-          <h1>My Home Page</h1>
+          <LandingPage />
         </Route>
       </Switch>
     </BrowserRouter>

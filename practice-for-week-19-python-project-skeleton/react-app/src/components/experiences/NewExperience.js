@@ -35,13 +35,28 @@ const NewExperience = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    return () => {
+      dispatch(getAllExperiences());
+    };
+  }, [dispatch]);
+
   // form validations
   useEffect(() => {
     const errors = [];
     setValidationErrors(errors);
+    if (!title) errors.push("A title is required.");
+    if (!city) errors.push("A city is required.");
+    if (!cost) errors.push("A price is required.");
+    if (isNaN(cost)) errors.push("Enter a valid price.");
+    if (!country) errors.push("A country is required.");
+    if (!address) errors.push("An address is required.");
+    if (!description) errors.push("A description is required.");
+    if (isNaN(lat) || isNaN(lng))
+      errors.push("Latitude and Longitude must be numbers.");
 
     setValidationErrors(errors);
-  }, []);
+  }, [title, description, cost, address, city, country, lat, lng]);
 
   // set the user albums
   const updateDuration = (e) => setDurationSelect(e.target.value);
@@ -62,13 +77,13 @@ const NewExperience = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let payload;
-    console.log(durationSelect);
+    console.log(payload, "payload");
 
     if (durationSelect === "<2") {
       payload = {
         city: city,
         name: title,
-        price: cost,
+        price: parseFloat(cost),
         country: country,
         address: address,
         host_id: user.id,
@@ -83,7 +98,7 @@ const NewExperience = () => {
       payload = {
         city: city,
         name: title,
-        price: cost,
+        price: parseFloat(cost),
         country: country,
         address: address,
         host_id: user.id,
@@ -98,8 +113,8 @@ const NewExperience = () => {
       payload = {
         city: city,
         name: title,
-        price: cost,
-        est_duration: 0,
+        price: parseFloat(cost),
+        est_duration: 60,
         address: address,
         country: country,
         host_id: user.id,
@@ -109,6 +124,8 @@ const NewExperience = () => {
         description: description,
       };
     }
+
+    console.log(payload, "payload");
     revert();
     let exp = await dispatch(createOneExperience(payload)).catch(
       async (res) => {
@@ -116,9 +133,8 @@ const NewExperience = () => {
         if (data && data.errors) setValidationErrors(data.errors);
       }
     );
-    if (exp.id) {
-      if (validationErrors.length === 0)
-        return history.push(`/experiences/${exp.id}`);
+    if (exp) {
+      return history.push(`/users/${user?.id}`);
     }
   };
 
@@ -126,10 +142,12 @@ const NewExperience = () => {
     <>
       <br></br>
       <br></br>
-      <div className="exp-datials">Host An Experience</div>
+      <div className="exp-details">Host An Experience</div>
+      <br></br>
       <br></br>
       <div className="form-container">
         <form className=".exp-form" onSubmit={handleSubmit}>
+          <br />
           <div>
             <input
               className="exp-name"
@@ -243,9 +261,13 @@ const NewExperience = () => {
           >
             Become a host
           </button>
+          <br />
         </form>
         <ExpImages />
+        <br />
       </div>
+      <br></br>
+      <br></br>
     </>
   );
 };

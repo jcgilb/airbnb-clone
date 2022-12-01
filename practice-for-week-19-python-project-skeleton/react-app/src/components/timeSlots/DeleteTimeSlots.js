@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getOneExperience } from "../../store/experiences.js";
-import { deleteExpImage } from "../../store/images.js";
-import User from "../User.js";
-import "./DeleteImage.css";
+import { getOneExperience } from "../../store/experiences";
+import { deleteSlot, getAllSlots } from "../../store/timeSlots";
 
-const DeleteExpImg = ({ imgId }) => {
+const DeleteTimeSlot = ({ slotId }) => {
+  let { expId } = useParams();
+  expId = parseInt(expId);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const [showDelete, setShowDelete] = useState(false);
 
-  // identify the experience from the url
-  let { expId } = useParams();
-  expId = parseInt(expId);
-  imgId = parseInt(imgId);
+  useEffect(() => {
+    dispatch(getAllSlots(expId));
+    return () => {
+      dispatch(getAllSlots(expId));
+    };
+  }, [dispatch]);
 
   // open menu onClick event
   const openMenu = () => {
@@ -35,21 +38,20 @@ const DeleteExpImg = ({ imgId }) => {
   // onClick, delete the experience from the url
   const handleClick = async (e) => {
     e.preventDefault();
-    await dispatch(deleteExpImage(expId, imgId));
+    await dispatch(deleteSlot(expId, slotId));
     dispatch(getOneExperience(expId));
-    return history.push(`/experiences/${expId}`);
+    history.push(`/experiences/${expId}`);
   };
 
   return (
     <>
-      <i className="fa-solid fa-x" onClick={() => setShowDelete(true)}></i>
-      {showDelete && (
-        <div className="confirm-delete" onClick={handleClick}>
-          Delete image
-        </div>
-      )}
+      <i
+        class="fa-regular fa-trash-can"
+        onClick={() => setShowDelete(true)}
+      ></i>
+      {showDelete && <div onClick={handleClick}>Delete this time slot</div>}
     </>
   );
 };
 
-export default DeleteExpImg;
+export default DeleteTimeSlot;
