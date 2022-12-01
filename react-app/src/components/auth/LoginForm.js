@@ -60,6 +60,15 @@ const LoginForm = () => {
         <button className="login-logout" type="submit">
           Login
         </button>
+        <button
+          type="submit"
+          onClick={() => {
+            setEmail("demo@aa.io");
+            setPassword("password");
+          }}
+        >
+          Demo User
+        </button>
       </div>
     </form>
   );

@@ -64,7 +64,6 @@ const ExperienceDetails = () => {
             <i
               className="pic1 fa fa-plus"
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
-              // aria-hidden="true"
             ></i>
           )}
         </div>
@@ -88,7 +87,6 @@ const ExperienceDetails = () => {
             <i
               className="pic2 fa fa-plus"
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
-              // aria-hidden="true"
             ></i>
           )}
         </div>
@@ -121,14 +119,12 @@ const ExperienceDetails = () => {
             <i
               className="pic-3 fa fa-plus"
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
-              // aria-hidden="true"
             ></i>
           )}
           {!expImgArr[3] && user?.id === exp.host_id && (
             <i
               className="pic-4 fa fa-plus"
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
-              // aria-hidden="true"
             ></i>
           )}
         </div>
@@ -152,7 +148,6 @@ const ExperienceDetails = () => {
           {!expImgArr[4] && user?.id === exp.host_id && (
             <i
               className="pic-5 fa fa-plus"
-              // aria-hidden="true"
               onClick={() => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}

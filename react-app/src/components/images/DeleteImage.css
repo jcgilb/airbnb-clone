@@ -7,7 +7,7 @@
 }
 
 .fa-x:hover {
-  opacity: 100%;
+  opacity: 1;
   color: rgb(255, 22, 84);
   cursor: pointer;
 }
@@ -20,10 +20,6 @@
   color: rgb(255, 22, 84);
   cursor: pointer;
 }
-
-/* .pic3-pic4 {
-  position: relative;
-} */
 
 .pic1,
 .pic2,

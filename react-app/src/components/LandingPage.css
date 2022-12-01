@@ -1,7 +1,33 @@
 .top-row {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   width: 90%;
+}
+.flex-row-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.exp-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-button {
+  height: 20px;
+  width: 20px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: nowrap; */
+  width: 70%;
+  justify-content: space-between;
+  white-space: nowrap;
+  transition: transform 0.3s;
 }
 
 .splash-explore-title {
@@ -14,12 +40,17 @@
   font-weight: 700;
   line-height: 1.43;
   width: 30%;
+  min-width: 300px;
   height: 625px;
-  border: 1px solid green;
+  padding-right: 30px;
+  margin-left: 30px;
 }
 
 .latest-exp {
   justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
 .exp-card {
@@ -42,11 +73,11 @@
 }
 
 .splash-exp-card {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   max-width: 341px;
   max-height: 575px;
-  padding: 8px;
+  padding: 10px;
   justify-content: flex-start;
   align-items: flex-start;
 }

@@ -144,7 +144,7 @@ hr.navbar {
   top: 10px;
   border: 1px solid rgb(79, 103, 0);
   background-color: white;
-  opacity: 100%;
+  opacity: 1;
   border-radius: 20px;
   z-index: 100;
 }
