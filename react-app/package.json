@@ -14,16 +14,13 @@
     "react-datetime-picker": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-geocode": "^0.2.3",
-    "react-google-places-autocomplete": "^3.4.0",
-    "react-native-google-places-autocomplete": "^2.5.1",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-time-picker": "^5.1.0",
     "redux": "^4.1.0",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0",
-    "use-places-autocomplete": "^4.0.0"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
