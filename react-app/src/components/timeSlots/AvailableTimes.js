@@ -33,7 +33,6 @@ const AvailableTimes = () => {
       let booking = bookings[j];
       if (slot.id === booking.time_slot_id) {
         slot.booked = true;
-        console.log(slot, "this slot is booked");
       }
     }
   }
@@ -69,10 +68,8 @@ const AvailableTimes = () => {
     timeSlotArray = sortedSlots;
   }
 
-  console.log(timeSlotArray, "array");
 
   const availabileTimes = timeSlotArray.map((slot) => {
-    console.log(slot);
     let dateEnd = String(new Date(parseInt(slot.end)));
     let dateStart = String(new Date(parseInt(slot.start)));
     let end = dateEnd;

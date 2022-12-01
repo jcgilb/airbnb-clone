@@ -60,7 +60,6 @@
 //   }, []);
 
 //   Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API);
-//   console.log(process.env.REACT_APP_GOOGLE_MAPS_API);
 //   // set response language. Defaults to english.
 //   Geocode.setLanguage("en");
 
@@ -78,7 +77,6 @@
 //         setCurrentPosition({ lat, lng });
 //       },
 //       (error) => {
-//         console.error(error);
 //       }
 //     );
 //   };
@@ -86,10 +84,9 @@
 //   Geocode.fromLatLng("48.8583701", "2.2922926").then(
 //     (response) => {
 //       const address = response.results[0].formatted_address;
-//       console.log(address);
 //     },
+
 //     (error) => {
-//       console.error(error);
 //     }
 //   );
 

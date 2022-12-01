@@ -42,7 +42,6 @@ const ExpTimeSlots = () => {
     let selected = userExperiences?.find((exp) => exp?.name == expSelect);
     setExpId(selected?.id);
     setDuration(selected?.est_duration);
-    console.log(duration, "duration");
   }, [expSelect, userExperiences]);
 
   // update selected experience
@@ -67,8 +66,6 @@ const ExpTimeSlots = () => {
       exp_id: expId,
       start: start,
     };
-
-    console.log(newTimeSlot, "payload data");
 
     let slot = await dispatch(createOneSlot(expId, newTimeSlot));
     if (slot) {

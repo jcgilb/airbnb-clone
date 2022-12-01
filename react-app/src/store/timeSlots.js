@@ -33,9 +33,7 @@ export const getAllSlots = (expId) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}/slots`);
   if (response.ok) {
     const slots = await response.json();
-    console.log(slots, "slots in thunk");
     dispatch(getAll(slots));
-    console.log(slots, "slots in thunk");
   }
   return response;
 };
@@ -59,7 +57,6 @@ export const createOneSlot = (expId, newTimeSlot) => async (dispatch) => {
   });
   if (response.ok) {
     const slot = await response.json();
-    console.log("time slot in thunk", slot);
     dispatch(addOrUpdate(slot));
     return slot;
   }
@@ -97,7 +94,6 @@ const timeSlotReducer = (state = initialState, action) => {
     case GET_ALL:
       newState = { ...state };
 
-      console.log(action.slots, "aaaaaaaaaaaaaaaaaaaaaaaaa");
       action.slots.forEach((slot) => {
         newState[slot.id] = slot;
       });

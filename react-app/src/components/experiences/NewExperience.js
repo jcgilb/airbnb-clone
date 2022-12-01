@@ -77,7 +77,6 @@ const NewExperience = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let payload;
-    console.log(payload, "payload");
 
     if (durationSelect === "<2") {
       payload = {
@@ -125,7 +124,6 @@ const NewExperience = () => {
       };
     }
 
-    console.log(payload, "payload");
     revert();
     let exp = await dispatch(createOneExperience(payload)).catch(
       async (res) => {

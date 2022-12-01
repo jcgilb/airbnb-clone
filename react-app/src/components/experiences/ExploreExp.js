@@ -25,7 +25,6 @@ const ExploreExperiences = () => {
     if (exp["images"]?.length) {
       image = exp["images"][0];
     }
-    console.log(image?.image_url, "image");
     return (
       <img
         onError={(e) => {

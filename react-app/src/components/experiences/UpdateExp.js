@@ -78,10 +78,8 @@ const UpdateExp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let payload;
-    console.log(durationSelect);
 
     if (durationSelect === "<2") {
-      console.log("<2 hours is true");
       payload = {
         city: city,
         name: title,
@@ -97,7 +95,6 @@ const UpdateExp = () => {
       };
     }
     if (durationSelect === "2-5") {
-      console.log("2-5 hours is true");
       payload = {
         city: city,
         name: title,
@@ -113,7 +110,6 @@ const UpdateExp = () => {
       };
     }
     if (durationSelect === "All day") {
-      console.log("all day hours is true");
       payload = {
         city: city,
         name: title,
@@ -128,7 +124,6 @@ const UpdateExp = () => {
         description: description,
       };
     }
-    console.log(payload);
     revert();
     let exp = await dispatch(updateOneExperience(expId, payload)).catch(
       async (res) => {

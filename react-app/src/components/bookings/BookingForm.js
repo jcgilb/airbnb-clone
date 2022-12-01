@@ -8,7 +8,6 @@ import "./BookingForm.css";
 function BookingForm({ exp, expId, slot }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log(slot, "this is the time slot");
 
   // get the user and the experience
   const user = useSelector((state) => state.session.user);
@@ -23,7 +22,6 @@ function BookingForm({ exp, expId, slot }) {
       time_slot_id: slot.id,
     };
 
-    console.log(expId, payload, "this is what im sending to my thunk");
     const booking = await dispatch(createOneBooking(expId, payload));
 
     if (booking) {
