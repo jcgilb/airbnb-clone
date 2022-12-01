@@ -59,8 +59,8 @@ class Experience(db.Model):
 class ExperienceImage(db.Model):
     __tablename__ = 'experience_images'
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+    # if environment == "production":
+    #     __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     exp_id = db.Column(db.Integer, db.ForeignKey('experiences.id'), nullable=False)
@@ -85,8 +85,8 @@ class ExperienceImage(db.Model):
 class TimeSlot(db.Model):
     __tablename__ = 'time_slots'
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+    # if environment == "production":
+    #     __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     exp_id = db.Column(db.Integer, db.ForeignKey('experiences.id'), nullable=False)
