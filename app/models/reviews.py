@@ -1,6 +1,6 @@
 from sqlalchemy import func
 from sqlalchemy.orm import validates
-from .db import db, ma, environment, SCHEMA,
+from .db import db, ma, environment, SCHEMA
 
 class Review(db.Model):
     __tablename__ = "reviews"
