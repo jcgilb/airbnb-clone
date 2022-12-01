@@ -1,4 +1,4 @@
-from .db import db, ma, environment, SCHEMA, add_prefix_for_prod
+from .db import db, ma, environment, SCHEMA
 from sqlalchemy import func
 
 class Experience(db.Model):
@@ -8,8 +8,7 @@ class Experience(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    host_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod(
-        'users.id')), nullable=False)
+    host_id = db.Column(db.Integer(), db.ForeignKey('users.id'), nullable=False)
     address = db.Column(db.String(), nullable=False)
     est_duration = db.Column(db.Integer(), nullable=False)
     city = db.Column(db.String(), nullable=False)
@@ -64,8 +63,7 @@ class ExperienceImage(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    exp_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('experiences.id')), nullable=False)
+    exp_id = db.Column(db.Integer, db.ForeignKey('experiences.id'), nullable=False)
     image_url = db.Column(db.String(), nullable=False)
     preview = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime(timezone=True),
@@ -91,8 +89,7 @@ class TimeSlot(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    exp_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('experiences.id')), nullable=False)
+    exp_id = db.Column(db.Integer, db.ForeignKey('experiences.id'), nullable=False)
     start = db.Column(db.String())
     end = db.Column(db.String())
     booked = db.Column(db.Boolean(), default=False)

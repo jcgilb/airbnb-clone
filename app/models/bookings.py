@@ -1,6 +1,6 @@
 from sqlalchemy import func
 from sqlalchemy.orm import validates
-from .db import db, ma, environment, SCHEMA, add_prefix_for_prod
+from .db import db, ma, environment, SCHEMA
 
 class Booking(db.Model):
     __tablename__ = "bookings"
@@ -9,12 +9,9 @@ class Booking(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("users.id")), nullable=False)
-    exp_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("experiences.id")), nullable=False)
-    time_slot_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("time_slots.id")), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    exp_id = db.Column(db.Integer, db.ForeignKey("experiences.id"), nullable=False)
+    time_slot_id = db.Column(db.Integer, db.ForeignKey("time_slots.id"), unique=True)
     created_at = db.Column(db.DateTime(timezone=True),server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
@@ -51,7 +48,7 @@ bookings_schema = BookingSchema(many=True)
 
 # from sqlalchemy import func
 # from sqlalchemy.orm import validates
-# from .db import db, ma, environment, SCHEMA, add_prefix_for_prod
+# from .db import db, ma, environment, SCHEMA
 
 # class Booking(db.Model):
 #     __tablename__ = "bookings"
@@ -61,9 +58,9 @@ bookings_schema = BookingSchema(many=True)
 
 #     id = db.Column(db.Integer, primary_key=True)
 #     user_id = db.Column(db.Integer, db.ForeignKey(
-#         add_prefix_for_prod("users.id")), nullable=False)
+#       ("users.id")), nullable=False)
 #     exp_id = db.Column(db.Integer, db.ForeignKey(
-#         add_prefix_for_prod("experiences.id")), nullable=False, index=True)
+#       ("experiences.id")), nullable=False, index=True)
 #     start_date = db.Column(db.String(), index=True)
 #     # end_date = db.Column(db.DateTime(timezone=True), unique=True)
 #     created_at = db.Column(db.DateTime(timezone=True),server_default=func.now())
