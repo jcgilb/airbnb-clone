@@ -141,7 +141,7 @@ hr.navbar {
   background-color: white;
   opacity: 100%;
   border-radius: 20px;
-  z-index: 2;
+  z-index: 100;
 }
 
 hr.bars {
