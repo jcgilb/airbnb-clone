@@ -66,7 +66,6 @@ const ExperienceDetails = () => {
               style={{
                 border: "1px solid rgb(221, 237, 170)",
                 height: "400px",
-                marginTop: "8px",
                 marginLeft: "8px",
                 width: "291px",
                 padding: "none",

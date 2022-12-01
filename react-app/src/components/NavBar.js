@@ -86,19 +86,17 @@ const NavBar = ({ loaded }) => {
           <div className="profile-dropdown">
             {sessionLinks}
 
-            {showDropdown && (
-              <div className="show-dropdown">
-                <div
-                  onClick={() => history.push("/experiences/new")}
-                  className="create-exp"
-                >
-                  Host an experience
-                </div>
-                <div className="logout">
-                  <LogoutButton />
-                </div>
+            <div className="show-dropdown">
+              <div
+                onClick={() => history.push("/experiences/new")}
+                className="create-exp"
+              >
+                Host an experience
               </div>
-            )}
+              <div className="logout">
+                <LogoutButton />
+              </div>
+            </div>
           </div>
         </div>
       </div>
