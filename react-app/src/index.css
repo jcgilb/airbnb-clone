@@ -19,6 +19,11 @@ body {
   font-family: "M PLUS 1", sans-serif;
 }
 
+iframe {
+  position: fixed;
+  z-index: -100 !important;
+}
+
 .root {
   height: 100%;
 }

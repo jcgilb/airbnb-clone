@@ -1,0 +1,61 @@
+.top-row {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+}
+
+.splash-explore-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.43;
+  width: 30%;
+  height: 625px;
+  border: 1px solid green;
+}
+
+.latest-exp {
+  justify-content: space-between;
+}
+
+.exp-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 307px;
+  max-height: 490px;
+  padding: 8px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.splash-experience-img {
+  display: flex;
+  flex-direction: column;
+  height: 535px;
+  width: 341px;
+  object-fit: cover;
+  border-radius: 5%;
+}
+
+.splash-exp-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 341px;
+  max-height: 575px;
+  padding: 8px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.experience-img {
+  display: flex;
+  flex-direction: column;
+  height: 418px;
+  width: 307px;
+  object-fit: cover;
+  border-radius: 5%;
+}
