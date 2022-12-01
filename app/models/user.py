@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     
-    review = db.relationship("Review", back_populates="review_author")
+    # review = db.relationship("Review", back_populates="review_author")
     bookings = db.relationship("Booking", back_populates="user_booking")
     host_exps = db.relationship("Experience", back_populates="exp_host")
 

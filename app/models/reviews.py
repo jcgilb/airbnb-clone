@@ -19,7 +19,7 @@ class Review(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
     review_images = db.relationship("ReviewImage", backref="review")
-    review_author = db.relationship("User", back_populates="review")
+    # review_author = db.relationship("User", back_populates="review")
     exp_review = db.relationship("Experience", back_populates="reviews")
 
     def to_dict(self):
