@@ -21,10 +21,24 @@ const ExploreExperiences = () => {
   }, []);
 
   const getFirstImage = (exp) => {
-    let image = exp["images"][0];
+    let image;
+    if (exp["images"]?.length) {
+      image = exp["images"][0];
+    }
     console.log(image?.image_url, "image");
     return (
-      <img className="experience-img" alt={exp.id} src={image?.image_url}></img>
+      <img
+        onError={(e) => {
+          e.target.src = "../../assets/default-image-localXP.jpg";
+        }}
+        className="experience-img"
+        alt={exp.id}
+        src={
+          !image?.image_url
+            ? "../../../assets/default-image-localXP.jpg"
+            : image?.image_url
+        }
+      ></img>
     );
   };
 
@@ -39,7 +53,11 @@ const ExploreExperiences = () => {
 
   return (
     <div className="container">
+      <br></br>
+      <br></br>
       <div className="explore-title">{"All Experiences"}</div>
+      <br></br>
+
       <div className="flex-row-wrap">
         {expArr.map((exp) => (
           <div className="exp-card">

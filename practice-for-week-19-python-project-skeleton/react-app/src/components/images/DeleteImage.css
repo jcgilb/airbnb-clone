@@ -1,6 +1,6 @@
 .fa-x {
   position: absolute;
-  z-index: 2;
+  z-index: 5;
   top: 20px;
   left: 20px;
   opacity: 50%;
@@ -21,9 +21,9 @@
   cursor: pointer;
 }
 
-.pic3-pic4 {
+/* .pic3-pic4 {
   position: relative;
-}
+} */
 
 .pic1,
 .pic2,

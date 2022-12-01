@@ -1,0 +1,54 @@
+.login-logout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: rgb(79, 103, 0);
+  height: 32px;
+  width: 68px;
+  border-radius: 10px;
+  background-color: rgb(221, 237, 170);
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.login-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: rgb(79, 103, 0);
+  height: 32px;
+  width: 68px;
+  border-radius: 10px;
+  background-color: rgb(221, 237, 170);
+  padding: 8px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.signup-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 32px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: #ff1654;
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}

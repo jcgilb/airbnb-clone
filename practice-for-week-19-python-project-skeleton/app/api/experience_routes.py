@@ -77,8 +77,10 @@ def create_one_experience():
         db.session.add(new_experience)
         db.session.commit()
 
-        success_response = Experience.query.order_by(Experience.id.desc()).first()
-        return jsonify(experience_schema.dump(success_response))
+        return jsonify(new_experience.to_dict())
+
+        # success_response = Experience.query.order_by(Experience.id.desc()).first()
+        # return jsonify(experience_schema.dump(success_response))
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -132,12 +134,13 @@ def edit_one_experience(exp_id):
 
 @experience_routes.route('/<int:exp_id>', methods=["DELETE"])
 def delete_experience(exp_id):
-    """Delete a exp by id"""
+    """Delete an exp by id"""
     exp = Experience.query.get(exp_id)
     if exp:
         bookings = Booking.query.filter_by(exp_id=exp_id).all()
         images = ExperienceImage.query.filter_by(exp_id=exp_id).all()
         reviews = Review.query.filter_by(exp_id=exp_id).all()
+        slots = TimeSlot.query.filter_by(exp_id=exp_id).all()
         for review in reviews:
           rvw_images = review.review_images
           for rvw_image in rvw_images:
@@ -146,6 +149,8 @@ def delete_experience(exp_id):
           db.session.delete(booking)
         for image in images:
           db.session.delete(image)
+        for slot in slots:
+          db.session.delete(slot)  
         db.session.delete(exp)
         db.session.commit()
         result = experience_schema.dump(exp)
@@ -178,6 +183,7 @@ def delete_time_slot(exp_id, slot_id):
     exp = Experience.query.get(exp_id)
     # time_slots = exp.time_slots
     slot = TimeSlot.query.get(slot_id)
+    booking = Booking.query.filter_by(time_slot_id=slot_id).all()
   
     if not exp: 
       return "Experience does not exist.", 404
@@ -185,6 +191,9 @@ def delete_time_slot(exp_id, slot_id):
       return "Time slot does not exist.", 404 
       
     if slot and current_user.id == exp.host_id:   
+      if booking:
+        for bkg in booking: 
+          db.session.delete(bkg)
       
       db.session.delete(slot)
       db.session.commit()

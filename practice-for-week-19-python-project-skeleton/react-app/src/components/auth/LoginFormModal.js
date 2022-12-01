@@ -17,7 +17,11 @@ function LoginFormModal() {
 
   return (
     <>
-      <button style={myStyles} onClick={() => setShowModal(true)}>
+      <button
+        className="login-button"
+        style={myStyles}
+        onClick={() => setShowModal(true)}
+      >
         Log in
       </button>
 
