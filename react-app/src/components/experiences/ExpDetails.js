@@ -69,7 +69,7 @@ const ExperienceDetails = () => {
                 marginLeft: "8px",
                 width: "291px",
                 padding: "none",
-                marginTop: "8px",
+                marginTop: "16px",
                 marginLeft: "8px",
                 marginRight: "16px",
               }}
