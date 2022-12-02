@@ -15,11 +15,6 @@
   overflow: hidden;
 }
 
-.carousel-button {
-  height: 20px;
-  width: 20px;
-}
-
 .flex-row {
   display: flex;
   flex-direction: row;
