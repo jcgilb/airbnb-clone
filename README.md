@@ -23,7 +23,7 @@ List of the app's functional features.
 ***
 [USER STORIES](https://github.com/jcgilb/Capstone-project/wiki/User-Stories)
 
-Descriptions of the "Experiences" and "Bookings" features as they are perceived as the application's user. 
+Descriptions of the "Experiences" and "Bookings" features as they are perceived by the application's user. 
 
 ***
 [WIREFRAMES](https://github.com/jcgilb/Capstone-project/wiki/Wireframes)
