@@ -94,12 +94,11 @@ const LandingPage = () => {
           </div>
           <div className="exp-carousel">
             {pos > 0 && (
-              <button
-                className="carousel-button"
+              <i
+                className="fa-solid fa-chevron-left"
                 onClick={() => updatePos(pos - 1)}
-              ></button>
+              ></i>
             )}
-
             <div
               style={{ transform: `translateX(-${pos * 100}%)` }}
               className="flex-row"
@@ -120,10 +119,10 @@ const LandingPage = () => {
               ))}
             </div>
             {pos < expArr?.length - 1 && (
-              <button
-                className="carousel-button"
+              <i
+                className="fa-solid fa-chevron-right"
                 onClick={() => updatePos(pos + 1)}
-              ></button>
+              ></i>
             )}
           </div>
         </div>
