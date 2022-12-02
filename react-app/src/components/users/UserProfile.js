@@ -73,73 +73,81 @@ const UserProfile = () => {
   return (
     <>
       <div className="container">
-        {user?.id === userId && (
-          <>
-            <br />
-            <br />
-            <div className="profile-title">Welcome, {user?.first_name}</div>
-            <br />
-          </>
-        )}
-        {user?.id !== userId && (
-          <>
-            <br />
-            <br />
-            <div className="profile-title">{oneUser?.first_name}'s Profile</div>
-            <br />
-          </>
-        )}
-
-        <div className="inner-container">
-          <div className="list">
-            <div className="title">All Experiences:</div>
-
-            {expArray.map((exp) => (
-              <>
-                <li key={exp.id}>
-                  <div
-                    className="exp-list-profile"
-                    onClick={(e) => history.push(`/experiences/${exp.id}`)}
-                  >
-                    <div>
-                      <div className="exp-name-profile">{exp.name}</div>
-                      <div className="exp-location-profile"></div>
-                      {exp.city}, {exp.state}, {exp.country}
-                    </div>
-                  </div>
-                </li>
-              </>
-            ))}
-          </div>
-          <br />
-          <div className="list">
-            <div className="title">All Bookings:</div>
-            {bkgArray.map((bkg) => (
-              <div className="delete-bkg-profile">
-                <li key={bkg.id}>{bookingInfo(bkg)}</li>
-                {user?.id === userId && (
-                  <div className="delete-bkg">
-                    <DeleteBooking userId={userId} user={user} bkgId={bkg.id} />
-                  </div>
-                )}
+        <div className="container-inner">
+          {user?.id === userId && (
+            <>
+              <br />
+              <br />
+              <div className="profile-title">Welcome, {user?.first_name}</div>
+              <br />
+            </>
+          )}
+          {user?.id !== userId && (
+            <>
+              <br />
+              <br />
+              <div className="profile-title">
+                {oneUser?.first_name}'s Profile
               </div>
-            ))}
-          </div>
-          {/* <div className="user-info">
+              <br />
+            </>
+          )}
+
+          <div className="inner-container">
+            <div className="list">
+              <div className="title">All Experiences:</div>
+
+              {expArray.map((exp) => (
+                <>
+                  <li key={exp.id}>
+                    <div
+                      className="exp-list-profile"
+                      onClick={(e) => history.push(`/experiences/${exp.id}`)}
+                    >
+                      <div>
+                        <div className="exp-name-profile">{exp.name}</div>
+                        <div className="exp-location-profile"></div>
+                        {exp.city}, {exp.state}, {exp.country}
+                      </div>
+                    </div>
+                  </li>
+                </>
+              ))}
+            </div>
+            <br />
+            <div className="list">
+              <div className="title">All Bookings:</div>
+              {bkgArray.map((bkg) => (
+                <div className="delete-bkg-profile">
+                  <li key={bkg.id}>{bookingInfo(bkg)}</li>
+                  {user?.id === userId && (
+                    <div className="delete-bkg">
+                      <DeleteBooking
+                        userId={userId}
+                        user={user}
+                        bkgId={bkg.id}
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            {/* <div className="user-info">
             <div className="user-image"></div>
             <div className="user-details">
               {user?.id === userId ? user?.first_name : oneUser?.first_name}{" "}
               {user?.id === userId ? user?.last_name : oneUser?.last_name}{" "}
-            </div>
-            <div>
+              </div>
+              <div>
               Total XP:{" "}
               {user?.id === userId ? user?.total_exp : oneUser?.total_exp}
-            </div>
-            <div>Badges: {""}</div>
+              </div>
+              <div>Badges: {""}</div>
           </div> */}
+          </div>
+          <br />
+          <br />
         </div>
-        <br />
-        <br />
       </div>
     </>
   );

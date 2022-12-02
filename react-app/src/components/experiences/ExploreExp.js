@@ -73,6 +73,10 @@ const ExploreExperiences = () => {
           </div>
         ))}
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

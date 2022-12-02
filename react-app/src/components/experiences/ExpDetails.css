@@ -17,7 +17,6 @@
   align-items: center;
 }
 
-.pic1,
 .pic-1 {
   height: 100%;
   width: 307px;
@@ -26,19 +25,30 @@
   object-fit: cover;
 }
 
+.pic1 {
+  height: 100%;
+  width: 307px;
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+  object-fit: cover;
+  border: 1px solid rgb(221, 237, 170);
+}
+
 .pic2,
 .pic-2 {
   height: 100%;
   width: 307px;
   object-fit: cover;
+  border: 1px solid rgb(221, 237, 170);
 }
 
 .pic3-pic4 {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 146px;
+  width: 148px;
   gap: 8px;
+  border: 1px solid rgb(221, 237, 170);
 }
 
 .pic3,
@@ -46,6 +56,7 @@
   height: 50%;
   width: 146px;
   object-fit: cover;
+  border: 1px solid rgb(221, 237, 170);
 }
 
 .pic-3,
@@ -72,6 +83,7 @@
   object-fit: cover;
   border-top-right-radius: 5%;
   border-bottom-right-radius: 5%;
+  border: 1px solid #ddedaa;
 }
 
 .details-dates {
@@ -118,7 +130,7 @@
   height: 32px;
   width: 68px;
   border-radius: 10px;
-  background-color: rgb(221, 237, 170);
+  background-color: #ddedaa;
   padding: 8px;
   font-weight: 500;
   border: none;
@@ -145,11 +157,11 @@
   line-height: 1.43;
   margin-top: 35px;
 
-  width: 1150px;
+  width: 100%;
 }
 
 .details-dates {
-  width: 1150px;
+  width: 100%;
 }
 
 .edit-exp-details {
@@ -171,5 +183,5 @@ hr {
   margin-top: 28px;
   border: none;
   height: 1px;
-  width: 1150px;
+  width: 100%;
 }

@@ -62,7 +62,7 @@ const ExperienceDetails = () => {
           )}
           {expImgArr.length === 0 && user?.id === exp.host_id && (
             <i
-              className="pic1 fa fa-plus"
+              className="fa fa-plus"
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}
@@ -85,7 +85,7 @@ const ExperienceDetails = () => {
           )}
           {!expImgArr[1] && user?.id === exp.host_id && (
             <i
-              className="pic2 fa fa-plus"
+              className="fa fa-plus"
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}
@@ -96,6 +96,9 @@ const ExperienceDetails = () => {
               <img
                 className="pic-3"
                 alt="img3"
+                onError={(e) => {
+                  e.target.src = "../../assets/default-image-localXP.jpg";
+                }}
                 src={expImgArr[2].image_url}
               ></img>
               {user?.id === exp.host_id && (
@@ -108,6 +111,9 @@ const ExperienceDetails = () => {
               <img
                 className="pic-4"
                 alt="img4"
+                onError={(e) => {
+                  e.target.src = "../../assets/default-image-localXP.jpg";
+                }}
                 src={expImgArr[3].image_url}
               ></img>
               {user?.id === exp.host_id && (
@@ -134,6 +140,9 @@ const ExperienceDetails = () => {
               <img
                 className="pic-5"
                 alt="img5"
+                onError={(e) => {
+                  e.target.src = "../../assets/default-image-localXP.jpg";
+                }}
                 src={expImgArr[4].image_url}
               ></img>
               {user?.id === exp.host_id && (
@@ -147,7 +156,7 @@ const ExperienceDetails = () => {
           )}
           {!expImgArr[4] && user?.id === exp.host_id && (
             <i
-              className="pic-5 fa fa-plus"
+              className="fa fa-plus"
               onClick={() => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}

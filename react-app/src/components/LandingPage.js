@@ -131,6 +131,7 @@ const LandingPage = () => {
       <br />
       <div className="explore-title">Browse Experiences</div>
       <br />
+      <br />
       <div className="flex-row-wrap">
         {expArr.map((exp) => (
           <div className="small-exp-card">
@@ -159,6 +160,8 @@ const LandingPage = () => {
           </div>
         ))}
       </div>
+      <br />
+      <br />
       <br />
       <br />
     </div>
