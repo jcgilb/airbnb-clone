@@ -103,7 +103,7 @@ const LandingPage = () => {
               style={{ transform: `translateX(-${pos * 100}%)` }}
               className="flex-row"
             >
-              {expArr?.reverse().map((exp) => (
+              {expArr.map((exp) => (
                 <div className="splash-exp-card">
                   <div key={"image"} onClick={() => getExpDetails(exp.id)}>
                     {getFirstImage(exp)}
@@ -118,7 +118,7 @@ const LandingPage = () => {
                 </div>
               ))}
             </div>
-            {pos < expArr?.length - 4 && (
+            {pos < expArr?.length - 5 && (
               <i
                 className="fa-solid fa-chevron-right"
                 onClick={() => updatePos(pos + 0.5)}
@@ -132,8 +132,8 @@ const LandingPage = () => {
       <div className="explore-title">Browse Experiences</div>
       <br />
       <br />
-      <div className="flex-row-wrap">
-        {expArr.map((exp) => (
+      <div className="small-flex-row-wrap">
+        {expArr?.reverse().map((exp) => (
           <div className="small-exp-card">
             <div
               className="exp-info"

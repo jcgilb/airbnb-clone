@@ -44,11 +44,11 @@ const ExperienceDetails = () => {
         </div>
       </div>
       <div className="details-images">
-        <div className="pic1">
+        <div className="pic-1">
           {expImgArr.length >= 1 && (
             <>
               <img
-                className="pic-1"
+                className={expImgArr.length === 1 ? "img1" : "pic-1"}
                 alt="img1"
                 onError={(e) => {
                   e.target.src = "../../assets/default-image-localXP.jpg";
@@ -62,7 +62,7 @@ const ExperienceDetails = () => {
           )}
           {expImgArr.length === 0 && user?.id === exp.host_id && (
             <i
-              className="fa fa-plus"
+              className="pic1 fa fa-plus"
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}
@@ -71,7 +71,7 @@ const ExperienceDetails = () => {
           {expImgArr.length >= 2 && (
             <>
               <img
-                className="pic-2"
+                className={expImgArr?.length === 2 ? "pic5" : "pic2"}
                 alt="img2"
                 onError={(e) => {
                   e.target.src = "../../assets/default-image-localXP.jpg";
@@ -85,16 +85,16 @@ const ExperienceDetails = () => {
           )}
           {!expImgArr[1] && user?.id === exp.host_id && (
             <i
-              className="fa fa-plus"
+              className="pic-2 fa fa-plus"
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}
         </div>
-        <div className="pic3-pic4">
+        <div className={expImgArr.length === 3 ? "img3" : "pic3-pic4"}>
           {expImgArr.length >= 3 && (
             <div className="pic3">
               <img
-                className="pic-3"
+                className={expImgArr.length === 3 ? "img3" : "pic-3"}
                 alt="img3"
                 onError={(e) => {
                   e.target.src = "../../assets/default-image-localXP.jpg";
@@ -123,23 +123,31 @@ const ExperienceDetails = () => {
           )}
           {!expImgArr[2] && user?.id === exp.host_id && (
             <i
-              className="pic-3 fa fa-plus"
+              className="pic3 fa fa-plus"
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}
-          {!expImgArr[3] && user?.id === exp.host_id && (
+          {expImgArr.length[3] && user?.id === exp.host_id && (
             <i
-              className="pic-4 fa fa-plus"
+              className="pic4 fa fa-plus"
               onClick={(e) => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}
+          {expImgArr.length < 3 &&
+            !expImgArr.length[3] &&
+            user?.id === exp.host_id && (
+              <i
+                className="pic4 fa fa-plus"
+                onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+              ></i>
+            )}
         </div>
         <div className="pic5">
           {expImgArr.length >= 5 && (
             <>
               <img
-                className="pic-5"
-                alt="img5"
+                className="pic5"
+                alt="img-5"
                 onError={(e) => {
                   e.target.src = "../../assets/default-image-localXP.jpg";
                 }}
@@ -156,7 +164,11 @@ const ExperienceDetails = () => {
           )}
           {!expImgArr[4] && user?.id === exp.host_id && (
             <i
-              className="fa fa-plus"
+              className={
+                expImgArr.length === 3
+                  ? "pic-3-pic-4 fa fa-plus"
+                  : "pic-5 fa fa-plus"
+              }
               onClick={() => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}
