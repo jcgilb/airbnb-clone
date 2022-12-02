@@ -19,15 +19,16 @@ const UpdateExp = () => {
   let { expId } = useParams();
   expId = parseInt(expId);
 
-  useEffect(() => {
-    // dispatch(getOneExperience(expId));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getOneExperience(expId));
+  // }, [dispatch]);
 
-  const experience = useSelector((state) => state.experiences.oneExperience);
+  const experiences = useSelector((state) => state.experiences.experiences);
+  const experience = Object.values(experiences).find((exp) => exp.id === expId);
   // getters and setters for the form
   const presetHours = ["<2", "2-5", "All day"];
-  const [lat, setLat] = useState(experience?.lat);
-  const [lng, setLng] = useState(experience?.lng);
+  // const [lat, setLat] = useState(experience?.lat);
+  // const [lng, setLng] = useState(experience?.lng);
   const [city, setCity] = useState(experience?.city);
   const [title, setTitle] = useState(experience?.name);
   const [cost, setCost] = useState(experience?.price);
@@ -40,6 +41,13 @@ const UpdateExp = () => {
   const [description, setDescription] = useState(experience?.description);
 
   const user = useSelector((state) => state.session.user);
+  console.log(experience?.est_duration);
+
+  useEffect(() => {
+    if (experience?.est_duration === 120) setDurationSelect(presetHours[0]);
+    if (experience?.est_duration === 300) setDurationSelect(presetHours[1]);
+    if (experience?.est_duration === 60) setDurationSelect(presetHours[2]);
+  }, []);
 
   // form validations
   // form validations
@@ -53,11 +61,11 @@ const UpdateExp = () => {
     if (!country) errors.push("A country is required.");
     if (!address) errors.push("An address is required.");
     if (!description) errors.push("A description is required.");
-    if (isNaN(lat) || isNaN(lng))
-      errors.push("Latitude and Longitude must be numbers.");
+    // if (isNaN(lat) || isNaN(lng))
+    //   errors.push("Latitude and Longitude must be numbers.");
 
     setValidationErrors(errors);
-  }, [title, description, cost, address, city, country, lat, lng]);
+  }, [title, description, cost, address, city, country]);
 
   // set the user albums
   const updateDuration = (e) => setDurationSelect(e.target.value);
@@ -88,8 +96,8 @@ const UpdateExp = () => {
         address: address,
         host_id: user.id,
         est_duration: 120,
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
+        // lat: parseFloat(lat),
+        // lng: parseFloat(lng),
         state: String(expState),
         description: description,
       };
@@ -103,8 +111,8 @@ const UpdateExp = () => {
         address: address,
         host_id: user.id,
         est_duration: 300,
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
+        // lat: parseFloat(lat),
+        // lng: parseFloat(lng),
         state: String(expState),
         description: description,
       };
@@ -118,8 +126,8 @@ const UpdateExp = () => {
         country: country,
         address: address,
         host_id: user.id,
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
+        // lat: parseFloat(lat),
+        // lng: parseFloat(lng),
         state: String(expState),
         description: description,
       };
@@ -201,7 +209,7 @@ const UpdateExp = () => {
               onChange={(e) => setCountry(e.target.value)}
             />
           </div>
-          <div>
+          {/* <div>
             <input
               className="exp-lat"
               type="text"
@@ -218,8 +226,7 @@ const UpdateExp = () => {
               value={lng}
               onChange={(e) => setLng(e.target.value)}
             />
-          </div>
-
+          </div> */}
           <div className="price">
             <input
               className="exp-price"

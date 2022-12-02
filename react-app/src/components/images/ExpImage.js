@@ -11,8 +11,8 @@ import "../experiences/NewExp.css";
 
 const ExpImages = () => {
   const [validationErrors, setValidationErrors] = useState([]);
-  const [preview, setPreview] = useState(false);
   const [imageUrl, setImageUrl] = useState();
+  const [validImage, setValidImage] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   let { expId } = useParams();
@@ -22,9 +22,25 @@ const ExpImages = () => {
   useEffect(() => {
     const errors = [];
     setValidationErrors(errors);
-
+    if (!imageUrl) errors.push("An image url is required.");
+    validateImage(imageUrl);
+    if (!validImage) errors.push("Please enter a valid image url.");
     setValidationErrors(errors);
-  }, []);
+  }, [imageUrl, validImage]);
+
+  // validate the image using the Image object's builtins
+  function validateImage(imageUrl) {
+    let image = new Image();
+    image.onload = function () {
+      if (this.width > 0) {
+        setValidImage(true);
+      }
+    };
+    image.onerror = function () {
+      setValidImage(false);
+    };
+    image.src = imageUrl;
+  }
 
   // handle submit onClick event
   const handleSubmit = async (e) => {
