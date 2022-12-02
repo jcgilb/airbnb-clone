@@ -53,7 +53,7 @@ const LandingPage = () => {
         onError={(e) => {
           e.target.src = "../../assets/default-image-localXP.jpg";
         }}
-        className="experience-img"
+        className="small-experience-img"
         alt={exp.id}
         src={
           !image?.image_url
@@ -96,7 +96,7 @@ const LandingPage = () => {
             {pos > 0 && (
               <i
                 className="fa-solid fa-chevron-left"
-                onClick={() => updatePos(pos - 1)}
+                onClick={() => updatePos(pos - 0.5)}
               ></i>
             )}
             <div
@@ -118,10 +118,10 @@ const LandingPage = () => {
                 </div>
               ))}
             </div>
-            {pos < expArr?.length - 1 && (
+            {pos < expArr?.length - 4 && (
               <i
                 className="fa-solid fa-chevron-right"
-                onClick={() => updatePos(pos + 1)}
+                onClick={() => updatePos(pos + 0.5)}
               ></i>
             )}
           </div>
@@ -133,14 +133,26 @@ const LandingPage = () => {
       <br />
       <div className="flex-row-wrap">
         {expArr.map((exp) => (
-          <div className="exp-card">
-            <div key={"image"} onClick={() => getExpDetails(exp.id)}>
+          <div className="small-exp-card">
+            <div
+              className="exp-info"
+              key={"image"}
+              onClick={() => getExpDetails(exp.id)}
+            >
               {getFirstImageAgain(exp)}
             </div>
-            <div key={exp.id} onClick={() => getExpDetails(exp.id)}>
+            <div
+              className="exp-info"
+              key={exp.id}
+              onClick={() => getExpDetails(exp.id)}
+            >
               {exp?.name}
             </div>
-            <div key={exp.price} onClick={() => getExpDetails(exp.id)}>
+            <div
+              className="exp-info"
+              key={exp.price}
+              onClick={() => getExpDetails(exp.id)}
+            >
               {"Price: $"}
               {exp?.price}/person
             </div>
