@@ -41,16 +41,16 @@ const NavBar = ({ loaded }) => {
   if (user) {
     sessionLinks = (
       <div className="session-links">
-        <LogoutButton />
+        {/* <LogoutButton /> */}
         <div onClick={() => history.push("/experiences")} className="explore">
           Explore
         </div>
-        <div
+        {/* <div
           onClick={() => history.push("/experiences/new")}
           className="create-exp"
         >
           Host an experience
-        </div>
+        </div> */}
         <div className="session">
           <div onClick={openMenu} className="hamburger">
             <hr className="bars" />

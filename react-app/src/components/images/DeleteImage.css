@@ -14,11 +14,15 @@
 .confirm-delete {
   position: absolute;
   z-index: 2;
-  top: 30px;
+  top: 44px;
   left: 20px;
   opacity: 1;
   color: rgb(255, 22, 84);
+  background-color: white;
   cursor: pointer;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 2px;
 }
 
 .pic1,
