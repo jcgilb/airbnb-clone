@@ -2,3 +2,8 @@
   display: flex;
   flex-direction: column;
 }
+
+.exp-date-time {
+  width: 100%;
+  border-radius: 10px;
+}

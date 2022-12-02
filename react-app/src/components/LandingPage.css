@@ -44,6 +44,15 @@
   width: 341px;
   object-fit: cover;
   border-radius: 5%;
+  cursor: pointer;
+}
+
+.fa-chevron-left {
+  cursor: pointer;
+}
+
+.fa-chevron-right {
+  cursor: pointer;
 }
 
 .splash-exp-card {
@@ -63,13 +72,21 @@
   flex-wrap: nowrap;
 }
 
+.small-flex-row-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  grid-column-gap: 21px;
+  grid-row-gap: 90px;
+}
+
 .flex-row-wrap {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  grid-column-gap: 90px;
-  grid-row-gap: 90px;
+  grid-row-gap: 30px;
 }
 
 .small-exp-card {
@@ -79,6 +96,7 @@
   max-height: 430px;
   justify-content: flex-start;
   align-items: flex-start;
+  cursor: pointer;
 }
 
 .small-experience-img {

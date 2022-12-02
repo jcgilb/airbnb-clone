@@ -98,11 +98,6 @@ const timeSlotReducer = (state = initialState, action) => {
         newState[slot.id] = slot;
       });
       return newState;
-    // case GET_ONE:
-    //   return {
-    //     ...state,
-    //     oneBooking: { ...action.booking },
-    //   };
     case ADD_UPDATE:
       if (!state[action.slot.id]) {
         newState = { ...state };
