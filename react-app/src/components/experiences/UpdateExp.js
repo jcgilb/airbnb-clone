@@ -148,9 +148,7 @@ const UpdateExp = () => {
   return (
     <>
       <br></br>
-      <br></br>
-      <div className="exp-details">Edit experience details below</div>
-      <br></br>
+      <div className="exp-details">Edit experience details</div>
       <br></br>
       <div className="form-container">
         <br></br>
@@ -259,15 +257,22 @@ const UpdateExp = () => {
                 </div>
               ))}
           </ul>
-          <button
-            className="exp-host"
-            type="submit"
-            disabled={!!validationErrors.length}
-          >
-            Submit
-          </button>
+          <div className="submit-or-delete">
+            <button
+              className="exp-host"
+              type="submit"
+              disabled={!!validationErrors.length}
+            >
+              Submit
+            </button>
+            <DeleteExperience />
+          </div>
         </form>
-        <DeleteExperience />
+      </div>
+
+      <div className="exp-details">Upload an image</div>
+      <br></br>
+      <div className="form-container">
         <div>
           <ExpImages />
         </div>
