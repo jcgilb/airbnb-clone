@@ -15,8 +15,8 @@ import ExpImages from "../images/ExpImage.js";
 
 const NewExperience = () => {
   // getters and setters for the form
-  const [lat, setLat] = useState();
-  const [lng, setLng] = useState();
+  // const [lat, setLat] = useState();
+  // const [lng, setLng] = useState();
   const [cost, setCost] = useState();
   const [city, setCity] = useState("");
   const [title, setTitle] = useState("");
@@ -52,11 +52,11 @@ const NewExperience = () => {
     if (!country) errors.push("A country is required.");
     if (!address) errors.push("An address is required.");
     if (!description) errors.push("A description is required.");
-    if (isNaN(lat) || isNaN(lng))
-      errors.push("Latitude and Longitude must be numbers.");
+    // if (isNaN(lat) || isNaN(lng))
+    //   errors.push("Latitude and Longitude must be numbers.");
 
     setValidationErrors(errors);
-  }, [title, description, cost, address, city, country, lat, lng]);
+  }, [title, description, cost, address, city, country]);
 
   // set the user albums
   const updateDuration = (e) => setDurationSelect(e.target.value);
@@ -87,8 +87,8 @@ const NewExperience = () => {
         address: address,
         host_id: user.id,
         est_duration: 120,
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
+        // lat: parseFloat(lat),
+        // lng: parseFloat(lng),
         state: String(expState),
         description: description,
       };
@@ -102,8 +102,8 @@ const NewExperience = () => {
         address: address,
         host_id: user.id,
         est_duration: 300,
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
+        // lat: parseFloat(lat),
+        // lng: parseFloat(lng),
         state: String(expState),
         description: description,
       };
@@ -117,8 +117,8 @@ const NewExperience = () => {
         address: address,
         country: country,
         host_id: user.id,
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
+        // lat: parseFloat(lat),
+        // lng: parseFloat(lng),
         state: String(expState),
         description: description,
       };
@@ -200,7 +200,7 @@ const NewExperience = () => {
               onChange={(e) => setCountry(e.target.value)}
             />
           </div>
-          <div>
+          {/* <div>
             <input
               className="exp-lat"
               type="text"
@@ -217,7 +217,7 @@ const NewExperience = () => {
               value={lng}
               onChange={(e) => setLng(e.target.value)}
             />
-          </div>
+          </div> */}
 
           <div className="price">
             <input
@@ -261,7 +261,7 @@ const NewExperience = () => {
           </button>
           <br />
         </form>
-        <ExpImages />
+        {/* <ExpImages /> */}
         <br />
       </div>
       <br></br>

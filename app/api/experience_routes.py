@@ -62,8 +62,8 @@ def create_one_experience():
         data = form.data
         new_experience = Experience(
             host_id=current_user.id,
-            lat=data['lat'],
-            lng=data['lng'],
+            # lat=data['lat'],
+            # lng=data['lng'],
             name=data['name'],
             city=data['city'],
             price=data['price'],
@@ -99,8 +99,8 @@ def edit_one_experience(exp_id):
         data = form.data
 
         host_id=current_user.id
-        lng=data['lng']
-        lat=data['lat']
+        # lng=data['lng']
+        # lat=data['lat']
         name=data['name']
         city=data['city']
         state=data['state']
@@ -110,8 +110,8 @@ def edit_one_experience(exp_id):
         description=data['description']
         est_duration=data['est_duration']
 
-        experience.lng=lng
-        experience.lat=lat
+        # experience.lng=lng
+        # experience.lat=lat
         experience.name=name
         experience.city=city
         experience.state=state

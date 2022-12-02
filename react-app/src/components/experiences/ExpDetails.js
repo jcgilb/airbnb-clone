@@ -19,7 +19,7 @@ const ExperienceDetails = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(getOneExperience());
+      dispatch(getOneExperience(expId));
     };
   }, []);
 
