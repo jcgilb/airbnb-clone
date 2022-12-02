@@ -79,6 +79,25 @@ function App() {
           <LandingPage />
         </Route>
       </Switch>
+      <footer>
+        Aribnb clone by Joanna Gilbert
+        <img
+          onClick={() => window.location.replace("https://github.com/jcgilb")}
+          className="about-me github"
+          alt="linkedin"
+          src="../assets/github-icon.png"
+        ></img>
+        <img
+          onClick={() =>
+            window.location.replace(
+              "https://www.linkedin.com/in/joanna-gilbert-7b2053255/"
+            )
+          }
+          className="about-me linkedin"
+          alt="linkedin"
+          src="../assets/linkedin-icon.png"
+        ></img>
+      </footer>
     </BrowserRouter>
   );
 }

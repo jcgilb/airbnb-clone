@@ -68,7 +68,6 @@ const AvailableTimes = () => {
     timeSlotArray = sortedSlots;
   }
 
-
   const availabileTimes = timeSlotArray.map((slot) => {
     let dateEnd = String(new Date(parseInt(slot.end)));
     let dateStart = String(new Date(parseInt(slot.start)));
@@ -142,7 +141,7 @@ const AvailableTimes = () => {
             <BookingForm exp={exp} slot={formSlot} expId={expId} />
           </Modal>
         )}
-        <DeleteTimeSlot slotId={slot.id} />
+        {exp.host_id === user?.id && <DeleteTimeSlot slotId={slot.id} />}
       </div>
     );
   });

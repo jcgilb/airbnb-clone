@@ -5,6 +5,9 @@
   height: 100%;
   width: 92%;
 }
+.container-inner {
+  height: 100vh;
+}
 
 .profile-title {
   display: flex;
