@@ -29,6 +29,13 @@
   cursor: pointer;
 }
 
+.explore-card {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 300px;
+}
+
 .experience-img {
   display: flex;
   flex-direction: column;

@@ -108,6 +108,13 @@
   border-radius: 5%;
 }
 
+.splash-details {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 340px;
+}
+
 .exp-info {
   text-overflow: ellipsis;
   overflow: hidden;

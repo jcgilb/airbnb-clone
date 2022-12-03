@@ -32,7 +32,7 @@
 .exp-name-profile {
   font-family: "M PLUS 1", sans-serif;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .exp-date-profile {
@@ -45,6 +45,7 @@
   font-family: "M PLUS 1", sans-serif;
   font-size: 14px;
   font-weight: 400;
+  margin-bottom: 10px;
 }
 
 .delete-bkg-profile {
