@@ -49,7 +49,7 @@ const ExperienceDetails = () => {
             <>
               <img
                 alt="default"
-                src={"../../assets/default-image-localXP.jpg"}
+                src={"../../assets/default-image-localXP.png"}
               ></img>
             </>
           )}
@@ -59,7 +59,7 @@ const ExperienceDetails = () => {
                 className={expImgArr.length === 1 ? "img1" : "pic-1"}
                 alt="img1"
                 onError={(e) => {
-                  e.target.src = "../../assets/default-image-localXP.jpg";
+                  e.target.src = "../../assets/default-image-localXP.png";
                 }}
                 src={expImgArr[0].image_url}
               ></img>
@@ -82,7 +82,7 @@ const ExperienceDetails = () => {
                 className={expImgArr?.length === 2 ? "pic5" : "pic2"}
                 alt="img2"
                 onError={(e) => {
-                  e.target.src = "../../assets/default-image-localXP.jpg";
+                  e.target.src = "../../assets/default-image-localXP.png";
                 }}
                 src={expImgArr[1].image_url}
               ></img>
@@ -105,7 +105,7 @@ const ExperienceDetails = () => {
                 className={expImgArr.length === 3 ? "img3" : "pic-3"}
                 alt="img3"
                 onError={(e) => {
-                  e.target.src = "../../assets/default-image-localXP.jpg";
+                  e.target.src = "../../assets/default-image-localXP.png";
                 }}
                 src={expImgArr[2].image_url}
               ></img>
@@ -120,7 +120,7 @@ const ExperienceDetails = () => {
                 className="pic-4"
                 alt="img4"
                 onError={(e) => {
-                  e.target.src = "../../assets/default-image-localXP.jpg";
+                  e.target.src = "../../assets/default-image-localXP.png";
                 }}
                 src={expImgArr[3].image_url}
               ></img>
@@ -157,7 +157,7 @@ const ExperienceDetails = () => {
                 className="pic5"
                 alt="img-5"
                 onError={(e) => {
-                  e.target.src = "../../assets/default-image-localXP.jpg";
+                  e.target.src = "../../assets/default-image-localXP.png";
                 }}
                 src={expImgArr[4].image_url}
               ></img>
