@@ -108,10 +108,18 @@ const LandingPage = () => {
                   <div key={"image"} onClick={() => getExpDetails(exp.id)}>
                     {getFirstImage(exp)}
                   </div>
-                  <div key={exp.id} onClick={() => getExpDetails(exp.id)}>
+                  <div
+                    className="splash-details"
+                    key={exp.id}
+                    onClick={() => getExpDetails(exp.id)}
+                  >
                     {exp?.name}
                   </div>
-                  <div key={exp.price} onClick={() => getExpDetails(exp.id)}>
+                  <div
+                    className="splash-details"
+                    key={exp.price}
+                    onClick={() => getExpDetails(exp.id)}
+                  >
                     {"Price: $"}
                     {exp?.price}/person
                   </div>

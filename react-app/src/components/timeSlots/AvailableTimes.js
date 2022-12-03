@@ -68,7 +68,7 @@ const AvailableTimes = () => {
     timeSlotArray = sortedSlots;
   }
 
-  const availabileTimes = timeSlotArray.map((slot) => {
+  const availableTimes = timeSlotArray.map((slot) => {
     let dateEnd = String(new Date(parseInt(slot.end)));
     let dateStart = String(new Date(parseInt(slot.start)));
     let end = dateEnd;
@@ -118,6 +118,7 @@ const AvailableTimes = () => {
           <button
             className="book-exp"
             onClick={() => {
+              if (!user) return alert("You must be logged in first.");
               setFormSlot(slot);
               setShowModal(true);
             }}
@@ -155,7 +156,11 @@ const AvailableTimes = () => {
             setChevDown(false);
           }}
         >
-          View all <i className="fa-solid fa-chevron-down"></i>
+          View all{" "}
+          <i
+            style={{ cursor: "pointer" }}
+            className="fa-solid fa-chevron-down"
+          ></i>
         </div>
       )}
       {!chevDown && showAll && (
@@ -165,15 +170,22 @@ const AvailableTimes = () => {
             setChevDown(true);
           }}
         >
-          View less <i className="fa-solid fa-chevron-up"></i>
+          View less{" "}
+          <i
+            style={{ cursor: "pointer" }}
+            className="fa-solid fa-chevron-up"
+          ></i>
         </div>
       )}
       {exp.host_id === user?.id && (
-        <div onClick={(e) => history.push(`/experiences/${expId}/dates`)}>
+        <div
+          style={{ cursor: "pointer" }}
+          onClick={(e) => history.push(`/experiences/${expId}/dates`)}
+        >
           Add dates <i className="fa-solid fa-plus"></i>
         </div>
       )}
-      <div className="details-dates">{availabileTimes}</div>
+      <div className="details-dates">{availableTimes}</div>
     </div>
   );
 };

@@ -165,10 +165,7 @@ hr.navbar {
   display: flex;
   flex-direction: column;
   position: relative;
-  /* margin-top: 10px;
-  margin-left: 105px; */
-  padding: 6px;
-  padding-left: 12px;
+  padding: 12px;
   width: 160px;
   right: -35px;
   top: 10px;

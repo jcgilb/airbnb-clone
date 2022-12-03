@@ -106,8 +106,9 @@ const UserProfile = () => {
                     >
                       <div>
                         <div className="exp-name-profile">{exp.name}</div>
-                        <div className="exp-location-profile"></div>
-                        {exp.city}, {exp.state}, {exp.country}
+                        <div className="exp-location-profile">
+                          {exp.city}, {exp.state}, {exp.country}
+                        </div>
                       </div>
                     </div>
                   </li>

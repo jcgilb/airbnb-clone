@@ -98,58 +98,95 @@ const ExperienceDetails = () => {
             ></i>
           )}
         </div>
-        <div className={expImgArr.length === 3 ? "img3" : "pic3-pic4"}>
-          {expImgArr.length >= 3 && (
-            <div className="pic3">
-              <img
-                className={expImgArr.length === 3 ? "img3" : "pic-3"}
-                alt="img3"
-                onError={(e) => {
-                  e.target.src = "../../assets/default-image-localXP.png";
-                }}
-                src={expImgArr[2].image_url}
-              ></img>
-              {user?.id === exp.host_id && (
-                <DeleteExpImg imgId={expImgArr[2].id} />
-              )}
-            </div>
-          )}
-          {expImgArr.length >= 4 && (
-            <div className="pic4">
-              <img
-                className="pic-4"
-                alt="img4"
-                onError={(e) => {
-                  e.target.src = "../../assets/default-image-localXP.png";
-                }}
-                src={expImgArr[3].image_url}
-              ></img>
-              {user?.id === exp.host_id && (
-                <DeleteExpImg imgId={expImgArr[3].id} />
-              )}
-            </div>
-          )}
-          {!expImgArr[2] && user?.id === exp.host_id && (
-            <i
-              className="pic3 fa fa-plus"
-              onClick={(e) => history.push(`/experiences/${expId}/edit`)}
-            ></i>
-          )}
-          {expImgArr.length[3] && user?.id === exp.host_id && (
-            <i
-              className="pic4 fa fa-plus"
-              onClick={(e) => history.push(`/experiences/${expId}/edit`)}
-            ></i>
-          )}
-          {expImgArr.length < 3 &&
-            !expImgArr.length[3] &&
-            user?.id === exp.host_id && (
+        {expImgArr.length === 4 && (
+          <div className="img3-img4">
+            {expImgArr.length >= 3 && (
+              <div className="pic3">
+                <img
+                  className="pic-3"
+                  alt="img3"
+                  onError={(e) => {
+                    e.target.src = "../../assets/default-image-localXP.png";
+                  }}
+                  src={expImgArr[2].image_url}
+                ></img>
+                {user?.id === exp.host_id && (
+                  <DeleteExpImg imgId={expImgArr[2].id} />
+                )}
+              </div>
+            )}
+            {expImgArr.length >= 4 && (
+              <div className="pic4">
+                <img
+                  className="pic-4"
+                  alt="img4"
+                  onError={(e) => {
+                    e.target.src = "../../assets/default-image-localXP.png";
+                  }}
+                  src={expImgArr[3].image_url}
+                ></img>
+                {user?.id === exp.host_id && (
+                  <DeleteExpImg imgId={expImgArr[3].id} />
+                )}
+              </div>
+            )}
+          </div>
+        )}
+        {expImgArr.length !== 4 && (
+          <div className={expImgArr.length === 3 ? "img3" : "pic3-pic4"}>
+            {expImgArr.length >= 3 && (
+              <div className="pic3">
+                <img
+                  className={expImgArr.length === 3 ? "img3" : "pic-3"}
+                  alt="img3"
+                  onError={(e) => {
+                    e.target.src = "../../assets/default-image-localXP.png";
+                  }}
+                  src={expImgArr[2].image_url}
+                ></img>
+                {user?.id === exp.host_id && (
+                  <DeleteExpImg imgId={expImgArr[2].id} />
+                )}
+              </div>
+            )}
+            {expImgArr.length >= 4 && (
+              <div className="pic4">
+                <img
+                  className="pic-4"
+                  alt="img4"
+                  onError={(e) => {
+                    e.target.src = "../../assets/default-image-localXP.png";
+                  }}
+                  src={expImgArr[3].image_url}
+                ></img>
+                {user?.id === exp.host_id && (
+                  <DeleteExpImg imgId={expImgArr[3].id} />
+                )}
+              </div>
+            )}
+            {!expImgArr[2] && user?.id === exp.host_id && (
+              <i
+                className="pic3 fa fa-plus"
+                onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+              ></i>
+            )}
+            {/* {expImgArr[3] && user?.id === exp.host_id && (
               <i
                 className="pic4 fa fa-plus"
                 onClick={(e) => history.push(`/experiences/${expId}/edit`)}
               ></i>
-            )}
-        </div>
+            )} */}
+            {expImgArr.length < 3 &&
+              !expImgArr[3] &&
+              user?.id === exp.host_id && (
+                <i
+                  className="pic4 fa fa-plus"
+                  onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+                ></i>
+              )}
+          </div>
+        )}
+
         <div className="pic5">
           {expImgArr.length >= 5 && (
             <>

@@ -68,7 +68,7 @@ function BookingForm({ exp, expId, slot }) {
 
   return (
     <div className="booking-form">
-      <div className="details-title">Booking details</div>
+      <div className="booking-details-title">Booking details</div>
       <div className="booking-info">
         <div className="booking-details">
           Date: {week}, {monthDay}, {year}

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getOneExperience } from "../../store/experiences";
 import { deleteSlot, getAllSlots } from "../../store/timeSlots";
+import "./DeleteTimeSlot.css";
 
 const DeleteTimeSlot = ({ slotId }) => {
   let { expId } = useParams();
@@ -46,10 +47,14 @@ const DeleteTimeSlot = ({ slotId }) => {
   return (
     <>
       <i
-        class="fa-regular fa-trash-can"
+        className="slot-trash fa-regular fa-trash-can"
         onClick={() => setShowDelete(true)}
       ></i>
-      {showDelete && <div onClick={handleClick}>Delete this time slot</div>}
+      {showDelete && (
+        <div className="confirm-delete-slot" onClick={handleClick}>
+          Delete this time slot
+        </div>
+      )}
     </>
   );
 };
