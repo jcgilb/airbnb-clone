@@ -32,45 +32,50 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          name="email"
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={updatePassword}
-        />
-        <button className="login-logout" type="submit">
-          Login
-        </button>
-        <button
-          type="submit"
-          onClick={() => {
-            setEmail("demo@aa.io");
-            setPassword("password");
-          }}
-        >
-          Demo User
-        </button>
-      </div>
-    </form>
+    <div className="modal-container">
+      <form className="modal-form" onSubmit={onLogin}>
+        <div className="input-container">
+          <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <label htmlFor="email">Email</label>
+          <input
+            className="modal-input"
+            name="email"
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={updateEmail}
+          />
+
+          <label htmlFor="password">Password</label>
+          <input
+            className="modal-input"
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={updatePassword}
+          />
+
+          <button className="login-logout" type="submit">
+            Login
+          </button>
+          <button
+            className="login-logout"
+            type="submit"
+            onClick={() => {
+              setEmail("demo@aa.io");
+              setPassword("password");
+            }}
+          >
+            Demo User
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

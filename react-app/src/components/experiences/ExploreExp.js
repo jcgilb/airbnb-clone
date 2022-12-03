@@ -28,13 +28,13 @@ const ExploreExperiences = () => {
     return (
       <img
         onError={(e) => {
-          e.target.src = "../../assets/default-image-localXP.jpg";
+          e.target.src = "../../assets/default-image-localXP.png";
         }}
         className="experience-img"
         alt={exp.id}
         src={
           !image?.image_url
-            ? "../../../assets/default-image-localXP.jpg"
+            ? "../../../assets/default-image-localXP.png"
             : image?.image_url
         }
       ></img>

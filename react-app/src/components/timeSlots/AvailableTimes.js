@@ -107,13 +107,13 @@ const AvailableTimes = () => {
 
     return (
       <div className="available-date">
-        <div>
+        <div className="time">
           {week}, {monthDay}, {year}
         </div>
-        <div>
+        <div className="time">
           {start} - {end}
         </div>
-        <div>${exp?.price}/person</div>
+        <div className="time">${exp?.price}/person</div>
         {slot.booked !== true && (
           <button
             className="book-exp"

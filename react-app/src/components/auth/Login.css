@@ -5,7 +5,7 @@
   justify-content: center;
   color: rgb(79, 103, 0);
   height: 32px;
-  width: 68px;
+  width: 100%;
   border-radius: 10px;
   background-color: rgb(221, 237, 170);
   padding: 8px;
@@ -51,4 +51,36 @@
   font-weight: 500;
   border: none;
   cursor: pointer;
+}
+.modal-container {
+  background: white;
+  width: 300px;
+  display: flex;
+  padding: 20px;
+  margin: 0 auto;
+  align-items: center;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #5b8193;
+}
+
+.input-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.modal-form {
+  width: 300px;
+}
+
+.modal-input {
+  width: 89%;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }

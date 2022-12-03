@@ -131,6 +131,10 @@
 }
 
 .available-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   height: 172px;
   width: 162px;
   min-width: 162px;
@@ -153,6 +157,8 @@
   border-radius: 10px;
   background-color: #ff1654;
   padding: 8px;
+  margin-top: 8px;
+  margin-left: 6px;
   font-weight: 500;
   cursor: pointer;
   /* background-color: rgb(221, 237, 170); */
@@ -170,10 +176,17 @@
   border-radius: 10px;
   background-color: #ddedaa;
   padding: 8px;
+  margin-top: 8px;
   font-weight: 500;
+  margin-left: 6px;
   border: none;
   /* background-color: rgb(221, 237, 170); */
   /* background-color: #93b5c6; */
+}
+
+.time {
+  padding: 6px;
+  margin-left: 6px;
 }
 
 .details-title {

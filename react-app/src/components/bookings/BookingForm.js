@@ -61,16 +61,23 @@ function BookingForm({ exp, expId, slot }) {
     end = String(parseInt(end) - 12).concat("PM");
   }
 
+  if (start == "0AM") {
+    start = "12AM";
+    end = String(parseInt(exp.est_duration / 60)).concat("AM");
+  }
+
   return (
     <div className="booking-form">
       <div className="details-title">Booking details</div>
-      <div className="booking-details">
-        {week}, {monthDay}
+      <div className="booking-info">
+        <div className="booking-details">
+          Date: {week}, {monthDay}, {year}
+        </div>
+        <div className="booking-details">
+          Time: {start} - {end}
+        </div>
+        <div className="booking-details">Price: ${exp?.price}/person</div>
       </div>
-      <div className="booking-details">
-        {start} - {end}
-      </div>
-      <div className="booking-details">${exp?.price}/person</div>
       <button
         className="book-exp-confirm"
         onClick={(e) => bookTimeSlot(e, slot)}
