@@ -45,6 +45,14 @@ const ExperienceDetails = () => {
       </div>
       <div className="details-images">
         <div className="pic-1">
+          {expImgArr.length === 0 && user?.id !== exp.host_id && (
+            <>
+              <img
+                alt="default"
+                src={"../../assets/default-image-localXP.jpg"}
+              ></img>
+            </>
+          )}
           {expImgArr.length >= 1 && (
             <>
               <img
