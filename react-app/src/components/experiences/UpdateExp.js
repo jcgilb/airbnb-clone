@@ -137,6 +137,7 @@ const UpdateExp = () => {
       async (res) => {
         const data = await res.json();
         if (data && data.errors) setValidationErrors(data.errors);
+        if (data && !data.errors) return history.push(`/experiences/${expId}`);
       }
     );
     if (exp) {

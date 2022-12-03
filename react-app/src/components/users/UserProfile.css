@@ -50,27 +50,38 @@
 .delete-bkg-profile {
   display: flex;
   flex-direction: row;
-  width: 590px;
   align-items: space-between;
   justify-content: space-between;
   cursor: pointer;
   border-bottom: 1px solid #5a3a5830;
+  inline-size: 100%;
+  overflow-wrap: break-word;
 }
 
 .exp-list-profile {
   display: flex;
   flex-direction: column;
-  width: 590px;
+  /* width: 590px; */
   align-items: space-between;
   justify-content: space-between;
   cursor: pointer;
   border-bottom: 1px solid #5a3a5830;
+  inline-size: 100%;
+  overflow-wrap: break-word;
 }
 
 .delete-bkg {
+  align-self: flex-end;
+  margin-bottom: 30px;
+  /* position: absolute; */
+}
+
+.confirm-delete-bkg {
   position: absolute;
-  left: 650px;
-  margin-top: 20px;
+  border: 1px solid black;
+  padding: 4px;
+  border-radius: 10px;
+  background-color: white;
 }
 
 .inner-container {
@@ -91,7 +102,7 @@
   display: flex;
   flex-direction: column;
   height: 90%;
-  width: 30%;
+  width: 38%;
 }
 
 .user-info {

@@ -46,7 +46,11 @@ const DeleteBooking = ({ bkgId, user, userId }) => {
         class="fa-regular fa-trash-can"
         onClick={() => setShowDelete(true)}
       ></i>
-      {showDelete && <div onClick={handleClick}>Cancel this booking</div>}
+      {showDelete && (
+        <div className="confirm-delete-bkg" onClick={handleClick}>
+          Cancel this booking
+        </div>
+      )}
     </>
   );
 };
