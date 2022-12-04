@@ -69,15 +69,21 @@
 
 .pic-3-pic-4 {
   position: absolute;
-  right: 32px;
+  right: 0px;
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 148px;
+  width: 75%;
   gap: 8px;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   border: 1px solid rgb(221, 237, 170);
+}
+
+@media screen and (max-width: 1900px) {
+  .pic-3-pic-4 {
+    width: 65%;
+  }
 }
 
 .img3-img4 {
