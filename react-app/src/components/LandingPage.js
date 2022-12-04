@@ -11,7 +11,7 @@ const LandingPage = () => {
 
   const experiences = useSelector((state) => state.experiences.experiences);
   const [expArr, setExpArr] = useState(Object.values(experiences));
-  let reversed = expArr?.reverse();
+  let reversed = Object.values(experiences).reverse();
   let lastTen = reversed.slice(0, 10);
   console.log(reversed, "reversed");
   console.log(lastTen, "lastTen");
