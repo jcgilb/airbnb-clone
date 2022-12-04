@@ -139,6 +139,9 @@ hr.navbar {
 .create-exp {
   cursor: pointer;
 }
+.create-exp:hover {
+  text-shadow: 1px 1px #0000004c;
+}
 
 .hamburger {
   display: flex;
@@ -153,6 +156,15 @@ hr.navbar {
 .explore {
   margin-left: 40px;
   margin-right: 40px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.explore:hover {
+  text-shadow: 1px 1px #0000004c;
+  cursor: pointer;
+  /* font-weight: 600; */
 }
 
 .fa-bars {
@@ -195,11 +207,5 @@ hr.bars {
   color: rgb(221, 237, 170);
   border: 1px solid rgb(79, 103, 0);
   border-radius: 50%;
-  cursor: pointer;
-}
-
-.explore {
-  display: flex;
-  flex-direction: row;
   cursor: pointer;
 }

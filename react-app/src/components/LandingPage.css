@@ -46,12 +46,38 @@
   border-radius: 5%;
   cursor: pointer;
 }
+.nondescript-div {
+  height: 30px;
+  width: 30px;
+}
 
 .fa-chevron-left {
+  display: flex;
   cursor: pointer;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
 }
 
 .fa-chevron-right {
+  display: flex;
+  cursor: pointer;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.fa-chevron-left:hover {
+  cursor: pointer;
+}
+
+.fa-chevron-right:hover {
   cursor: pointer;
 }
 

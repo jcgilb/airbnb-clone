@@ -5,6 +5,9 @@
   margin-bottom: 0px;
   padding-bottom: 0px;
 }
+.confirm-delete-slot:hover {
+  text-shadow: 1px 1px #0000004c;
+}
 .slot-trash {
   cursor: pointer;
   margin-top: 8px;
