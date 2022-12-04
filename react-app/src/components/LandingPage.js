@@ -147,7 +147,7 @@ const LandingPage = () => {
       <br />
       <br />
       <div className="small-flex-row-wrap">
-        {expArr.map((exp) => (
+        {expArr?.map((exp) => (
           <div className="small-exp-card">
             <div
               className="exp-info"
