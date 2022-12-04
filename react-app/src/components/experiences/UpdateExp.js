@@ -46,7 +46,7 @@ const UpdateExp = () => {
   useEffect(() => {
     if (experience?.est_duration === 120) setDurationSelect(presetHours[0]);
     if (experience?.est_duration === 300) setDurationSelect(presetHours[1]);
-    if (experience?.est_duration === 60) setDurationSelect(presetHours[2]);
+    if (experience?.est_duration === 480) setDurationSelect(presetHours[2]);
   }, []);
 
   // form validations
@@ -122,7 +122,7 @@ const UpdateExp = () => {
         city: city,
         name: title,
         price: cost,
-        est_duration: 60,
+        est_duration: 480,
         country: country,
         address: address,
         host_id: user.id,

@@ -113,7 +113,7 @@ const NewExperience = () => {
         city: city,
         name: title,
         price: parseFloat(cost),
-        est_duration: 60,
+        est_duration: 480,
         address: address,
         country: country,
         host_id: user.id,
