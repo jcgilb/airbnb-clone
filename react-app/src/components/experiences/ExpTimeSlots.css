@@ -7,3 +7,21 @@
   width: 100%;
   border-radius: 10px;
 }
+
+.exp-host-availability {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 30px;
+  width: 140px;
+  border-radius: 5px;
+  border: none;
+  background-color: #93b5c6;
+  padding: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}

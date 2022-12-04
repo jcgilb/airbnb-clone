@@ -113,7 +113,7 @@ const ExpTimeSlots = () => {
               ))}
           </ul>
           <button
-            className="exp-host"
+            className="exp-host-availability"
             type="submit"
             disabled={!!errors?.length}
           >
