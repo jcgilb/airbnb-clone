@@ -11,8 +11,10 @@ const LandingPage = () => {
 
   const experiences = useSelector((state) => state.experiences.experiences);
   const [expArr, setExpArr] = useState(Object.values(experiences));
-  const lastTen = expArr.slice(expArr?.length - 10, expArr.length);
-
+  const reversed = expArr?.reverse();
+  const lastTen = reversed.slice(0, 10);
+  console.log(reversed, "reversed");
+  console.log(lastTen, "lastTen");
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("/api/experiences");
