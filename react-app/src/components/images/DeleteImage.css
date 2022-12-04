@@ -10,6 +10,7 @@
   opacity: 1;
   color: rgb(255, 22, 84);
   cursor: pointer;
+  text-shadow: 1px 1px #ffffff;
 }
 .confirm-delete {
   position: absolute;

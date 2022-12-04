@@ -47,7 +47,7 @@ const NewExperience = () => {
     setValidationErrors(errors);
     if (!title) errors.push("A title is required.");
     if (!city) errors.push("A city is required.");
-    if (!cost) errors.push("A price is required.");
+    if (!cost || cost <= 0) errors.push("A price is required.");
     if (isNaN(cost)) errors.push("Enter a valid price.");
     if (!country) errors.push("A country is required.");
     if (!address) errors.push("An address is required.");

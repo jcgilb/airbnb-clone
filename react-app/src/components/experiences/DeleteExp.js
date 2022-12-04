@@ -5,6 +5,7 @@ import {
   deleteExperience,
   getAllExperiences,
 } from "../../store/experiences.js";
+import "./DeleteExp.css";
 
 const DeleteExperience = () => {
   const dispatch = useDispatch();
@@ -48,10 +49,14 @@ const DeleteExperience = () => {
   return (
     <>
       <i
-        class="fa-regular fa-trash-can"
+        className="exp-trash fa-regular fa-trash-can"
         onClick={() => setShowDelete(true)}
       ></i>
-      {showDelete && <div onClick={handleClick}>Delete this experience</div>}
+      {showDelete && (
+        <div className="confirm-delete-exp" onClick={handleClick}>
+          Delete this experience
+        </div>
+      )}
     </>
   );
 };

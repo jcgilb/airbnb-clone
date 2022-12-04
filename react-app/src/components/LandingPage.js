@@ -11,7 +11,7 @@ const LandingPage = () => {
 
   const experiences = useSelector((state) => state.experiences.experiences);
   const [expArr, setExpArr] = useState(Object.values(experiences));
-  // const lastThree = expArr.slice(expArr.length - 3, expArr.length);
+  const lastTen = expArr.slice(expArr?.length - 10, expArr.length);
 
   useEffect(() => {
     async function fetchData() {
@@ -71,7 +71,7 @@ const LandingPage = () => {
   const updatePos = (newPos) => {
     if (newPos < 0) {
       newPos = 0;
-    } else if (newPos >= expArr.length) {
+    } else if (newPos === expArr.length) {
       newPos = expArr.length - 1;
     }
 
@@ -83,6 +83,7 @@ const LandingPage = () => {
     // TODO: get total num reviews
   };
 
+  console.log(pos);
   return (
     <div className="container">
       <br />
@@ -93,17 +94,18 @@ const LandingPage = () => {
             Unforgettable activities hosted by locals
           </div>
           <div className="exp-carousel">
+            {pos === 0 && <div className="nondescript-div"></div>}
             {pos > 0 && (
               <i
                 className="fa-solid fa-chevron-left"
-                onClick={() => updatePos(pos - 0.5)}
+                onClick={() => updatePos(pos - 515 / 1257)}
               ></i>
             )}
             <div
               style={{ transform: `translateX(-${pos * 100}%)` }}
               className="flex-row"
             >
-              {expArr.map((exp) => (
+              {lastTen?.map((exp) => (
                 <div className="splash-exp-card">
                   <div key={"image"} onClick={() => getExpDetails(exp.id)}>
                     {getFirstImage(exp)}
@@ -126,12 +128,13 @@ const LandingPage = () => {
                 </div>
               ))}
             </div>
-            {pos < expArr?.length - 5 && (
+            {pos < 2.86 && (
               <i
                 className="fa-solid fa-chevron-right"
-                onClick={() => updatePos(pos + 0.5)}
+                onClick={() => updatePos(pos + 515 / 1257)}
               ></i>
             )}
+            {pos >= 2.86 && <div className="nondescript-div"></div>}
           </div>
         </div>
       </div>

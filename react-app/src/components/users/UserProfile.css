@@ -59,6 +59,10 @@
   overflow-wrap: break-word;
 }
 
+.delete-bkg-profile:hover {
+  /* text-shadow: 1px 1px #0000004c; */
+}
+
 .exp-list-profile {
   display: flex;
   flex-direction: column;

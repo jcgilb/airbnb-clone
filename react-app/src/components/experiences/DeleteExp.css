@@ -1,0 +1,14 @@
+.exp-trash {
+  position: relative;
+  right: 0;
+}
+
+.confirm-delete-exp {
+  position: absolute;
+  right: 660px;
+}
+
+.confirm-delete-exp:hover {
+  text-shadow: 1px 1px #0000004c;
+  cursor: pointer;
+}

@@ -147,6 +147,11 @@
   position: absolute;
 }
 
+.fa-plus:hover {
+  text-shadow: 1px 1px #35460055;
+  cursor: pointer;
+}
+
 .details-dates {
   display: flex;
   flex-direction: row;
@@ -247,7 +252,6 @@
 }
 
 .edit-exp-details {
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -258,6 +262,11 @@
   line-height: 1.43;
   margin-bottom: 35px;
   margin-right: 35px;
+}
+
+.edit-exp-details:hover {
+  text-shadow: 1px 1px #0000004c;
+  cursor: pointer;
 }
 
 hr {
