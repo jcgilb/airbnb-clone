@@ -30,7 +30,4 @@ Descriptions of the "Experiences" and "Bookings" features as they are perceived 
 
 A visual representation of the application's basic architechure. 
 
-***
-[REDUX STORE SHAPE][link here]
 
-Pseudo code that illustrates the state of the Redux store for experiences and reviews. 
