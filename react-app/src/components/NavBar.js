@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import LoginFormModal from "./auth/LoginFormModal";
 import SignupFormModal from "./auth/SignupFormModal";
-import UserProfile from "./users/UserProfile";
 import { getAllExperiences } from "../store/experiences";
 import "../index.css";
 
@@ -17,9 +16,7 @@ const NavBar = ({ loaded }) => {
 
   useEffect(() => {
     dispatch(getAllExperiences());
-  }, []);
-
-  const experiences = useSelector((state) => state.experiences.experiences);
+  }, [dispatch]);
 
   // open menu onClick event
   const openMenu = () => {
@@ -41,16 +38,9 @@ const NavBar = ({ loaded }) => {
   if (user) {
     sessionLinks = (
       <div className="session-links">
-        {/* <LogoutButton /> */}
         <div onClick={() => history.push("/experiences")} className="explore">
           Explore
         </div>
-        {/* <div
-          onClick={() => history.push("/experiences/new")}
-          className="create-exp"
-        >
-          Host an experience
-        </div> */}
         <div className="session">
           <div onClick={openMenu} className="hamburger">
             <hr className="bars" />

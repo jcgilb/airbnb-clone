@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDeferredValue } from "react";
 import DateTimePicker from "react-datetime-picker";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserExperiences, getOneExperience } from "../../store/experiences";
 
-import { getAllSlots, createOneSlot } from "../../store/timeSlots";
+import { createOneSlot } from "../../store/timeSlots";
 import "./ExpTimeSlots.css";
 
 const ExpTimeSlots = () => {
@@ -15,7 +14,6 @@ const ExpTimeSlots = () => {
   const [expId, setExpId] = useState(null);
   const [timeSlot, setTimeSlot] = useState();
   const [now, setNow] = useState(new Date());
-  const [end, setEnd] = useState(new Date());
   const [expSelect, setExpSelect] = useState();
   const [start, setStart] = useState(new Date());
   const [duration, setDuration] = useState();

@@ -1,16 +1,14 @@
 import React from "react";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
-import { GoogleMap, LoadScript, useJsApiLoader } from "@react-google-maps/api";
-import DatePicker from "react-datepicker";
+import { useHistory, useParams } from "react-router-dom";
 import {
   updateOneExperience,
   getOneExperience,
 } from "../../store/experiences.js";
-import "./ExpDetails.css";
 import DeleteExperience from "./DeleteExp.js";
 import ExpImages from "../images/ExpImage.js";
+import "./ExpDetails.css";
 import "./NewExp.css";
 
 const UpdateExp = () => {
@@ -18,10 +16,6 @@ const UpdateExp = () => {
   const history = useHistory();
   let { expId } = useParams();
   expId = parseInt(expId);
-
-  // useEffect(() => {
-  //   dispatch(getOneExperience(expId));
-  // }, [dispatch]);
 
   const experiences = useSelector((state) => state.experiences.experiences);
   const experience = Object.values(experiences).find((exp) => exp.id === expId);
@@ -37,11 +31,9 @@ const UpdateExp = () => {
   const [address, setAddress] = useState(experience?.address);
   const [country, setCountry] = useState(experience?.country);
   const [validationErrors, setValidationErrors] = useState([]);
-  const [estDuration, setEstDuration] = useState(experience?.est_duration);
   const [description, setDescription] = useState(experience?.description);
 
   const user = useSelector((state) => state.session.user);
-  console.log(experience?.est_duration);
 
   useEffect(() => {
     if (experience?.est_duration === 120) setDurationSelect(presetHours[0]);
@@ -86,7 +78,6 @@ const UpdateExp = () => {
     setExpState();
     setAddress("");
     setCountry("");
-    setEstDuration();
     setDescription("");
   };
 

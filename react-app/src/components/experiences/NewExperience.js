@@ -1,17 +1,12 @@
 import React from "react";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
-import { GoogleMap, LoadScript, useJsApiLoader } from "@react-google-maps/api";
-import DatePicker from "react-datepicker";
+import { useHistory } from "react-router-dom";
 import {
   createOneExperience,
   getAllExperiences,
-  getOneExperience,
 } from "../../store/experiences.js";
 import "./NewExp.css";
-import AvailableTimes from "../timeSlots/AvailableTimes.js";
-import ExpImages from "../images/ExpImage.js";
 
 const NewExperience = () => {
   // getters and setters for the form
@@ -24,8 +19,6 @@ const NewExperience = () => {
   const [address, setAddress] = useState("");
   const [country, setCountry] = useState("");
   const presetHours = ["<2", "2-5", "All day"];
-  const [hoursSelect, setHoursSelect] = useState([]);
-  const [estDuration, setEstDuration] = useState("");
   const [description, setDescription] = useState("");
   const [durationSelect, setDurationSelect] = useState();
   const [validationErrors, setValidationErrors] = useState([]);
@@ -77,7 +70,6 @@ const NewExperience = () => {
     setCountry("");
     setAddress("");
     setExpState("");
-    setEstDuration();
     setDescription("");
   };
 

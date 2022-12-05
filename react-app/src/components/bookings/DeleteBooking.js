@@ -1,24 +1,12 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
-import {
-  deleteBooking,
-  getAllBookings,
-  getUserBookings,
-} from "../../store/bookings.js";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { deleteBooking, getUserBookings } from "../../store/bookings.js";
 
 const DeleteBooking = ({ bkgId, user, userId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [showDelete, setShowDelete] = useState(false);
-
-  const bookings = useSelector((state) => state.bookings.userBookings);
-
-  // open menu onClick event
-  const openMenu = () => {
-    if (showDelete) return;
-    setShowDelete(true);
-  };
 
   // close the menu if a user clicks anywhere outside of it
   useEffect(() => {

@@ -1,12 +1,11 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getOneExperience } from "../../store/experiences.js";
-import "./ExpDetails.css";
 import AvailableTimes from "../timeSlots/AvailableTimes.js";
 import DeleteExpImg from "../images/DeleteExpImage.js";
 import AllImages from "../images/AllImages.js";
+import "./ExpDetails.css";
 
 const ExperienceDetails = () => {
   const dispatch = useDispatch();

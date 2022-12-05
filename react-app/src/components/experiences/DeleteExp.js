@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import {
   deleteExperience,
@@ -16,18 +16,10 @@ const DeleteExperience = () => {
   let { expId } = useParams();
   expId = parseInt(expId);
 
-  const experiences = useSelector((state) => state.experiences.experiences);
-
   // get experiences
   useEffect(() => {
     dispatch(getAllExperiences());
   }, [dispatch]);
-
-  // open menu onClick event
-  const openMenu = () => {
-    if (showDelete) return;
-    setShowDelete(true);
-  };
 
   // close the menu if a user clicks anywhere outside of it
   useEffect(() => {

@@ -104,7 +104,6 @@ const AvailableTimes = () => {
       start = "12AM";
       end = String(parseInt(exp.est_duration / 60)).concat("AM");
     }
-    console.log(start, end, "start, end");
 
     return (
       <div className="available-date">
