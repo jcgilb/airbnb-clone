@@ -245,6 +245,15 @@
   overflow-wrap: break-word;
   width: 100%;
 }
+.edit-exp-details {
+  border: 1px solid rgb(221, 237, 170);
+  height: 24px;
+  border-radius: 10px;
+  padding: 4px;
+}
+.edit-exp-details:hover {
+  box-shadow: 1px 1px #0000004c;
+}
 
 .details-dates {
   width: 100%;
