@@ -1,0 +1,34 @@
+div.not-found {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+div.not-found-title {
+  position: relative;
+  z-index: 2;
+  top: -300px;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+div.not-found-page {
+  height: 500px;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(250, 170, 251, 0.466);
+  width: 100%;
+  z-index: 0;
+}
+
+img.not-found {
+  height: 500px;
+  position: relative;
+  z-index: 1;
+}

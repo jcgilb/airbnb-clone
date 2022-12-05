@@ -91,6 +91,7 @@ const LandingPage = () => {
   //   // TODO: get total num reviews
   // };
 
+  console.log(pos);
   return (
     <div className="container">
       <br />
@@ -135,13 +136,13 @@ const LandingPage = () => {
                 </div>
               ))}
             </div>
-            {pos < 2.86 && (
+            {pos < 3.27 && (
               <i
                 className="fa-solid fa-chevron-right"
                 onClick={() => updatePos(pos + 515 / 1257)}
               ></i>
             )}
-            {pos >= 2.86 && <div className="nondescript-div"></div>}
+            {pos >= 3.27 && <div className="nondescript-div"></div>}
           </div>
         </div>
       </div>
