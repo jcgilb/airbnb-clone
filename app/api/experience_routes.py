@@ -313,7 +313,6 @@ def create_one_bkg(exp_id):
             user_id=data['user_id'],
             time_slot_id=data['time_slot_id']
         )
-        print(new_booking.time_slot_id, "new booking time slot id*************")
 
         bookings = exp.bookings
         time_slots = exp.time_slots

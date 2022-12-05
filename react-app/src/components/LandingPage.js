@@ -9,13 +9,15 @@ const LandingPage = () => {
   const history = useHistory();
   const [pos, setPos] = useState(0);
 
-  const experiences = useSelector((state) => state.experiences.experiences);
-  const [expArr, setExpArr] = useState(Object.values(experiences));
-  const [reversed, setReversed] = useState();
-
   useEffect(() => {
     dispatch(getAllExperiences());
   }, [dispatch]);
+
+  const experiences = useSelector((state) => state.experiences.experiences);
+
+  let expArrCopy = Object.values(experiences);
+  const [expArr, setExpArr] = useState(Object.values(experiences));
+  const [reversed, setReversed] = useState(expArrCopy.reverse());
 
   useEffect(() => {
     async function fetchData() {
