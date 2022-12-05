@@ -1,9 +1,9 @@
-![localEXP-logo-small](https://user-images.githubusercontent.com/106204127/205101178-a283c7d8-47ad-4d61-897d-5665508fcd9f.jpg)
+![splash-page-localXP](https://user-images.githubusercontent.com/106204127/205547760-c25afd6d-41c7-4caf-90a1-d1ba48bbadff.jpg)
 
 ***
 ### An Airbnb clone for booking and hosting unique experiences.
 
-LocalEXP is a full stack application that is inspired by Airbnb. Instead of booking spots, it can be used to book and host experiences. Visit the [live link] to explore the website and find new ways to experience any city, from your hometown to a vacation destination.
+LocalXP is a full stack application that is inspired by Airbnb. Instead of booking spots, it can be used to book and host experiences. Visit the [live link](https://localxp.herokuapp.com/) to explore the website and find new ways to experience any city, from your hometown to a vacation destination.
 
 ***
 [API DOCUMENTATION](https://github.com/jcgilb/Capstone-project/wiki/API-Documentation)
@@ -29,8 +29,3 @@ Descriptions of the "Experiences" and "Bookings" features as they are perceived 
 [WIREFRAMES](https://github.com/jcgilb/Capstone-project/wiki/Wireframes)
 
 A visual representation of the application's basic architechure. 
-
-***
-[REDUX STORE SHAPE][link here]
-
-Pseudo code that illustrates the state of the Redux store for experiences and reviews. 
