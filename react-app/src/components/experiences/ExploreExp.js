@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
-import { getAllExperiences } from "../../store/experiences.js";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "./ExploreExp.css";
 
 const ExploreExperiences = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const experiences = useSelector((state) => state.experiences.experiences);
   const [expArr, setExpArr] = useState(Object.values(experiences));

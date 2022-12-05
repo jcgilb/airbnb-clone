@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { createOneBooking } from "../../store/bookings";
 import "./BookingForm.css";
 
@@ -11,7 +10,6 @@ function BookingForm({ exp, expId, slot }) {
 
   // get the user and the experience
   const user = useSelector((state) => state.session.user);
-  const bookings = exp["bookings"];
 
   const bookTimeSlot = async (e, slot) => {
     e.preventDefault();
@@ -36,7 +34,6 @@ function BookingForm({ exp, expId, slot }) {
   let year = dateStart.slice(11, 15);
   let start = dateStart.slice(16, 18);
   let monthDay = dateStart.slice(4, 10);
-  const minutes = dateStart.slice(22, 24);
 
   start = parseInt(start);
   end = start + parseInt(exp.est_duration / 60);

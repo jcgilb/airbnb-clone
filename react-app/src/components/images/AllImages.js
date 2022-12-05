@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
-import { getOneExperience } from "../../store/experiences";
-import { Modal } from "../../context/Modal";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import DeleteExpImg from "./DeleteExpImage";
-import { deleteExpImage } from "../../store/images.js";
-
 import "./AllImages.css";
 import "./DeleteImage.css";
 
 const AllImages = ({ exp }) => {
-  const history = useHistory();
-  let { expId } = useParams();
-  const dispatch = useDispatch();
   const [showAll, setShowAll] = useState(false);
   const [chevDown, setChevDown] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
 
   // get the user and the experience
   const user = useSelector((state) => state.session.user);
-  // const exp = useSelector((state) => state.experiences.oneExperience);
   const images = exp["images"];
-  console.log(images);
 
   return (
     <div>

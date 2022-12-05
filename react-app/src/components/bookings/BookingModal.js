@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
 import { Modal } from "../../context/Modal";
 import BookingForm from "./BookingForm";
 
 function BookingFormModal() {
   const [showModal, setShowModal] = useState(false);
-  const { expId } = useParams();
 
   const myStyles = {
     background: "none",

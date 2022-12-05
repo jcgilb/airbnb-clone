@@ -1,8 +1,8 @@
 import React from "react";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
-import { getAllBookings, getUserBookings } from "../../store/bookings";
+import { useHistory, useParams } from "react-router-dom";
+import { getUserBookings } from "../../store/bookings";
 import { getAllExperiences, getUserExperiences } from "../../store/experiences";
 import DeleteBooking from "../bookings/DeleteBooking";
 import "./UserProfile.css";

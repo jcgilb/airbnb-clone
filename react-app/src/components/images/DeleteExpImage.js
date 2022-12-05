@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getOneExperience } from "../../store/experiences.js";
 import { deleteExpImage } from "../../store/images.js";
-import User from "../User.js";
 import "./DeleteImage.css";
 
 const DeleteExpImg = ({ imgId }) => {
@@ -15,12 +14,6 @@ const DeleteExpImg = ({ imgId }) => {
   let { expId } = useParams();
   expId = parseInt(expId);
   imgId = parseInt(imgId);
-
-  // open menu onClick event
-  const openMenu = () => {
-    if (showDelete) return;
-    setShowDelete(true);
-  };
 
   // close the menu if a user clicks anywhere outside of it
   useEffect(() => {
