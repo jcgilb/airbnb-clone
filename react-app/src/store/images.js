@@ -1,7 +1,5 @@
 // constants
 const REMOVE = "images/REMOVE";
-const GET_ALL = "images/GET_ALL";
-const GET_ONE = "images/GET_ONE";
 const ADD_UPDATE = "images/ADD_UPDATE";
 
 const addOrUpdate = (image) => {

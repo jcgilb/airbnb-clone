@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllExperiences());
-  }, [loaded]);
+  }, [loaded, dispatch]);
 
   const experiences = useSelector((state) => state.experiences.experiences);
   const expArr = Object.values(experiences);

@@ -1,7 +1,7 @@
 // constants
 const REMOVE = "slots/REMOVE";
 const GET_ALL = "slots/GET_ALL";
-const GET_ONE = "slots/GET_ONE";
+// const GET_ONE = "slots/GET_ONE";
 const ADD_UPDATE = "slots/ADD_UPDATE";
 
 const getAll = (slots) => ({
@@ -9,12 +9,12 @@ const getAll = (slots) => ({
   slots,
 });
 
-const getOne = (slot) => {
-  return {
-    type: GET_ONE,
-    slot,
-  };
-};
+// const getOne = (slot) => {
+//   return {
+//     type: GET_ONE,
+//     slot,
+//   };
+// };
 
 const addOrUpdate = (slot) => {
   return {
@@ -37,16 +37,6 @@ export const getAllSlots = (expId) => async (dispatch) => {
   }
   return response;
 };
-
-// // get one booking
-// export const getOneBooking = (bkgId) => async (dispatch) => {
-//   const response = await fetch(`/api/bookings/${bkgId}`);
-//   if (response.ok) {
-//     const data = await response.json();
-//     dispatch(getOne(data));
-//   }
-//   return response;
-// };
 
 // create a time slot
 export const createOneSlot = (expId, newTimeSlot) => async (dispatch) => {

@@ -1,11 +1,7 @@
-import React from "react";
-import { useEffect, useState, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
-import {
-  getAllExperiences,
-  getOneExperience,
-} from "../../store/experiences.js";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { getOneExperience } from "../../store/experiences.js";
 import { ceateExpImage } from "../../store/images.js";
 import "../experiences/NewExp.css";
 
