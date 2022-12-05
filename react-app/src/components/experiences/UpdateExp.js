@@ -61,6 +61,15 @@ const UpdateExp = () => {
     if (!country) errors.push("A country is required.");
     if (!address) errors.push("An address is required.");
     if (!description) errors.push("A description is required.");
+    if (title && title.length > 250)
+      errors.push("Title exceeds maximum length.");
+    if (city && city.length > 100) errors.push("City exceeds maximum length.");
+    if (address && address.length > 100)
+      errors.push("Address exceeds maximum length.");
+    if (country && country.length > 100)
+      errors.push("Country exceeds maximum length.");
+    if (description && description.length > 1000)
+      errors.push("Description exceeds maximum length.");
     // if (isNaN(lat) || isNaN(lng))
     //   errors.push("Latitude and Longitude must be numbers.");
 

@@ -18,33 +18,11 @@ const AllImages = ({ exp }) => {
   const [showModal, setShowModal] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
-  const openMenu = () => {
-    if (showDelete) return;
-    setShowDelete(true);
-  };
-
-  // close the menu if a user clicks anywhere outside of it
-  useEffect(() => {
-    if (!showDelete) return;
-    const closeDelete = () => {
-      setShowDelete(false);
-    };
-    document.addEventListener("click", closeDelete);
-    return () => document.removeEventListener("click", closeDelete);
-  }, [showDelete]);
-
   // get the user and the experience
   const user = useSelector((state) => state.session.user);
   // const exp = useSelector((state) => state.experiences.oneExperience);
   const images = exp["images"];
   console.log(images);
-
-  const handleClick = async (e, img) => {
-    e.preventDefault();
-    await dispatch(deleteExpImage(expId, img.id));
-    dispatch(getOneExperience(expId));
-    return history.push(`/experiences/${expId}`);
-  };
 
   return (
     <div>

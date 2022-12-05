@@ -17,6 +17,7 @@ import UpdateExp from "./components/experiences/UpdateExp";
 import { getAllExperiences } from "./store/experiences";
 import DeleteExperience from "./components/experiences/DeleteExp";
 import LandingPage from "./components/LandingPage";
+import NotFoundPage from "./components/NotFoundPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -77,6 +78,9 @@ function App() {
         </Route>
         <Route path="/" exact={true}>
           <LandingPage />
+        </Route>
+        <Route path="">
+          <NotFoundPage />
         </Route>
       </Switch>
       <footer>
