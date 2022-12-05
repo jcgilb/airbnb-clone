@@ -138,9 +138,14 @@ hr.navbar {
 
 .create-exp {
   cursor: pointer;
+  border: 1px solid rgb(221, 237, 170);
+  height: 24px;
+  border-radius: 10px;
+  padding: 4px;
 }
 .create-exp:hover {
   text-shadow: 1px 1px #0000004c;
+  box-shadow: 1px 1px #0000004c;
 }
 
 .hamburger {
@@ -159,11 +164,16 @@ hr.navbar {
   display: flex;
   flex-direction: row;
   cursor: pointer;
+  border: 1px solid rgb(221, 237, 170);
+  height: 24px;
+  border-radius: 10px;
+  padding: 4px;
 }
 
 .explore:hover {
   text-shadow: 1px 1px #0000004c;
   cursor: pointer;
+  box-shadow: 1px 1px #0000004c;
   /* font-weight: 600; */
 }
 

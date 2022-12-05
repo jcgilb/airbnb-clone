@@ -1,12 +1,16 @@
 .confirm-delete-slot {
   cursor: pointer;
-  padding: 4px;
   width: 100%;
-  margin-bottom: 0px;
+  margin-top: 4px;
   padding-bottom: 0px;
+  border: 1px solid rgb(221, 237, 170);
+  height: 24px;
+  border-radius: 10px;
+  padding: 4px;
 }
 .confirm-delete-slot:hover {
   text-shadow: 1px 1px #0000004c;
+  box-shadow: 1px 1px #0000004c;
 }
 .slot-trash {
   cursor: pointer;

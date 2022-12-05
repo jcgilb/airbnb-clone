@@ -35,6 +35,23 @@
   cursor: pointer;
 }
 
+.login-button:hover {
+  /* text-shadow: 1px 1px #0000004c; */
+  box-shadow: 1px 1px #0000004c;
+  cursor: pointer;
+}
+.login-logout:hover {
+  /* text-shadow: 1px 1px #0000004c; */
+  box-shadow: 1px 1px #0000004c;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+  /* text-shadow: 1px 1px #0000004c; */
+  box-shadow: 1px 1px #0000004c;
+  cursor: pointer;
+}
+
 .signup-button {
   display: flex;
   flex-direction: row;
