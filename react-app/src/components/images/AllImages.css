@@ -1,0 +1,35 @@
+.flex-row-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  grid-row-gap: 30px;
+}
+
+.exp-img-card {
+  display: flex;
+  flex-direction: column;
+  width: 210px;
+  height: 250px;
+  margin-right: 10px;
+  grid-column-gap: 30px;
+  object-fit: cover;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+img.img-card {
+  display: flex;
+  flex-direction: column;
+  width: 210px;
+  height: 250px;
+  border-radius: 20px;
+  object-fit: cover;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.delete-images {
+  position: absolute;
+  width: 140px;
+}

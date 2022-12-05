@@ -6,6 +6,7 @@ import { getOneExperience } from "../../store/experiences.js";
 import "./ExpDetails.css";
 import AvailableTimes from "../timeSlots/AvailableTimes.js";
 import DeleteExpImg from "../images/DeleteExpImage.js";
+import AllImages from "../images/AllImages.js";
 
 const ExperienceDetails = () => {
   const dispatch = useDispatch();
@@ -218,6 +219,9 @@ const ExperienceDetails = () => {
             ></i>
           )}
         </div>
+      </div>
+      <div>
+        <AllImages exp={exp} />
       </div>
       <div className="details">
         <div>Experience hosted by {exp["exp_host"]?.first_name}</div>
