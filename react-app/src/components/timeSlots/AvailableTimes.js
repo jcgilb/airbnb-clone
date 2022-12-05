@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getOneExperience } from "../../store/experiences";
-import BookingFormModal from "../bookings/BookingModal";
 import { getAllSlots } from "../../store/timeSlots";
 import BookingForm from "../bookings/BookingForm";
-import { bindActionCreators } from "redux";
 import { Modal } from "../../context/Modal";
-import "../experiences/ExpDetails.css";
 import DeleteTimeSlot from "./DeleteTimeSlots";
+import "../experiences/ExpDetails.css";
 
 const AvailableTimes = () => {
   const history = useHistory();
@@ -76,7 +74,6 @@ const AvailableTimes = () => {
     let year = dateStart.slice(11, 15);
     let start = dateStart.slice(16, 18);
     let monthDay = dateStart.slice(4, 10);
-    const minutes = dateStart.slice(22, 24);
 
     start = parseInt(start);
     end = start + parseInt(exp.est_duration / 60);

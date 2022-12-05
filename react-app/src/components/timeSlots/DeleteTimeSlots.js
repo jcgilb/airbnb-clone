@@ -20,12 +20,6 @@ const DeleteTimeSlot = ({ slotId }) => {
     };
   }, [dispatch]);
 
-  // open menu onClick event
-  const openMenu = () => {
-    if (showDelete) return;
-    setShowDelete(true);
-  };
-
   // close the menu if a user clicks anywhere outside of it
   useEffect(() => {
     if (!showDelete) return;

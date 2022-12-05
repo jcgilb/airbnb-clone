@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DateTimePicker from "react-datetime-picker";
-import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getUserExperiences, getOneExperience } from "../../store/experiences";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getUserExperiences } from "../../store/experiences";
 import { createOneSlot } from "../../store/timeSlots";
 import "./ExpTimeSlots.css";
 
@@ -55,7 +54,7 @@ const ExpTimeSlots = () => {
     if (!expSelect) err.push("Select an experience.");
 
     setErrors(err);
-  }, [timeSlot, expSelect, start]);
+  }, [timeSlot, expSelect, start, now]);
 
   // send the information to the database
   const handleSubmit = async (e) => {

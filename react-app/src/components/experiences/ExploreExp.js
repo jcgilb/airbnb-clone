@@ -43,10 +43,10 @@ const ExploreExperiences = () => {
     history.push(`/experiences/${id}`);
   };
 
-  const getAvgStars = (exp) => {
-    // TODO: get avg star rating
-    // TODO: get total num reviews
-  };
+  // const getAvgStars = (exp) => {
+  //   // TODO: get avg star rating
+  //   // TODO: get total num reviews
+  // };
 
   return (
     <div className="container">
