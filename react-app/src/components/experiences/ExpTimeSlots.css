@@ -25,3 +25,7 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+.date-picker-container {
+  height: 100vh;
+}
