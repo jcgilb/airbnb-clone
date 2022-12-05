@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
+  const [validationErrors, setValidationErrors] = useState([]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -14,8 +15,17 @@ const SignUpForm = () => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
+  // form validations
+  useEffect(() => {
+    const errors = [];
+    setValidationErrors(errors);
+    if (password !== repeatPassword) errors.push("Passwords do not match.");
+    setValidationErrors(errors);
+  }, [password, repeatPassword]);
+
   const onSignUp = async (e) => {
     e.preventDefault();
+    setErrors([]);
     if (password === repeatPassword) {
       const data = await dispatch(
         signUp(username, firstName, lastName, email, password)
@@ -57,6 +67,9 @@ const SignUpForm = () => {
       <form className="modal-form" onSubmit={onSignUp}>
         <div>
           {errors.map((error, ind) => (
+            <div key={ind}>{error}</div>
+          ))}
+          {validationErrors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
         </div>
