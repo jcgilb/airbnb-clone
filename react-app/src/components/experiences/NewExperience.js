@@ -63,7 +63,6 @@ const NewExperience = () => {
       errors.push("Description exceeds maximum length.");
     // if (isNaN(lat) || isNaN(lng))
     //   errors.push("Latitude and Longitude must be numbers.");
-
     setValidationErrors(errors);
   }, [title, description, cost, address, city, country]);
 
@@ -91,7 +90,7 @@ const NewExperience = () => {
       payload = {
         city: city,
         name: title,
-        price: parseFloat(cost),
+        price: parseFloat(cost).toFixed(2),
         country: country,
         address: address,
         host_id: user.id,
@@ -106,7 +105,7 @@ const NewExperience = () => {
       payload = {
         city: city,
         name: title,
-        price: parseFloat(cost),
+        price: parseFloat(cost).toFixed(2),
         country: country,
         address: address,
         host_id: user.id,
@@ -121,7 +120,7 @@ const NewExperience = () => {
       payload = {
         city: city,
         name: title,
-        price: parseFloat(cost),
+        price: parseFloat(cost).toFixed(2),
         est_duration: 480,
         address: address,
         country: country,

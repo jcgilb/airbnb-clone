@@ -50,7 +50,6 @@ const UpdateExp = () => {
   }, []);
 
   // form validations
-  // form validations
   useEffect(() => {
     const errors = [];
     setValidationErrors(errors);
@@ -100,7 +99,7 @@ const UpdateExp = () => {
       payload = {
         city: city,
         name: title,
-        price: cost,
+        price: parseFloat(cost).toFixed(2),
         country: country,
         address: address,
         host_id: user.id,
@@ -115,7 +114,7 @@ const UpdateExp = () => {
       payload = {
         city: city,
         name: title,
-        price: cost,
+        price: parseFloat(cost).toFixed(2),
         country: country,
         address: address,
         host_id: user.id,
@@ -130,7 +129,7 @@ const UpdateExp = () => {
       payload = {
         city: city,
         name: title,
-        price: cost,
+        price: parseFloat(cost).toFixed(2),
         est_duration: 480,
         country: country,
         address: address,
