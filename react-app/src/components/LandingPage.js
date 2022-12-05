@@ -11,16 +11,19 @@ const LandingPage = () => {
 
   const experiences = useSelector((state) => state.experiences.experiences);
   const [expArr, setExpArr] = useState(Object.values(experiences));
-  let reversed = Object.values(experiences).reverse();
-  let lastTen = reversed.slice(0, 10);
-  console.log(reversed, "reversed");
-  console.log(lastTen, "lastTen");
+  const [reversed, setReversed] = useState();
+
+  useEffect(() => {
+    dispatch(getAllExperiences());
+  }, [dispatch]);
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("/api/experiences");
       const responseData = await response.json();
       setExpArr(responseData);
+      let expArrayCopy = [...responseData];
+      setReversed(expArrayCopy.reverse());
     }
     fetchData();
   }, []);
@@ -108,7 +111,7 @@ const LandingPage = () => {
               style={{ transform: `translateX(-${pos * 100}%)` }}
               className="flex-row"
             >
-              {lastTen?.map((exp) => (
+              {reversed?.slice(0, 10).map((exp) => (
                 <div className="splash-exp-card">
                   <div key={"image"} onClick={() => getExpDetails(exp.id)}>
                     {getFirstImage(exp)}

@@ -94,7 +94,7 @@ const UserProfile = () => {
           )}
 
           <div className="inner-container">
-            <div className="list">
+            <div className="list-exp">
               <div className="title">All Experiences:</div>
 
               {expArray.map((exp) => (
@@ -116,7 +116,7 @@ const UserProfile = () => {
               ))}
             </div>
             <br />
-            <div className="list">
+            <div className="list-bkg">
               <div className="title">All Bookings:</div>
               {bkgArray.map((bkg) => (
                 <div className="delete-bkg-profile">
