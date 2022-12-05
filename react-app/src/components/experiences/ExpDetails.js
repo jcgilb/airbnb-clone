@@ -232,7 +232,7 @@ const ExperienceDetails = () => {
       </div>
 
       <div className="details-duration">
-        {exp?.est_duration === 60
+        {exp?.est_duration === 480
           ? "All day"
           : `${exp?.est_duration / 60} hours`}
       </div>
