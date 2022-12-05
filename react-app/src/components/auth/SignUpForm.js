@@ -20,8 +20,10 @@ const SignUpForm = () => {
     const errors = [];
     setValidationErrors(errors);
     if (password !== repeatPassword) errors.push("Passwords do not match.");
+    if (username.length < 4 || username.length > 20)
+      errors.push("Username must be 4-20 characters.");
     setValidationErrors(errors);
-  }, [password, repeatPassword]);
+  }, [password, repeatPassword, username]);
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -137,7 +139,11 @@ const SignUpForm = () => {
             required={true}
           ></input>
         </div>
-        <button className="login-logout" type="submit">
+        <button
+          disabled={!!validationErrors.length}
+          className="login-logout"
+          type="submit"
+        >
           Sign Up
         </button>
       </form>

@@ -29,6 +29,15 @@
   border: none;
 }
 
+.book-exp:hover {
+  box-shadow: 1px 1px #0000004c;
+  cursor: pointer;
+}
+.book-exp-confirm:hover {
+  box-shadow: 1px 1px #0000004c;
+  cursor: pointer;
+}
+
 .book-exp-confirm {
   display: flex;
   flex-direction: row;

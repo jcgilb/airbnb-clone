@@ -26,6 +26,11 @@
   padding: 2px;
 }
 
+.confirm-delete:hover {
+  box-shadow: 1px 1px #0000004c;
+  cursor: pointer;
+}
+
 .pic-1,
 .pic2,
 .pic3,
