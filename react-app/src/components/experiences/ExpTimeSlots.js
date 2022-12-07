@@ -71,52 +71,54 @@ const ExpTimeSlots = () => {
   };
 
   return (
-    <div className="container-inner">
-      <br></br>
-      <br></br>
-      <div className="exp-details">
-        Select a date and time to host your experience
-      </div>
-      <br></br>
-      <br></br>
-      <div className="form-container">
-        <form className=".exp-form" onSubmit={handleSubmit}>
-          <select
-            className="exp-duration"
-            onChange={updateExp}
-            value={expSelect}
-            placeholder="Select an experience"
-          >
-            <option value="" disabled selected>
-              Select an experience...
-            </option>
-            {userExperiences.map((exp) => (
-              <option key={exp.name}>{exp.name}</option>
-            ))}
-          </select>
-          <div className="exp-date-time">
-            <DateTimePicker
-              className="exp-date-time"
-              onChange={(datetime) => setTimeSlot(datetime)}
-              value={timeSlot}
-            />
-          </div>
-          <ul className="errors">
-            {errors?.length > 0 &&
-              errors.map((err) => (
-                <div id="err" key={err}>
-                  {err}
-                </div>
+    <div className="date-picker-container">
+      <div className="container-inner">
+        <br></br>
+        <br></br>
+        <div className="exp-details">
+          Select a date and time to host your experience
+        </div>
+        <br></br>
+        <br></br>
+        <div className="form-container">
+          <form className=".exp-form" onSubmit={handleSubmit}>
+            <select
+              className="exp-duration"
+              onChange={updateExp}
+              value={expSelect}
+              placeholder="Select an experience"
+            >
+              <option value="" disabled selected>
+                Select an experience...
+              </option>
+              {userExperiences.map((exp) => (
+                <option key={exp.name}>{exp.name}</option>
               ))}
-          </ul>
-          <button
-            className="exp-host-availability"
-            type="submit"
-            disabled={!!errors?.length}
-          >
-            Submit availability
-          </button>
-        </form>
+            </select>
+            <div className="exp-date-time">
+              <DateTimePicker
+                className="exp-date-time"
+                onChange={(datetime) => setTimeSlot(datetime)}
+                value={timeSlot}
+              />
+            </div>
+            <ul className="errors">
+              {errors?.length > 0 &&
+                errors.map((err) => (
+                  <div id="err" key={err}>
+                    {err}
+                  </div>
+                ))}
+            </ul>
+            <button
+              className="exp-host-availability"
+              type="submit"
+              disabled={!!errors?.length}
+            >
+              Submit availability
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
