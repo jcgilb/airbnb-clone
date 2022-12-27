@@ -6,6 +6,7 @@ import LoginFormModal from "./auth/LoginFormModal";
 import SignupFormModal from "./auth/SignupFormModal";
 import { getAllExperiences } from "../store/experiences";
 import "../index.css";
+import Search from "./search/Search";
 
 const NavBar = ({ loaded }) => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -79,6 +80,9 @@ const NavBar = ({ loaded }) => {
               alt="logo"
               src="../../assets/localXP-logo.jpg"
             />
+          </div>
+          <div className="searchbar">
+            <Search />
           </div>
           <div className="profile-dropdown">
             {sessionLinks}

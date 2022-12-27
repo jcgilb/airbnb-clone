@@ -56,7 +56,7 @@ export const getUserExperiences = (userId) => async (dispatch) => {
   return response;
 };
 
-// get one experiences
+// get one experience
 export const getOneExperience = (expId) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}`);
   if (response.ok) {
@@ -66,7 +66,7 @@ export const getOneExperience = (expId) => async (dispatch) => {
   return response;
 };
 
-// create an experiences
+// create an experience
 export const createOneExperience = (payload) => async (dispatch) => {
   const response = await fetch(`/api/experiences`, {
     method: "POST",
@@ -80,7 +80,7 @@ export const createOneExperience = (payload) => async (dispatch) => {
   return response;
 };
 
-// update an experiences
+// update an experience
 export const updateOneExperience = (expId, payload) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}`, {
     method: "PUT",
