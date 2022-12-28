@@ -6,7 +6,7 @@ function Search({ exp, expId, slot }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllExperiences);
+    dispatch(getAllExperiences());
   }, [dispatch]);
 
   const experiences = useSelector((state) => state.experiences.experiences);

@@ -452,33 +452,49 @@ def create_one_rvw(exp_id):
     experience = Experience.query.get(exp_id)
     bookings = experience.bookings
 
-    if not experience: 
-      return "Experience does not exist", 404
-    if not bookings: 
-      return "Nobody has booked this experience yet. ", 404
+    # if not experience: 
+    #   return "Experience does not exist", 404
+    # if not bookings: 
+    #   return "Nobody has booked this experience yet. ", 404
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+      data = form.data
 
-    for booking in bookings: 
-      if booking.user_id == current_user.id or experience.host_id == current_user.id: 
-        form = ReviewForm()
-        form['csrf_token'].data = request.cookies['csrf_token']
-        if form.validate_on_submit():
-          data = form.data
+      new_review = Review(
+        exp_id=exp_id,
+        user_id=current_user.id,
+        stars=data['stars'],
+        review_body=data['review_body']
+      )
 
-          new_review = Review(
-            exp_id=exp_id,
-            user_id=current_user.id,
-            stars=data['stars'],
-            review_body=data['review_body']
-          )
-
-          db.session.add(new_review)
-          db.session.commit()
+      db.session.add(new_review)
+      db.session.commit()
           
-          return jsonify(review_schema.dump(new_review))
-      else: 
-        return "Only users who have booked this experience can leave a review.", 401  
+      return jsonify(review_schema.dump(new_review))  
 
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401    
+    # for booking in bookings: 
+    #   if booking.user_id == current_user.id or experience.host_id == current_user.id: 
+    #     form = ReviewForm()
+    #     form['csrf_token'].data = request.cookies['csrf_token']
+    #     if form.validate_on_submit():
+    #       data = form.data
+
+    #       new_review = Review(
+    #         exp_id=exp_id,
+    #         user_id=current_user.id,
+    #         stars=data['stars'],
+    #         review_body=data['review_body']
+    #       )
+
+    #       db.session.add(new_review)
+    #       db.session.commit()
+          
+    #       return jsonify(review_schema.dump(new_review))
+    #   else: 
+    #     return "Only users who have booked this experience can leave a review.", 401  
+
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401    
 
 
 @experience_routes.route('/<int:exp_id>/reviews', methods=["GET"])

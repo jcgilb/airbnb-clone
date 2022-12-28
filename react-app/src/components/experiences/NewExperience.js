@@ -59,7 +59,7 @@ const NewExperience = () => {
     setValidationErrors(errors);
   }, [title, description, cost, address, city, country]);
 
-  // set the user albums
+  // set the duration
   const updateDuration = (e) => setDurationSelect(e.target.value);
 
   // helper function for clearing the form

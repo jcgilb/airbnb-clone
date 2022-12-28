@@ -16,6 +16,7 @@ import DeleteExperience from "./components/experiences/DeleteExp";
 import LandingPage from "./components/LandingPage";
 import NotFoundPage from "./components/NotFoundPage";
 import Search from "./components/search/Search";
+import CreateReview from "./components/reviews/CreateReview";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -61,6 +62,7 @@ function App() {
         </Route>
         <Route path="/experiences/:expId" exact={true}>
           <ExperienceDetails />
+          <CreateReview />
         </Route>
         <Route path="/experiences/:expId/edit" exact={true}>
           <UpdateExp />

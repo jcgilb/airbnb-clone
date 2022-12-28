@@ -68,7 +68,7 @@ export const getOneReview = (expId, rvwId) => async (dispatch) => {
 
 // create a review
 export const createOneReview = (payload, expId) => async (dispatch) => {
-  const response = await fetch(`/api/${expId}/reviews`, {
+  const response = await fetch(`/api/experiences/${expId}/reviews`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
