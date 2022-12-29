@@ -84,7 +84,7 @@ function CreateReview() {
           onChange={(e) => setBody(e.target.value)}
         />
         <select
-          className="star-rating"
+          className="star-rating-select"
           onChange={updateStars}
           value={starSelect}
           placeholder="Stars"

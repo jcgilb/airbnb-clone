@@ -1,0 +1,23 @@
+.each-rvw {
+  display: flex;
+  flex-direction: column;
+}
+
+.rvw-profile-pic {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #35460055;
+}
+
+.pic-name-timestamp {
+  display: flex;
+  flex-direction: row;
+}
+
+.star-rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
