@@ -3,6 +3,7 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import { getAllReviews } from "../../store/reviews.js";
 import CreateReview from "./CreateReview.js";
+import "./GetReviews.css";
 
 function GetReviews() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function GetReviews() {
   };
   const getProfilePic = (userId) => {
     let user = users.find((user) => user.id === userId);
+    if (!user?.image_url) return "../../assets/default-image-localXP.png";
     return user?.image_url;
   };
   const getAvgStars = (reviewArray) => {
@@ -46,7 +48,7 @@ function GetReviews() {
       sum += rvw.stars;
     }
     return (
-      <div>
+      <div className="star-rating">
         <i className="fa-sharp fa-solid fa-star"></i>
         <span>{sum / total}</span>(<span>{`${total} reviews`}</span>)
       </div>
@@ -59,11 +61,23 @@ function GetReviews() {
     <div className="">
       <div>{getAvgStars(reviewArray)}</div>
       {Object.values(reviews).map((rvw) => (
-        <>
-          <div>{getUsername(rvw.user_id)}</div>
-          <div>{getProfilePic(rvw.user_id)}</div>
+        <div className="each-rvw">
+          <div className="pic-name-timestamp">
+            <img
+              className="rvw-profile-pic"
+              alt="profile-pic"
+              onError={(e) => {
+                e.target.src = "../../assets/default-image-localXP.png";
+              }}
+              src={getProfilePic(rvw.user_id)}
+            ></img>
+            <span>
+              <div>{getUsername(rvw.user_id)}</div>
+              <div>{rvw.created_at}</div>
+            </span>
+          </div>
           <div>{rvw.review_body}</div>
-        </>
+        </div>
       ))}
       <CreateReview />
     </div>
