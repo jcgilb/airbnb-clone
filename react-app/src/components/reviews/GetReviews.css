@@ -14,10 +14,25 @@
 .pic-name-timestamp {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .star-rating {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
+}
+
+.rvw-username-timestamp {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.rvw-body {
+  margin-top: 5px;
+  margin-bottom: 25px;
 }

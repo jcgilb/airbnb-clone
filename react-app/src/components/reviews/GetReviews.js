@@ -71,12 +71,12 @@ function GetReviews() {
               }}
               src={getProfilePic(rvw.user_id)}
             ></img>
-            <span>
+            <span className="rvw-username-timestamp">
               <div>{getUsername(rvw.user_id)}</div>
               <div>{rvw.created_at}</div>
             </span>
           </div>
-          <div>{rvw.review_body}</div>
+          <div className="rvw-body">{rvw.review_body}</div>
         </div>
       ))}
       <CreateReview />
