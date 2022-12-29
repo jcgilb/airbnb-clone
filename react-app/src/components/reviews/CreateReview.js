@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import { getAllExperiences } from "../../store/experiences";
 import { createOneReview, getAllReviews } from "../../store/reviews.js";
@@ -14,12 +14,14 @@ function CreateReview() {
 
   useEffect(() => {
     dispatch(getAllExperiences());
+    dispatch(getAllReviews(expId));
   }, [dispatch]);
 
   // get comment body, set comment body
   const [body, setBody] = useState("");
   const numStars = [1, 2, 3, 4, 5];
   const [starSelect, setStarSelect] = useState();
+  const [users, setUsers] = useState([]);
   const experiences = useSelector((state) => state.experiences.experiences);
   // identify the exp from the url
   const exp = Object.values(experiences).find(
@@ -30,13 +32,13 @@ function CreateReview() {
   const reviews = useSelector((state) => state.reviews.reviews);
 
   useEffect(() => {
-    if (user) {
-      const handlePageMount = async () => {
-        await dispatch(getAllReviews(expId));
-      };
-      handlePageMount();
+    async function fetchData() {
+      const response = await fetch("/api/users/");
+      const responseData = await response.json();
+      setUsers(responseData.users);
     }
-  }, [dispatch]);
+    fetchData();
+  }, []);
 
   // helper function for clearing the input
   const revert = () => {
@@ -62,13 +64,10 @@ function CreateReview() {
       stars: parseInt(starSelect),
       review_body: body,
     };
-    console.log(newReview, "review body");
     // send review body and exp id to createreview thunk
     let review = await dispatch(createOneReview(newReview, expId));
     // if successful, post the review
     if (review) {
-      // once created, add user data to review
-      if (user) review.User = user;
       revert();
       history.push(`/experiences/${expId}`);
     }
@@ -76,9 +75,6 @@ function CreateReview() {
 
   return (
     <div className="">
-      {Object.values(reviews).map((rvw) => (
-        <div>{rvw.review_body}</div>
-      ))}
       <form className="create-comment-form" onSubmit={handleSubmit}>
         <input
           type="body"

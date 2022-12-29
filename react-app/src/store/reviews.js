@@ -38,7 +38,7 @@ const remove = (rvwId) => ({
 
 // get all reviews by expId
 export const getAllReviews = (expId) => async (dispatch) => {
-  const response = await fetch(`/api/${expId}/reviews`);
+  const response = await fetch(`/api/experiences/${expId}/reviews`);
   if (response.ok) {
     const data = await response.json();
     dispatch(getAll(data));
@@ -58,7 +58,7 @@ export const getAllReviews = (expId) => async (dispatch) => {
 
 // get one review
 export const getOneReview = (expId, rvwId) => async (dispatch) => {
-  const response = await fetch(`/api/${expId}/reviews/${rvwId}`);
+  const response = await fetch(`/api/experiences/${expId}/reviews/${rvwId}`);
   if (response.ok) {
     const data = await response.json();
     dispatch(getOne(data));
@@ -82,7 +82,7 @@ export const createOneReview = (payload, expId) => async (dispatch) => {
 
 // update a review
 export const updateOneReview = (expId, rvwId, payload) => async (dispatch) => {
-  const response = await fetch(`/api/${expId}/reviews/${rvwId}`, {
+  const response = await fetch(`/api/experiences/${expId}/reviews/${rvwId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -96,7 +96,7 @@ export const updateOneReview = (expId, rvwId, payload) => async (dispatch) => {
 
 // delete an review
 export const deleteReview = (expId, rvwId) => async (dispatch) => {
-  const response = await fetch(`/api/${expId}/reviews/${rvwId}`, {
+  const response = await fetch(`/api/experiences/${expId}/reviews/${rvwId}`, {
     method: "DELETE",
   });
   if (response.ok) {
