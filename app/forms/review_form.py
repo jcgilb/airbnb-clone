@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, StringField
+from wtforms import IntegerField, StringField, FileField
 from wtforms.validators import DataRequired, ValidationError
 
 class ReviewForm(FlaskForm):
@@ -11,5 +11,5 @@ class ReviewForm(FlaskForm):
 
 class ReviewImageForm(FlaskForm):
     review_id = IntegerField("Review ID", validators=[DataRequired()])
-    image_url = StringField("Image URL", validators=[DataRequired()])
+    image_url = FileField("Image URL", validators=[DataRequired()])
 

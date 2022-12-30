@@ -2,7 +2,7 @@
 const REMOVE = "reviews/REMOVE";
 const GET_ALL = "reviews/GET_ALL";
 const GET_ONE = "reviews/GET_ONE";
-const USER_RVWS = "reviews/USER_rvwS";
+const CLEAR_RVWS = "reviews/CLEAR_RVWS";
 const ADD_UPDATE = "reviews/ADD_UPDATE";
 
 const getAll = (reviews) => ({
@@ -10,10 +10,9 @@ const getAll = (reviews) => ({
   reviews,
 });
 
-const getUserRvws = (reviews) => {
+const clearAll = () => {
   return {
-    type: USER_RVWS,
-    reviews,
+    type: CLEAR_RVWS,
   };
 };
 
@@ -46,16 +45,6 @@ export const getAllReviews = (expId) => async (dispatch) => {
   return response;
 };
 
-// // get user reviews
-// export const getUserReviews = (userId) => async (dispatch) => {
-//   const response = await fetch(`/api/users/${userId}/reviews`);
-//   if (response.ok) {
-//     const data = await response.json();
-//     dispatch(getUserRvws(data));
-//   }
-//   return response;
-// };
-
 // get one review
 export const getOneReview = (expId, rvwId) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}/reviews/${rvwId}`);
@@ -76,8 +65,8 @@ export const createOneReview = (payload, expId) => async (dispatch) => {
   if (response.ok) {
     const review = await response.json();
     dispatch(addOrUpdate(review));
+    return review;
   }
-  return response;
 };
 
 // update a review
@@ -102,6 +91,10 @@ export const deleteReview = (expId, rvwId) => async (dispatch) => {
   if (response.ok) {
     dispatch(remove(rvwId));
   }
+};
+
+export const clearReviews = () => async (dispatch) => {
+  dispatch(clearAll());
 };
 
 const initialState = {
@@ -136,6 +129,10 @@ const reviewReducer = (state = initialState, action) => {
     case REMOVE:
       newState = { ...state };
       delete newState[action.rvwId];
+      return newState;
+    case CLEAR_RVWS:
+      newState = { ...state };
+      newState.reviews = {};
       return newState;
     default:
       return state;

@@ -39,7 +39,8 @@ class ReviewImage(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    image_url = db.Column(db.String(255))
+    # image_url = db.Column(db.String(255))
+    image_url = db.Column(db.Text, nullable=False)
     review_id = db.Column(db.Integer(), db.ForeignKey("reviews.id"), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True),server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
