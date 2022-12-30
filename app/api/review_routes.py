@@ -6,9 +6,11 @@ from app.models.bookings import db, Booking, booking_schema, bookings_schema
 from flask_login import login_required, current_user
 from datetime import datetime
 from app.models import User
-from app.cool import (
-    delete_image_from_s3, upload_file_to_s3, allowed_file, get_unique_filename)
 
+import boto3
+import botocore
+from app.config import Config
+from app.cool import *
 
 review_routes = Blueprint('reviews', __name__)
 
