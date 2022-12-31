@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
+import { deleteRvwImage } from "../../store/images.js";
 import { clearReviews, getAllReviews } from "../../store/reviews.js";
 import UploadReviewImage from "../images/RvwImage.js";
 import CreateReview from "./CreateReview.js";
@@ -24,10 +25,12 @@ function GetReviews() {
   // get comment body, set comment body
   const [users, setUsers] = useState([]);
   const [imageFile, setImageFile] = useState(null);
+  const [images, setImages] = useState();
 
   // identify the current user
   const user = useSelector((state) => state.session.user);
   const reviews = useSelector((state) => state.reviews.reviews);
+  const rvwImages = useSelector((state) => state.images.rvwImages);
   const reviewArray = Object.values(reviews);
 
   useEffect(() => {
@@ -67,18 +70,6 @@ function GetReviews() {
     }
   };
 
-  // const handleSubmit = async (e, rvw) => {
-  //   e.preventDefault();
-  //   if (imageFile) {
-  //     let newRvwImage = { review_id: rvw.id, image_url: imageFile };
-  //     let rvwImage = await dispatch(uploadRvwImage(rvw.id, newRvwImage));
-
-  //     if (rvwImage) {
-  //       history.push(`/experiences/${expId}`);
-  //     }
-  //   }
-  // };
-
   return (
     <div className="">
       <div>{getAvgStars(reviewArray)}</div>
@@ -106,8 +97,20 @@ function GetReviews() {
             />
           )}
           <div className="rvw-images">
-            {rvw.review_images.map((img, idx) => (
-              <img src={img["image_url"]} key={idx} alt="image"></img>
+            {rvw.review_images.map((image, index) => (
+              <div key={index} className="image-item">
+                <img src={image.image_url} alt="" width="100" />
+                <div className="images-to-submit">
+                  <button
+                    onClick={async () => {
+                      await dispatch(deleteRvwImage(rvw.id, image.id));
+                      return history.push(`/experiences/${expId}`);
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
           <div className="rvw-body">{rvw.review_body}</div>

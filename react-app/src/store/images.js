@@ -1,5 +1,6 @@
 // constants
-const REMOVE = "images/REMOVE";
+const REMOVE_RVW_IMG = "images/REMOVE_RVW_IMG";
+const REMOVE_EXP_IMG = "images/REMOVE_EXP_IMG";
 const ADD_UPDATE = "images/ADD_UPDATE";
 const UPLOAD = "images/UPLOAD";
 
@@ -17,8 +18,13 @@ const uploadRvwImg = (image) => {
   };
 };
 
-const remove = (imgId) => ({
-  type: REMOVE,
+const removeExpImg = (imgId) => ({
+  type: REMOVE_EXP_IMG,
+  imgId,
+});
+
+const removeRvwImg = (imgId) => ({
+  type: REMOVE_RVW_IMG,
   imgId,
 });
 
@@ -64,15 +70,30 @@ export const uploadRvwImage = (rvwId, payload) => async (dispatch) => {
     method: "POST",
     body: form,
   });
+
+  if (res.ok) {
+    const image = await res.json();
+    dispatch(uploadRvwImg(image));
+  }
 };
 
-// delete an image
+// delete an exp image
 export const deleteExpImage = (expId, imgId) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}/images/${imgId}`, {
     method: "DELETE",
   });
   if (response.ok) {
-    dispatch(remove(imgId));
+    dispatch(removeExpImg(imgId));
+  }
+};
+
+// delete a rvw image
+export const deleteRvwImage = (rvwId, imgId) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/${rvwId}/images/${imgId}`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    dispatch(removeRvwImg(imgId));
   }
 };
 
@@ -101,9 +122,13 @@ const imageReducer = (state = initialState, action) => {
         newState.rvwImages[action.image.id] = action.image;
         return newState;
       }
-    case REMOVE:
+    case REMOVE_EXP_IMG:
       newState = { ...state };
       delete newState.expImages[action.imgId];
+      return newState;
+    case REMOVE_RVW_IMG:
+      newState = { ...state };
+      delete newState.rvwImages[action.imgId];
       return newState;
     default:
       return state;

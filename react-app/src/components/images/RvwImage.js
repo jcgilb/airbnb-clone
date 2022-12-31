@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import ImageUploading from "react-images-uploading";
-import { uploadRvwImage } from "../../store/images.js";
+import { uploadRvwImage, deleteRvwImage } from "../../store/images.js";
+import { getAllReviews } from "../../store/reviews.js";
 
 function UploadReviewImage({ rvw, setImageFile, imageFile }) {
-  // const user = useSelector((state) => state.session.user);
-  // const [imageUrl, setImageUrl] = useState(null);
   const [image, setImage] = useState("");
-  const allowedExt = ["HEIC", " JPEG", "JPG", "PNG", "jpeg", "jpg", "png"];
+  const [list, setList] = useState();
+  const [errors, setErrors] = useState([]);
+  // const allowedExt = ["HEIC", " JPEG", "JPG", "PNG", "jpeg", "jpg", "png"];
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -17,94 +18,136 @@ function UploadReviewImage({ rvw, setImageFile, imageFile }) {
   let { expId } = useParams();
   expId = parseInt(expId);
 
-  // const setFile = (file) => {
-  //   setImageUrl(file);
-  //   setImageFile(file);
-  // };
+  // state objs
+  const user = useSelector((state) => state.session.user);
+  const rvwImages = useSelector((state) => state.images.rvwImages);
+  const reviews = useSelector((state) => state.reviews.reviews);
+  const rvwImgArr = Object.values(rvwImages);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (imageUrl) {
-  //     // const formData = new FormData();
-  //     // formData.append("review_id", rvw.id);
-  //     // formData.append("image_url", imageUrl);
-  //     // console.log(formData, "formData");
-  //     // let rvwImage = await dispatch(uploadRvwImage(rvw.id, formData));
+  useEffect(() => {
+    dispatch(getAllReviews(expId));
+  }, [reviews]);
 
-  //     let newRvwImage = { review_id: rvw.id, image_url: imageUrl };
-  //     console.log("newRvwImage", newRvwImage);
-  //     let rvwImage = await dispatch(uploadRvwImage(rvw.id, newRvwImage));
-  //     console.log(rvwImage, "promise");
-  //     if (rvwImage) {
-  //       history.push(`/experiences/${expId}`);
-  //     }
-  //   }
-  // };
+  // handle add/update image
+  const onChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    setImage(imageList[0]);
+    setImageFile({ addUpdateIndex: imageList[0] });
+    console.log("setting image file", imageFile);
+  };
 
+  // err validations
+  useEffect(() => {
+    const err = [];
+    // limit image file size to 1MB => 1,000,000 bites
+    if (image[0]?.file.size > 1000000) err.push("Limit image size to 1MB.");
+    setErrors(err);
+  }, []);
+
+  // handle form submit function
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let imageUrl = image[0].file;
 
-    console.log("image in handleSubmit", imageUrl);
-    console.log("rvw.id", rvw.id);
+    console.log("image", image);
+    let imageFile = image?.file;
+    console.log("imgFile", imageFile);
 
-    await addImages(imageUrl, rvw.id);
-    window.alert("Success");
-    history.push(`/experiences/${expId}`);
-  };
-
-  const addImages = async (imageUrl, id) => {
-    const obj = {
-      file: imageUrl,
-      review_id: id,
+    const newRvwImage = {
+      file: imageFile,
+      review_id: rvw.id,
       newFile: true,
     };
-    console.log("obj", obj);
 
-    await dispatch(uploadRvwImage(id, obj));
+    let upload = await dispatch(uploadRvwImage(rvw.id, newRvwImage));
+    if (upload) {
+      return history.push(`/experiences/${expId}`);
+    }
+
+    // let uploads = await uploadImages(rvw, imageFiles);
+    // alert("Success");
+    // return history.push(`/experiences/${expId}`);
   };
+
+  // const uploadImages = async (rvw, imageFiles) => {
+  //   for (let img of imageFiles) {
+  //     const newRvwImage = {
+  //       file: img,
+  //       review_id: rvw.id,
+  //       newFile: true,
+  //     };
+  //     let upload = await dispatch(uploadRvwImage(rvw.id, newRvwImage)).catch(
+  //       async (res) => {
+  //         const data = await res.json();
+  //         if (data && data.errors) setErrors(data.errors);
+  //       }
+  //     );
+  //   }
+  // };
 
   return (
     <>
       <div className="dd-img-div"></div>
       <form className="upload-rvw-form" onSubmit={handleSubmit}>
         <div className="dd-area">
-          {/* <FileUploader
-            className="file-uploader"
-            handleChange={(file) => setFile(file)}
-            name="imageUrl"
-            types={allowedExt}
-          >
-            <div className="dd-div">Drag and drop or upload an image</div>
-          </FileUploader> */}
-
           <ImageUploading
-            multiple={false}
+            multiple
             value={image}
-            onChange={(file) => setImage(file)}
-            maxNumber={20}
+            onChange={onChange}
+            maxNumber={1}
+            maxFileSize={1000000}
             dataURLKey="data_url"
             acceptType={["jpg", "png", "jpeg"]}
           >
-            {({ onImageUpload, isDragging, dragProps }) => (
+            {({
+              image,
+              imageList,
+              onImageUpload,
+              onImageRemoveAll,
+              onImageUpdate,
+              onImageRemove,
+              isDragging,
+              dragProps,
+            }) => (
               <div className="upload__image-wrapper">
-                <div
-                  style={isDragging ? { color: "rgb(192, 53, 22)" } : undefined}
+                <button
+                  style={isDragging ? { color: "red" } : undefined}
                   onClick={onImageUpload}
                   {...dragProps}
-                  className="add_images_container"
+                  className="add-img-container"
                 >
-                  Click or Drag Images Here
-                </div>
-                {/* <div onClick={onImageRemoveAll}>Remove all images</div> */}
-                <div className="images_container">
-                  <img src={image["data_url"]} alt="" height="230" />
-                </div>
+                  Click or Drop here
+                </button>
+                &nbsp;
+                <ul className="errors">
+                  {errors.length > 0 &&
+                    errors.map((err) => (
+                      <div id="err" key={err}>
+                        {err}
+                      </div>
+                    ))}
+                </ul>
+                {imageList?.map((image, index) => (
+                  <div key={index} className="image-item">
+                    <img src={image["data_url"]} alt="" width="100" />
+                    <div className="images-to-submit">
+                      <button onClick={() => onImageUpdate(index)}>
+                        Update
+                      </button>
+                      <button
+                        onClick={() => {
+                          onImageRemove(index);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </ImageUploading>
         </div>
-        <button className="new-comment" type="submit">
+        <button className="new-img-submit" type="submit">
           Submit
         </button>
       </form>
