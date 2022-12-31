@@ -15,8 +15,6 @@ import { getAllExperiences } from "./store/experiences";
 import DeleteExperience from "./components/experiences/DeleteExp";
 import LandingPage from "./components/LandingPage";
 import NotFoundPage from "./components/NotFoundPage";
-import Search from "./components/search/Search";
-import CreateReview from "./components/reviews/CreateReview";
 import GetReviews from "./components/reviews/GetReviews";
 
 function App() {
