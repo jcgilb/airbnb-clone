@@ -13,7 +13,6 @@
     "react-datepicker": "^4.8.0",
     "react-datetime-picker": "^4.1.1",
     "react-dom": "^17.0.2",
-    "react-drag-drop-files": "^2.3.8",
     "react-geocode": "^0.2.3",
     "react-images-uploading": "^3.1.7",
     "react-redux": "^7.2.4",

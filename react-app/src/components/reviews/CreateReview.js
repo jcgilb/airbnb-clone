@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
-import { useLatestReview } from "../../context/LatestReviewContext";
 import { getAllExperiences } from "../../store/experiences";
-import { uploadRvwImage } from "../../store/images";
 import { createOneReview, getAllReviews } from "../../store/reviews.js";
-import UploadReviewImage from "../images/RvwImage";
 
 function CreateReview() {
   const dispatch = useDispatch();
@@ -22,9 +19,9 @@ function CreateReview() {
 
   // get comment body, set comment body
   const [body, setBody] = useState("");
+  const [users, setUsers] = useState("");
   const numStars = [1, 2, 3, 4, 5];
   const [starSelect, setStarSelect] = useState();
-  const [users, setUsers] = useState([]);
 
   const experiences = useSelector((state) => state.experiences.experiences);
   // identify the exp from the url
@@ -34,7 +31,6 @@ function CreateReview() {
 
   // identify the current user
   const user = useSelector((state) => state.session.user);
-  const reviews = useSelector((state) => state.reviews.reviews);
 
   useEffect(() => {
     async function fetchData() {
@@ -103,7 +99,6 @@ function CreateReview() {
             <option key={star}>{star}</option>
           ))}
         </select>
-        {/* <UploadReviewImage setImageFile={setImageFile} imageFile={imageFile} /> */}
         <button className="new-comment" type="submit">
           Submit
         </button>

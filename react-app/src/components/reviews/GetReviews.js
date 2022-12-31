@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
-import { useLatestReview } from "../../context/LatestReviewContext.js";
 import { clearReviews, getAllReviews } from "../../store/reviews.js";
 import UploadReviewImage from "../images/RvwImage.js";
 import CreateReview from "./CreateReview.js";
