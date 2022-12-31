@@ -37,19 +37,33 @@ export const ceateExpImage = (expId, payload) => async (dispatch) => {
   return response;
 };
 
-// upload a review image
+// // upload a review image
+// export const uploadRvwImage = (rvwId, payload) => async (dispatch) => {
+//   const response = await fetch(`/api/reviews/${rvwId}/images`, {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(payload),
+//   });
+//   console.log(response, "response in thunk");
+//   if (response.ok) {
+//     const image = await response.json();
+//     dispatch(uploadRvwImg(image));
+//   }
+//   return response;
+// };
+
 export const uploadRvwImage = (rvwId, payload) => async (dispatch) => {
-  const response = await fetch(`/api/reviews/${rvwId}/images`, {
+  const { review_id, file, newFile } = payload;
+
+  const form = new FormData();
+  form.append("file", file);
+  form.append("review_id", review_id);
+  form.append("newFile", newFile);
+
+  const res = await fetch(`/api/reviews/${rvwId}/images`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: form,
   });
-  console.log(response, "response in thunk");
-  if (response.ok) {
-    const image = await response.json();
-    dispatch(uploadRvwImg(image));
-  }
-  return response;
 };
 
 // delete an image

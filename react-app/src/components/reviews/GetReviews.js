@@ -100,18 +100,17 @@ function GetReviews() {
             </span>
           </div>
           {rvw.user_id === user.id && (
-            // <form className="upload-rvw-form" onSubmit={handleSubmit(rvw)}>
             <UploadReviewImage
               setImageFile={setImageFile}
               imageFile={imageFile}
               rvw={rvw}
             />
-            //   <button className="new-comment" type="submit">
-            //     Submit
-            //   </button>
-            // </form>
           )}
-
+          <div className="rvw-images">
+            {rvw.review_images.map((img, idx) => (
+              <img src={img["image_url"]} key={idx} alt="image"></img>
+            ))}
+          </div>
           <div className="rvw-body">{rvw.review_body}</div>
         </div>
       ))}

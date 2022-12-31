@@ -52,6 +52,7 @@ def upload_rvw_image(rvw_id):
         if file:
             review_id = request.form.get('review_id')
             file_url = upload_file_to_s3(file)
+            print("file_url*************", file_url)
             image = ReviewImage(review_id=rvw_id, image_url=file_url["url"])
             db.session.add(image)
             db.session.commit()
