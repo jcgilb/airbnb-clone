@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { useParams, useHistory } from "react-router";
+import { useLatestReview } from "../../context/LatestReviewContext";
 import { getAllExperiences } from "../../store/experiences";
+import { uploadRvwImage } from "../../store/images";
 import { createOneReview, getAllReviews } from "../../store/reviews.js";
+import UploadReviewImage from "../images/RvwImage";
 
 function CreateReview() {
   const dispatch = useDispatch();
@@ -22,11 +25,13 @@ function CreateReview() {
   const numStars = [1, 2, 3, 4, 5];
   const [starSelect, setStarSelect] = useState();
   const [users, setUsers] = useState([]);
+
   const experiences = useSelector((state) => state.experiences.experiences);
   // identify the exp from the url
   const exp = Object.values(experiences).find(
     (exp) => exp.id === parseInt(expId)
   );
+
   // identify the current user
   const user = useSelector((state) => state.session.user);
   const reviews = useSelector((state) => state.reviews.reviews);
@@ -66,6 +71,7 @@ function CreateReview() {
     };
     // send review body and exp id to createreview thunk
     let review = await dispatch(createOneReview(newReview, expId));
+
     // if successful, post the review
     if (review) {
       revert();
@@ -97,6 +103,7 @@ function CreateReview() {
             <option key={star}>{star}</option>
           ))}
         </select>
+        {/* <UploadReviewImage setImageFile={setImageFile} imageFile={imageFile} /> */}
         <button className="new-comment" type="submit">
           Submit
         </button>

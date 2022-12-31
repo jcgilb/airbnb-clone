@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
-import { getAllReviews } from "../../store/reviews.js";
+import { useLatestReview } from "../../context/LatestReviewContext.js";
+import { clearReviews, getAllReviews } from "../../store/reviews.js";
+import UploadReviewImage from "../images/RvwImage.js";
 import CreateReview from "./CreateReview.js";
 import "./GetReviews.css";
 
 function GetReviews() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // parse exp id from url
   let { expId } = useParams();
@@ -14,14 +17,19 @@ function GetReviews() {
 
   useEffect(() => {
     dispatch(getAllReviews(expId));
-  }, [dispatch]);
+    return () => {
+      dispatch(clearReviews());
+    };
+  }, [dispatch, expId]);
 
   // get comment body, set comment body
   const [users, setUsers] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
+
   // identify the current user
+  const user = useSelector((state) => state.session.user);
   const reviews = useSelector((state) => state.reviews.reviews);
   const reviewArray = Object.values(reviews);
-  console.log(reviewArray);
 
   useEffect(() => {
     async function fetchData() {
@@ -47,15 +55,30 @@ function GetReviews() {
     for (let rvw of reviewArray) {
       sum += rvw.stars;
     }
-    return (
-      <div className="star-rating">
-        <i className="fa-sharp fa-solid fa-star"></i>
-        <span>{sum / total}</span>(<span>{`${total} reviews`}</span>)
-      </div>
-    );
+    let avg = +(sum / total).toFixed(2);
+    if (isNaN(avg)) {
+      return <div className="star-rating">No reviews</div>;
+    } else {
+      return (
+        <div className="star-rating">
+          <i className="fa-sharp fa-solid fa-star"></i>
+          <span>{avg}</span>(<span>{`${total} reviews`}</span>)
+        </div>
+      );
+    }
   };
 
-  if (!reviewArray.length) return null;
+  // const handleSubmit = async (e, rvw) => {
+  //   e.preventDefault();
+  //   if (imageFile) {
+  //     let newRvwImage = { review_id: rvw.id, image_url: imageFile };
+  //     let rvwImage = await dispatch(uploadRvwImage(rvw.id, newRvwImage));
+
+  //     if (rvwImage) {
+  //       history.push(`/experiences/${expId}`);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="">
@@ -71,12 +94,24 @@ function GetReviews() {
               }}
               src={getProfilePic(rvw.user_id)}
             ></img>
-            <span>
+            <span className="rvw-username-timestamp">
               <div>{getUsername(rvw.user_id)}</div>
               <div>{rvw.created_at}</div>
             </span>
           </div>
-          <div>{rvw.review_body}</div>
+          {rvw.user_id === user.id && (
+            <UploadReviewImage
+              setImageFile={setImageFile}
+              imageFile={imageFile}
+              rvw={rvw}
+            />
+          )}
+          <div className="rvw-images">
+            {rvw.review_images.map((img, idx) => (
+              <img src={img["image_url"]} key={idx} alt="image"></img>
+            ))}
+          </div>
+          <div className="rvw-body">{rvw.review_body}</div>
         </div>
       ))}
       <CreateReview />

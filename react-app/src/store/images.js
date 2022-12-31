@@ -1,10 +1,18 @@
 // constants
 const REMOVE = "images/REMOVE";
 const ADD_UPDATE = "images/ADD_UPDATE";
+const UPLOAD = "images/UPLOAD";
 
 const addOrUpdate = (image) => {
   return {
     type: ADD_UPDATE,
+    image,
+  };
+};
+
+const uploadRvwImg = (image) => {
+  return {
+    type: UPLOAD,
     image,
   };
 };
@@ -14,18 +22,48 @@ const remove = (imgId) => ({
   imgId,
 });
 
-// create a image
+// create an experience image
 export const ceateExpImage = (expId, payload) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}/images`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
+
   if (response.ok) {
     const image = await response.json();
     dispatch(addOrUpdate(image));
   }
   return response;
+};
+
+// // upload a review image
+// export const uploadRvwImage = (rvwId, payload) => async (dispatch) => {
+//   const response = await fetch(`/api/reviews/${rvwId}/images`, {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(payload),
+//   });
+//   console.log(response, "response in thunk");
+//   if (response.ok) {
+//     const image = await response.json();
+//     dispatch(uploadRvwImg(image));
+//   }
+//   return response;
+// };
+
+export const uploadRvwImage = (rvwId, payload) => async (dispatch) => {
+  const { review_id, file, newFile } = payload;
+
+  const form = new FormData();
+  form.append("file", file);
+  form.append("review_id", review_id);
+  form.append("newFile", newFile);
+
+  const res = await fetch(`/api/reviews/${rvwId}/images`, {
+    method: "POST",
+    body: form,
+  });
 };
 
 // delete an image
@@ -50,7 +88,17 @@ const imageReducer = (state = initialState, action) => {
         return newState;
       } else {
         newState = { ...state };
-        newState.expImages[action.exp.id] = action.image;
+        newState.expImages[action.image.id] = action.image;
+        return newState;
+      }
+    case UPLOAD:
+      if (!state[action.image.id]) {
+        newState = { ...state };
+        newState.rvwImages[action.image.id] = action.image;
+        return newState;
+      } else {
+        newState = { ...state };
+        newState.rvwImages[action.image.id] = action.image;
         return newState;
       }
     case REMOVE:
