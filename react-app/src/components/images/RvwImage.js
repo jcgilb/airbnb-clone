@@ -18,10 +18,9 @@ function UploadReviewImage({ rvw, setImageFile, imageFile }) {
   expId = parseInt(expId);
 
   // state objs
-  const user = useSelector((state) => state.session.user);
-  const rvwImages = useSelector((state) => state.images.rvwImages);
+  // const user = useSelector((state) => state.session.user);
+  // const rvwImages = useSelector((state) => state.images.rvwImages);
   const reviews = useSelector((state) => state.reviews.reviews);
-  const rvwArr = Object.values(reviews);
 
   useEffect(() => {
     dispatch(getAllReviews(expId));
