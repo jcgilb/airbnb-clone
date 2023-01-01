@@ -7,7 +7,7 @@ import UploadReviewImage from "../images/RvwImage.js";
 import CreateReview from "./CreateReview.js";
 import "./GetReviews.css";
 
-function GetReviews() {
+function GetReviews2() {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -24,9 +24,9 @@ function GetReviews() {
   // get comment body, set comment body
   const [users, setUsers] = useState([]);
   const [imageFile, setImageFile] = useState(null);
-  const [list, setList] = useState();
 
   useEffect(() => {
+    console.log(expId, "expId");
     dispatch(getAllReviews(expId));
     return () => {
       dispatch(clearReviews());
@@ -90,11 +90,13 @@ function GetReviews() {
             </span>
           </div>
           {rvw.user_id === user.id && (
-            <UploadReviewImage
-              setImageFile={setImageFile}
-              imageFile={imageFile}
-              rvw={rvw}
-            />
+            <div
+              onClick={() =>
+                history.push(`/experiences/${expId}/reviews/${rvw.id}/upload`)
+              }
+            >
+              Add review images +
+            </div>
           )}
           <div className="rvw-images">
             {rvw.review_images.map((image, index) => (
@@ -121,4 +123,4 @@ function GetReviews() {
   );
 }
 
-export default GetReviews;
+export default GetReviews2;

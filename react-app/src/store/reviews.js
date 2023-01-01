@@ -1,4 +1,5 @@
 // constants
+const UPLOAD = "reviews/UPLOAD";
 const REMOVE = "reviews/REMOVE";
 const GET_ALL = "reviews/GET_ALL";
 const GET_ONE = "reviews/GET_ONE";
@@ -26,6 +27,13 @@ const getOne = (rvw) => {
 const addOrUpdate = (rvw) => {
   return {
     type: ADD_UPDATE,
+    rvw,
+  };
+};
+
+const uploadRvwImg = (rvw) => {
+  return {
+    type: UPLOAD,
     rvw,
   };
 };
@@ -83,6 +91,25 @@ export const updateOneReview = (expId, rvwId, payload) => async (dispatch) => {
   return response;
 };
 
+export const uploadRvwImage = (rvwId, payload) => async (dispatch) => {
+  const { review_id, file, newFile } = payload;
+
+  const form = new FormData();
+  form.append("file", file);
+  form.append("review_id", review_id);
+  form.append("newFile", newFile);
+
+  const res = await fetch(`/api/reviews/${rvwId}/images`, {
+    method: "POST",
+    body: form,
+  });
+
+  if (res.ok) {
+    const rvw = await res.json();
+    dispatch(uploadRvwImg(rvw));
+  }
+};
+
 // delete an review
 export const deleteReview = (expId, rvwId) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}/reviews/${rvwId}`, {
@@ -117,6 +144,16 @@ const reviewReducer = (state = initialState, action) => {
         oneReview: { ...action.rvw },
       };
     case ADD_UPDATE:
+      if (!state.reviews[action.rvw.id]) {
+        newState = { ...state };
+        newState.reviews[action.rvw.id] = action.rvw;
+        return newState;
+      } else {
+        newState = { ...state };
+        newState.reviews[action.rvw.id] = action.rvw;
+        return newState;
+      }
+    case UPLOAD:
       if (!state.reviews[action.rvw.id]) {
         newState = { ...state };
         newState.reviews[action.rvw.id] = action.rvw;

@@ -16,6 +16,9 @@ import DeleteExperience from "./components/experiences/DeleteExp";
 import LandingPage from "./components/LandingPage";
 import NotFoundPage from "./components/NotFoundPage";
 import GetReviews from "./components/reviews/GetReviews";
+import GetReviews2 from "./components/reviews/GetReviews2";
+import UploadReviewImage from "./components/images/RvwImage";
+import UploadReviewImage2 from "./components/images/RvwImage2";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -61,7 +64,7 @@ function App() {
         </Route>
         <Route path="/experiences/:expId" exact={true}>
           <ExperienceDetails />
-          <GetReviews />
+          <GetReviews2 />
         </Route>
         <Route path="/experiences/:expId/edit" exact={true}>
           <UpdateExp />
@@ -74,6 +77,9 @@ function App() {
         </Route>
         <Route path="/users/:userId" exact={true}>
           <UserProfile />
+        </Route>
+        <Route path="/experiences/:expId/reviews/:rvwId/upload" exact={true}>
+          <UploadReviewImage2 />
         </Route>
         <Route path="/" exact={true}>
           <LandingPage />

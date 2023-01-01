@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import ImageUploading from "react-images-uploading";
-import { uploadRvwImage, deleteRvwImage } from "../../store/images.js";
-import { getAllReviews } from "../../store/reviews.js";
+import { deleteRvwImage } from "../../store/images.js";
+import { getAllReviews, uploadRvwImage } from "../../store/reviews.js";
 
 function UploadReviewImage({ rvw, setImageFile, imageFile }) {
   const [image, setImage] = useState("");
-  const [list, setList] = useState();
   const [errors, setErrors] = useState([]);
   // const allowedExt = ["HEIC", " JPEG", "JPG", "PNG", "jpeg", "jpg", "png"];
 
@@ -19,20 +18,22 @@ function UploadReviewImage({ rvw, setImageFile, imageFile }) {
   expId = parseInt(expId);
 
   // state objs
-  const user = useSelector((state) => state.session.user);
-  const rvwImages = useSelector((state) => state.images.rvwImages);
+  // const user = useSelector((state) => state.session.user);
+  // const rvwImages = useSelector((state) => state.images.rvwImages);
   const reviews = useSelector((state) => state.reviews.reviews);
-  const rvwImgArr = Object.values(rvwImages);
 
   useEffect(() => {
     dispatch(getAllReviews(expId));
+    return () => {
+      dispatch(getAllReviews(expId));
+    };
   }, [reviews]);
 
   // handle add/update image
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    setImage(imageList[0]);
-    setImageFile({ addUpdateIndex: imageList[0] });
+    setImage(imageList);
+    setImageFile({ addUpdateIndex: imageList });
     console.log("setting image file", imageFile);
   };
 
@@ -49,7 +50,7 @@ function UploadReviewImage({ rvw, setImageFile, imageFile }) {
     e.preventDefault();
 
     console.log("image", image);
-    let imageFile = image?.file;
+    let imageFile = image[0]?.file;
     console.log("imgFile", imageFile);
 
     const newRvwImage = {
@@ -60,6 +61,8 @@ function UploadReviewImage({ rvw, setImageFile, imageFile }) {
 
     let upload = await dispatch(uploadRvwImage(rvw.id, newRvwImage));
     if (upload) {
+      setImage();
+      dispatch(getAllReviews(expId));
       return history.push(`/experiences/${expId}`);
     }
 
@@ -99,7 +102,6 @@ function UploadReviewImage({ rvw, setImageFile, imageFile }) {
             acceptType={["jpg", "png", "jpeg"]}
           >
             {({
-              image,
               imageList,
               onImageUpload,
               onImageRemoveAll,
