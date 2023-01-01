@@ -42,12 +42,14 @@ def get_one_rvw(rvw_id):
 @review_routes.route("/<int:rvw_id>/images", methods=['POST'])
 @login_required
 def upload_rvw_image(rvw_id):
+    review = Review.query.get(rvw_id)
     newFile = request.form.get('newFile')
     if newFile == 'true':
         if "file" not in request.files:
             return "No file key in request.files"
         file = request.files['file']
-
+        rvw_dict = review.to_dict()
+        images = rvw_dict["review_images"]
         if file:
             review_id = request.form.get('review_id')
             file_url = upload_file_to_s3(file)
@@ -57,7 +59,9 @@ def upload_rvw_image(rvw_id):
             )
             db.session.add(image)
             db.session.commit()
-            return jsonify(review_image_schema.dump(image))
+            images.append(image.to_dict())
+            # return jsonify(review_image_schema.dump(image))
+            return review.to_dict()
 
     if newFile == 'false':
         review_id = request.form.get('review_id')

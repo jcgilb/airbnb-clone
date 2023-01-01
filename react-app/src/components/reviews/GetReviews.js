@@ -15,23 +15,23 @@ function GetReviews() {
   let { expId } = useParams();
   expId = parseInt(expId);
 
-  useEffect(() => {
-    dispatch(getAllReviews(expId));
-    return () => {
-      dispatch(clearReviews());
-    };
-  }, [dispatch, expId]);
-
-  // get comment body, set comment body
-  const [users, setUsers] = useState([]);
-  const [imageFile, setImageFile] = useState(null);
-  const [images, setImages] = useState();
-
   // identify the current user
   const user = useSelector((state) => state.session.user);
   const reviews = useSelector((state) => state.reviews.reviews);
   const rvwImages = useSelector((state) => state.images.rvwImages);
   const reviewArray = Object.values(reviews);
+
+  // get comment body, set comment body
+  const [users, setUsers] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
+  const [list, setList] = useState();
+
+  useEffect(() => {
+    dispatch(getAllReviews(expId));
+    return () => {
+      dispatch(clearReviews());
+    };
+  }, [dispatch, expId, rvwImages]);
 
   useEffect(() => {
     async function fetchData() {
