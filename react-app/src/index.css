@@ -1,11 +1,11 @@
 /* Site wide styles */
-/* :root {
-  --prussian-blue: #023047;
-  --blue-green: rgb(33, 158, 188);
-  --light-cornflower-blue: rgb(142, 202, 230);
-  --selective-yellow: rgb(255, 183, 3);
-  --tangerine: rgb(250, 133, 0);
-} */
+:root {
+  --local-red: rgb(255, 22, 84);
+  --local-navy: rgb(21, 52, 98);
+  --local-teal: rgb(79, 160, 149);
+  --local-green: rgb(186, 209, 194);
+  --local-yellow: rgb(255, 255, 231);
+}
 
 * {
   margin: 0;
@@ -15,7 +15,7 @@
 html,
 body {
   height: 100%;
-  size: 16px;
+  size: 18px;
   font-family: "M PLUS 1", sans-serif;
 }
 
@@ -39,14 +39,36 @@ footer {
   bottom: 0;
   height: 80px;
   width: 100%;
-  border-top: 1px solid rgb(221, 237, 170);
+  border-top: 1px solid rgb(186, 209, 194);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
   font-family: "M PLUS 1", sans-serif;
-  font-size: 18px;
-  /* background-color: rgb(221, 237, 170); */
+  font-size: 16px;
+}
+
+label {
+  color: black;
+}
+
+select {
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 16px;
+  color: black;
+}
+
+#err {
+  color: rgb(255, 22, 84);
+}
+
+.react-datetime-picker * {
+  color: black;
+  background-color: white;
+}
+
+.nav {
+  height: 32px;
 }
 
 .about-me {
@@ -74,11 +96,14 @@ footer {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 30px;
-  border: 1px solid #4f6700;
+  height: 32px;
+  width: 66px;
+  border: 1px solid black;
   border-radius: 25px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+}
+
+.fa-user {
+  color: white;
 }
 
 .logo-search-profile {
@@ -87,7 +112,7 @@ footer {
   align-items: center;
   width: 92.5%;
   justify-content: flex-start;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-right: 40px;
   height: 40px;
   position: relative;
@@ -104,8 +129,8 @@ footer {
 
 .img-logo {
   align-items: flex-start;
-  height: 90px;
-  width: 160px;
+  height: 60px;
+  width: 180px;
   object-fit: scale-down;
   cursor: pointer;
 }
@@ -124,6 +149,7 @@ hr.navbar {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   height: 40px;
 }
 
@@ -138,14 +164,18 @@ hr.navbar {
 
 .create-exp {
   cursor: pointer;
-  border: 1px solid rgb(221, 237, 170);
+  border: 1px solid rgb(79, 160, 149);
+  color: rgb(79, 160, 149);
+  font-family: "M PLUS 1", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
   height: 24px;
   border-radius: 10px;
   padding: 4px;
 }
+
 .create-exp:hover {
-  text-shadow: 1px 1px #0000004c;
-  box-shadow: 1px 1px #0000004c;
+  box-shadow: 1px 1px rgb(79, 160, 149);
 }
 
 .hamburger {
@@ -153,34 +183,53 @@ hr.navbar {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  margin-left: 6px;
+  width: 12px;
+  margin-left: 12px;
   cursor: pointer;
+}
+
+.prof-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 22px;
+  border: 2px solid black;
+  background-color: black;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 4px;
 }
 
 .explore {
-  margin-left: 40px;
-  margin-right: 40px;
   display: flex;
   flex-direction: row;
-  cursor: pointer;
-  border: 1px solid rgb(221, 237, 170);
-  height: 24px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 15px;
+  width: 55px;
   border-radius: 10px;
-  padding: 4px;
+  color: rgb(79, 160, 149);
+  padding: 8px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-family: "M PLUS 1", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  border: 1px solid rgb(79, 160, 149);
+  cursor: pointer;
 }
 
 .explore:hover {
-  text-shadow: 1px 1px #0000004c;
   cursor: pointer;
-  box-shadow: 1px 1px #0000004c;
-  /* font-weight: 600; */
+  box-shadow: 1px 1px rgb(79, 160, 149);
 }
 
-.fa-bars {
-  color: rgb(79, 103, 0);
-  padding-left: 3px;
-  padding-right: 3px;
+.hr-bars {
+  color: black;
 }
 
 .show-dropdown {
@@ -191,7 +240,7 @@ hr.navbar {
   width: 160px;
   right: -35px;
   top: 10px;
-  border: 1px solid rgb(79, 103, 0);
+  border: 1px solid black;
   background-color: white;
   opacity: 1;
   border-radius: 20px;
@@ -199,7 +248,7 @@ hr.navbar {
 }
 
 hr.bars {
-  background-color: rgb(79, 103, 0);
+  background-color: black;
   width: 20px;
   margin: 2px;
   margin-left: 6px;
@@ -214,8 +263,7 @@ hr.bars {
   margin: 6px;
   margin-left: 10px;
   justify-content: center;
-  color: rgb(221, 237, 170);
-  border: 1px solid rgb(79, 103, 0);
+  color: black;
   border-radius: 50%;
   cursor: pointer;
 }

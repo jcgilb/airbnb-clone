@@ -49,8 +49,11 @@ const NavBar = ({ loaded }) => {
             <hr className="bars" />
           </div>
           <div className="profile">
-            <div onClick={() => history.push(`/users/${user?.id}`)}>
-              <i className="fa-solid fa-circle-user fa-2x"></i>
+            <div
+              className="prof-box"
+              onClick={() => history.push(`/users/${user?.id}`)}
+            >
+              <i className="fa-solid fa-user"></i>
             </div>
           </div>
         </div>
@@ -71,14 +74,14 @@ const NavBar = ({ loaded }) => {
 
   return (
     <nav>
-      <div>
+      <div className="nav">
         <div className="logo-search-profile">
           <div className="logo">
             <img
               onClick={() => history.push("/")}
               className="img-logo"
               alt="logo"
-              src="../../assets/localXP-logo.jpg"
+              src="../../assets/localxp-high-res-logo.png"
             />
           </div>
           <div className="searchbar">

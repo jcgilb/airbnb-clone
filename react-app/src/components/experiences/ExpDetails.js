@@ -6,6 +6,7 @@ import AvailableTimes from "../timeSlots/AvailableTimes.js";
 import DeleteExpImg from "../images/DeleteExpImage.js";
 import AllImages from "../images/AllImages.js";
 import "./ExpDetails.css";
+import GetReviews2 from "../reviews/GetReviews2.js";
 
 const ExperienceDetails = () => {
   const dispatch = useDispatch();
@@ -245,6 +246,8 @@ const ExperienceDetails = () => {
       <hr></hr>
       <div className="details">Choose from available dates</div>
       <AvailableTimes />
+      <hr></hr>
+      <GetReviews2 />
       <br />
       <br />
     </div>

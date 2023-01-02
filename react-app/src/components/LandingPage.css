@@ -26,6 +26,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  color: black;
   font-family: "M PLUS 1", sans-serif;
   font-size: 52px;
   font-weight: 700;
@@ -60,6 +61,7 @@
   height: 30px;
   width: 30px;
   border-radius: 50%;
+  color: black;
 }
 
 .fa-chevron-right {
@@ -71,6 +73,7 @@
   height: 30px;
   width: 30px;
   border-radius: 50%;
+  color: black;
 }
 
 .fa-chevron-left:hover {
@@ -139,6 +142,7 @@
   overflow: hidden;
   white-space: nowrap;
   max-width: 340px;
+  color: black;
 }
 
 .exp-info {
@@ -146,4 +150,5 @@
   overflow: hidden;
   white-space: nowrap;
   max-width: 250px;
+  color: black;
 }

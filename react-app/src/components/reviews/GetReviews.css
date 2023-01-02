@@ -24,6 +24,10 @@
   align-items: center;
 }
 
+.star {
+  margin-right: 10px;
+}
+
 .rvw-username-timestamp {
   margin-left: 15px;
   display: flex;
