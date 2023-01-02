@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import { deleteRvwImage } from "../../store/images.js";
 import { clearReviews, getAllReviews } from "../../store/reviews.js";
-import UploadReviewImage from "../images/RvwImage.js";
 import CreateReview from "./CreateReview.js";
 import "./GetReviews.css";
 
@@ -43,11 +42,11 @@ function GetReviews2() {
   }, []);
 
   const getUsername = (userId) => {
-    let user = users.find((user) => user.id === userId);
+    let user = users?.find((user) => user?.id === userId);
     return user?.username;
   };
   const getProfilePic = (userId) => {
-    let user = users.find((user) => user.id === userId);
+    let user = users?.find((user) => user?.id === userId);
     if (!user?.image_url) return "../../assets/default-image-localXP.png";
     return user?.image_url;
   };
@@ -63,8 +62,8 @@ function GetReviews2() {
     } else {
       return (
         <div className="star-rating">
-          <i className="fa-sharp fa-solid fa-star"></i>
-          <span>{avg}</span>(<span>{`${total} reviews`}</span>)
+          <i className="fa-sharp fa-solid fa-star star"></i>
+          <span className="star">{avg}</span>(<span>{`${total} reviews`}</span>)
         </div>
       );
     }
@@ -72,7 +71,7 @@ function GetReviews2() {
 
   return (
     <div className="">
-      <div>{getAvgStars(reviewArray)}</div>
+      <div className="details">{getAvgStars(reviewArray)}</div>
       {Object.values(reviews).map((rvw) => (
         <div className="each-rvw">
           <div className="pic-name-timestamp">
@@ -82,17 +81,17 @@ function GetReviews2() {
               onError={(e) => {
                 e.target.src = "../../assets/default-image-localXP.png";
               }}
-              src={getProfilePic(rvw.user_id)}
+              src={getProfilePic(rvw?.user_id)}
             ></img>
             <span className="rvw-username-timestamp">
-              <div>{getUsername(rvw.user_id)}</div>
+              <div>{getUsername(rvw?.user_id)}</div>
               <div>{rvw.created_at}</div>
             </span>
           </div>
-          {rvw.user_id === user.id && (
+          {rvw.user_id === user?.id && (
             <div
               onClick={() =>
-                history.push(`/experiences/${expId}/reviews/${rvw.id}/upload`)
+                history.push(`/experiences/${expId}/reviews/${rvw?.id}/upload`)
               }
             >
               Add review images +

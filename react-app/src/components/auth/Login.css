@@ -3,15 +3,17 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  color: rgb(79, 103, 0);
+  color: white;
   height: 32px;
   width: 100%;
   border-radius: 10px;
-  background-color: rgb(221, 237, 170);
+  background-color: rgb(79, 160, 149);
   padding: 8px;
   margin-top: 10px;
   margin-bottom: 8px;
+  font-family: "M PLUS 1", sans-serif;
   font-weight: 500;
+  font-size: 16px;
   border: none;
   cursor: pointer;
 }
@@ -21,16 +23,18 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  color: rgb(79, 103, 0);
+  color: white;
   height: 32px;
   width: 68px;
   border-radius: 10px;
-  background-color: rgb(221, 237, 170);
+  background-color: rgb(79, 160, 149);
   padding: 8px;
   margin-right: 20px;
   margin-top: 10px;
   margin-bottom: 8px;
+  font-family: "M PLUS 1", sans-serif;
   font-weight: 500;
+  font-size: 16px;
   border: none;
   cursor: pointer;
 }
@@ -65,13 +69,15 @@
   padding: 8px;
   margin-top: 10px;
   margin-bottom: 8px;
+  font-family: "M PLUS 1", sans-serif;
   font-weight: 500;
+  font-size: 15px;
   border: none;
   cursor: pointer;
 }
 .modal-container {
-  background: white;
-  width: 300px;
+  background: var(--local-yellow);
+  width: 420px;
   display: flex;
   padding: 20px;
   margin: 0 auto;
@@ -79,7 +85,7 @@
   border-radius: 10px;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid #5b8193;
+  border: 1px solid black;
 }
 
 .input-container {
@@ -91,13 +97,16 @@
 }
 
 .modal-form {
-  width: 300px;
+  width: 400px;
 }
 
 .modal-input {
-  width: 89%;
+  width: 92%;
   height: 30px;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+  color: black;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 16px;
 }

@@ -16,6 +16,7 @@
   font-size: 24px;
   font-weight: 600;
   line-height: 1.43;
+  color: black;
 }
 
 .title {
@@ -27,6 +28,7 @@
   font-size: 21px;
   font-weight: 600;
   line-height: 1.43;
+  color: black;
 }
 
 .exp-name-profile {
@@ -34,6 +36,7 @@
   font-size: 18px;
   font-weight: 500;
   width: 100%;
+  color: black;
 }
 
 .exp-date-profile {
@@ -41,6 +44,7 @@
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 10px;
+  color: black;
 }
 .exp-location-profile {
   font-family: "M PLUS 1", sans-serif;
@@ -48,6 +52,7 @@
   font-weight: 400;
   margin-bottom: 10px;
   width: 100%;
+  color: black;
 }
 
 .delete-bkg-profile {
@@ -56,7 +61,7 @@
   align-items: space-between;
   justify-content: space-between;
   cursor: pointer;
-  border-bottom: 1px solid #5a3a5830;
+  border-bottom: 1px solid rgb(186, 209, 194);
   inline-size: 100%;
   overflow-wrap: break-word;
 }
@@ -72,7 +77,7 @@
   align-items: space-between;
   justify-content: space-between;
   cursor: pointer;
-  border-bottom: 1px solid #5a3a5830;
+  border-bottom: 1px solid rgb(186, 209, 194);
   inline-size: 100%;
   overflow-wrap: break-word;
 }
@@ -88,7 +93,7 @@
   padding: 4px;
   border-radius: 10px;
   background-color: white;
-  border: 1px solid rgb(221, 237, 170);
+  border: 1px solid rgb(186, 209, 194);
   height: 24px;
   border-radius: 10px;
   padding: 4px;

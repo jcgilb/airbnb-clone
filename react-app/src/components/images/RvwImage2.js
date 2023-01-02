@@ -7,9 +7,7 @@ import { getAllReviews, uploadRvwImage } from "../../store/reviews.js";
 
 function UploadReviewImage2() {
   const [images, setImages] = useState([]);
-  const [uploaded, setUploaded] = useState(false);
   const [errors, setErrors] = useState([]);
-  // const allowedExt = ["HEIC", " JPEG", "JPG", "PNG", "jpeg", "jpg", "png"];
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,33 +39,27 @@ function UploadReviewImage2() {
     setImages(imageList);
   };
 
-  // // err validations
-  // useEffect(() => {
-  //   const err = [];
-  //   // limit image file size to 1MB => 1,000,000 bites
-  //   if (image[0]?.file.size > 1000000) err.push("Limit image size to 1MB.");
-  //   setErrors(err);
-  // }, []);
+  // err validations
+  useEffect(() => {
+    const err = [];
+    let imageFiles = images?.map((img) => img.file);
+    for (let i = 0; i < imageFiles.length; i++) {
+      let img = imageFiles[i];
+      // limit image file size to 1MB => 1000KB => 1,000,000 bites
+      if (img.size > 1000000) err.push("Limit image size to 1MB.");
+    }
+    setErrors(err);
+  }, [images]);
 
   // handle form submit function
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // console.log("image", image);
-    // let imageFile = image[0]?.file;
-    // console.log("imgFile", imageFile);
-
-    console.log("images", images);
     let imageFiles = images?.map((img) => img.file);
-    console.log("imgFiles", imageFiles);
-
     await uploadImages(rvwId, imageFiles);
-    alert("Success");
     history.push(`/experiences/${expId}`);
-    // if (uploaded)
-    //   history.push(`/experiences/${expId}/reviews/${rvw.id}/upload`);
   };
 
+  // send image files to thunk
   const uploadImages = async (rvwId, imageFiles) => {
     for (let i = 0; i < imageFiles.length; i++) {
       let img = imageFiles[i];
@@ -78,7 +70,6 @@ function UploadReviewImage2() {
       };
       await dispatch(uploadRvwImage(rvwId, newRvwImage));
     }
-    // setUploaded(true);
   };
 
   return (
@@ -89,7 +80,6 @@ function UploadReviewImage2() {
         value={images}
         onChange={onChange}
         maxNumber={5}
-        maxFileSize={1000000}
         dataURLKey="data_url"
         acceptType={["jpg", "png", "jpeg"]}
       >
