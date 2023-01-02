@@ -1,10 +1,10 @@
 /* Site wide styles */
 :root {
+  --local-red: rgb(255, 22, 84);
   --local-navy: rgb(21, 52, 98);
   --local-teal: rgb(79, 160, 149);
   --local-green: rgb(186, 209, 194);
-  --local-yellow: rgb(246, 246, 222);
-  --local-red: rgb(255, 22, 84);
+  --local-yellow: rgb(255, 255, 231);
 }
 
 * {
@@ -46,7 +46,6 @@ footer {
   justify-content: flex-end;
   font-family: "M PLUS 1", sans-serif;
   font-size: 16px;
-  /* background-color: rgb(186, 209, 194); */
 }
 
 label {
@@ -65,6 +64,7 @@ select {
 
 .react-datetime-picker * {
   color: black;
+  background-color: white;
 }
 
 .nav {
@@ -97,7 +97,7 @@ select {
   justify-content: center;
   align-items: center;
   height: 32px;
-  width: 68px;
+  width: 66px;
   border: 1px solid black;
   border-radius: 25px;
 }
@@ -184,7 +184,7 @@ hr.navbar {
   align-items: center;
   justify-content: center;
   width: 12px;
-  margin-left: 10px;
+  margin-left: 12px;
   cursor: pointer;
 }
 
@@ -199,7 +199,7 @@ hr.navbar {
   background-color: black;
   border-radius: 50%;
   cursor: pointer;
-  margin-left: 5px;
+  margin-left: 4px;
 }
 
 .explore {

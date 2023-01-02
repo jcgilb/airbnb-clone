@@ -16,11 +16,13 @@
   align-items: center;
   justify-content: center;
   color: white;
-  height: 30px;
-  width: 140px;
-  border-radius: 5px;
+  height: 32px;
+  width: 164px;
+  border-radius: 10px;
   border: none;
   background-color: black;
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 16px;
   padding: 8px;
   font-weight: 500;
   cursor: pointer;

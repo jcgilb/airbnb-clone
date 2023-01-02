@@ -36,6 +36,7 @@
   flex-direction: column;
   justify-content: center;
   border: 1px solid black;
+  background-color: rgb(255, 255, 231);
 }
 
 .exp-name,
@@ -135,13 +136,13 @@ input.exp-price {
   align-items: center;
   justify-content: center;
   color: white;
-  height: 30px;
+  height: 32px;
   width: 130px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: none;
   background-color: black;
   font-family: "M PLUS 1", sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   padding: 8px;
   font-weight: 500;
   cursor: pointer;
