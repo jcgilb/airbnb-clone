@@ -24,7 +24,6 @@ function GetReviews() {
   // get comment body, set comment body
   const [users, setUsers] = useState([]);
   const [imageFile, setImageFile] = useState(null);
-  const [list, setList] = useState();
 
   useEffect(() => {
     dispatch(getAllReviews(expId));
@@ -99,8 +98,12 @@ function GetReviews() {
           <div className="rvw-images">
             {rvw.review_images.map((image, index) => (
               <div key={index} className="image-item">
-                <img src={image.image_url} alt="" width="100" />
-                <div className="images-to-submit">
+                <img
+                  className="rvw-image-uploads"
+                  src={image.image_url}
+                  alt="rvw-img"
+                />
+                <div className="delete-rvw-image">
                   <button
                     onClick={async () => {
                       await dispatch(deleteRvwImage(rvw.id, image.id));
