@@ -1,3 +1,6 @@
+.rvws-container {
+}
+
 .each-rvw {
   display: flex;
   flex-direction: column;
@@ -8,7 +11,6 @@
   width: 40px;
   object-fit: cover;
   border-radius: 50%;
-  border: 1px solid #35460055;
 }
 
 .pic-name-timestamp {
@@ -39,4 +41,41 @@
 .rvw-body {
   margin-top: 5px;
   margin-bottom: 25px;
+}
+.add-img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 150px;
+  cursor: pointer;
+}
+.add-rvw-img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.add-img:hover {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.284);
+}
+.rvw-images {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.rvw-image-uploads {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  padding: 0px 8px 8px 0px;
+}
+
+.rvw-image-uploads {
+  position: relative;
+}
+
+.delete-rvw-image {
+  position: absolute;
+  z-index: 3;
 }

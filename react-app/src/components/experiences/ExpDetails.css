@@ -171,6 +171,7 @@
   border-radius: 5%;
   margin: 4px;
   margin-left: 0px;
+  margin: 0px 8px 8px 0px;
 }
 
 .book-exp {
@@ -201,7 +202,7 @@
   height: 32px;
   width: 68px;
   border-radius: 10px;
-  background-color: rgb(79, 160, 149);
+  background-color: rgb(186, 209, 194);
   padding: 8px;
   margin-top: 8px;
   font-family: "M PLUS 1", sans-serif;

@@ -22,7 +22,6 @@ function GetReviews2() {
 
   // get comment body, set comment body
   const [users, setUsers] = useState([]);
-  const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
     console.log(expId, "expId");
@@ -70,7 +69,7 @@ function GetReviews2() {
   };
 
   return (
-    <div className="">
+    <div className="rvws-container">
       <div className="details">{getAvgStars(reviewArray)}</div>
       {Object.values(reviews).map((rvw) => (
         <div className="each-rvw">
@@ -90,26 +89,35 @@ function GetReviews2() {
           </div>
           {rvw.user_id === user?.id && (
             <div
+              className="add-img"
               onClick={() =>
                 history.push(`/experiences/${expId}/reviews/${rvw?.id}/upload`)
               }
             >
-              Add review images +
+              <div className="add-rvw-img">Add review images</div>
+              <div className="add-rvw-img">
+                <i className="fa-solid fa-plus" />
+              </div>
             </div>
           )}
           <div className="rvw-images">
             {rvw.review_images.map((image, index) => (
               <div key={index} className="image-item">
-                <img src={image.image_url} alt="" width="100" />
-                <div className="images-to-submit">
-                  <button
+                <div className="image-item">
+                  <div
+                    className="delete-rvw-image"
                     onClick={async () => {
                       await dispatch(deleteRvwImage(rvw.id, image.id));
                       return history.push(`/experiences/${expId}`);
                     }}
                   >
-                    X
-                  </button>
+                    <i className="fa-solid fa-x" />
+                  </div>
+                  <img
+                    className="rvw-image-uploads"
+                    src={image.image_url}
+                    alt="rvw-img"
+                  />
                 </div>
               </div>
             ))}
