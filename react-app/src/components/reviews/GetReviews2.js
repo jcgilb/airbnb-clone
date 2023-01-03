@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
-import { deleteRvwImage } from "../../store/images.js";
-import { clearReviews, getAllReviews } from "../../store/reviews.js";
+// import {} from "../../store/images.js";
+
+import {
+  clearReviews,
+  getAllReviews,
+  deleteRvwImage,
+} from "../../store/reviews.js";
 import CreateReview from "./CreateReview.js";
 import "./GetReviews.css";
 
@@ -108,7 +113,8 @@ function GetReviews2() {
                     className="delete-rvw-image"
                     onClick={async () => {
                       await dispatch(deleteRvwImage(rvw.id, image.id));
-                      return history.push(`/experiences/${expId}`);
+                      await dispatch(getAllReviews(expId));
+                      history.push(`/experiences/${expId}`);
                     }}
                   >
                     <i className="fa-solid fa-x" />
