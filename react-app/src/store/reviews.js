@@ -5,6 +5,7 @@ const GET_ALL = "reviews/GET_ALL";
 const GET_ONE = "reviews/GET_ONE";
 const CLEAR_RVWS = "reviews/CLEAR_RVWS";
 const ADD_UPDATE = "reviews/ADD_UPDATE";
+const REMOVE_RVW_IMG = "images/REMOVE_RVW_IMG";
 
 const getAll = (reviews) => ({
   type: GET_ALL,
@@ -37,6 +38,12 @@ const uploadRvwImg = (rvw) => {
     rvw,
   };
 };
+
+const removeRvwImg = (imgId, rvwId) => ({
+  type: REMOVE_RVW_IMG,
+  rvwId,
+  imgId,
+});
 
 const remove = (rvwId) => ({
   type: REMOVE,
@@ -110,7 +117,17 @@ export const uploadRvwImage = (rvwId, payload) => async (dispatch) => {
   }
 };
 
-// delete an review
+// delete a rvw image
+export const deleteRvwImage = (rvwId, imgId) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/${rvwId}/images/${imgId}`, {
+    method: "DELETE",
+  });
+  if (response.ok) {
+    dispatch(removeRvwImg(imgId, rvwId));
+  }
+};
+
+// delete a review
 export const deleteReview = (expId, rvwId) => async (dispatch) => {
   const response = await fetch(`/api/experiences/${expId}/reviews/${rvwId}`, {
     method: "DELETE",
@@ -163,6 +180,14 @@ const reviewReducer = (state = initialState, action) => {
         newState.reviews[action.rvw.id] = action.rvw;
         return newState;
       }
+    case REMOVE_RVW_IMG:
+      newState = { ...state };
+      // normalize image data
+      newState.reviews[action.rvwId]["review_images"].forEach((img) => {
+        newState.reviews[action.rvwId]["review_images"][action.imgId] = img;
+      });
+      delete newState.reviews[action.rvwId]["review_images"][action.imgId];
+      return newState;
     case REMOVE:
       newState = { ...state };
       delete newState[action.rvwId];

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import ImageUploading from "react-images-uploading";
-import { deleteRvwImage } from "../../store/images.js";
+import { deleteRvwImage, uploadReviewImage } from "../../store/images.js";
 import { getAllReviews, uploadRvwImage } from "../../store/reviews.js";
 
 function UploadReviewImage2() {

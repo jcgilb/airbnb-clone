@@ -58,7 +58,7 @@ export const ceateExpImage = (expId, payload) => async (dispatch) => {
 //   return response;
 // };
 
-export const uploadRvwImage = (rvwId, payload) => async (dispatch) => {
+export const uploadReviewImage = (rvwId, payload) => async (dispatch) => {
   const { review_id, file, newFile } = payload;
 
   const form = new FormData();
