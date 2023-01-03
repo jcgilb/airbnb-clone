@@ -76,6 +76,7 @@ function GetReviews2() {
   return (
     <div className="rvws-container">
       <div className="details">{getAvgStars(reviewArray)}</div>
+      <CreateReview />
       {Object.values(reviews).map((rvw) => (
         <div className="each-rvw">
           <div className="pic-name-timestamp">
@@ -106,7 +107,7 @@ function GetReviews2() {
             </div>
           )}
           <div className="rvw-images">
-            {rvw.review_images.map((image, index) => (
+            {rvw?.review_images?.map((image, index) => (
               <div key={index} className="image-item">
                 <div className="image-item">
                   <div
@@ -131,7 +132,6 @@ function GetReviews2() {
           <div className="rvw-body">{rvw.review_body}</div>
         </div>
       ))}
-      <CreateReview />
     </div>
   );
 }

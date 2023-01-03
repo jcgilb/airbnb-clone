@@ -10,6 +10,7 @@ function Search({ exp, expId, slot }) {
   }, [dispatch]);
 
   const experiences = useSelector((state) => state.experiences.experiences);
+  const expArr = Object.values(experiences);
 
   const [target, setTarget] = useState();
 
