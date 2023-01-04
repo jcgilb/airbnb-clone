@@ -68,7 +68,8 @@ select {
 }
 
 .sc-hLBbgP.fDbOPw {
-  min-height: 40px !important;
+  min-height: 38px !important;
+  max-height: 34px !important;
   display: flex;
   flex-direction: row-reverse !important;
 }
@@ -101,7 +102,7 @@ select {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 4px;
+  margin-top: 5px;
   font-family: "M PLUS 1", sans-serif !important;
 }
 
