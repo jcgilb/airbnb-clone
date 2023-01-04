@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { ModalProvider } from "./context/Modal";
 import App from "./App";
 import "./index.css";
-import LatestReviewProvider from "./context/LatestReviewContext";
+import SearchResultsProvider from "./context/SearchResultsContext";
 
 const store = configureStore();
 
@@ -13,9 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ModalProvider>
-        <LatestReviewProvider>
+        <SearchResultsProvider>
           <App />
-        </LatestReviewProvider>
+        </SearchResultsProvider>
       </ModalProvider>
     </Provider>
   </React.StrictMode>,

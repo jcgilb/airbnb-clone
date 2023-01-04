@@ -16,6 +16,7 @@ import DeleteExperience from "./components/experiences/DeleteExp";
 import LandingPage from "./components/LandingPage";
 import NotFoundPage from "./components/NotFoundPage";
 import UploadReviewImage2 from "./components/images/RvwImage2";
+import ExploreExperienceResults from "./components/experiences/ExploreExperienceResults";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -55,6 +56,9 @@ function App() {
         </Route>
         <Route path="/experiences" exact={true}>
           <ExploreExperiences loaded={loaded} expArr={expArr} />
+        </Route>
+        <Route path="/experiences/results" exact={true}>
+          <ExploreExperienceResults loaded={loaded} expArr={expArr} />
         </Route>
         <Route path="/experiences/new" exact={true}>
           <NewExperience />
