@@ -26,14 +26,24 @@ function GetReviews2() {
 
   // get comment body, set comment body
   const [users, setUsers] = useState([]);
+  const [reviewArr, setReviewArr] = useState(reviewArray);
 
   useEffect(() => {
-    console.log(expId, "expId");
     dispatch(getAllReviews(expId));
     return () => {
       dispatch(clearReviews());
     };
   }, [dispatch, expId, rvwImages]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(`/api/experiences/${expId}/reviews`);
+      const responseData = await response.json();
+      setReviewArr(responseData);
+      console.log("reviewArr", reviewArr);
+    }
+    fetchData();
+  }, [reviews]);
 
   useEffect(() => {
     async function fetchData() {
@@ -134,7 +144,9 @@ function GetReviews2() {
             </div>
             <div className="review-section">
               <div className="rvw-body">{rvw.review_body}</div>
-              <DeleteReview rvw={rvw} />
+              <div className="delete-review">
+                <DeleteReview rvw={rvw} />
+              </div>
             </div>
           </div>
         ))}

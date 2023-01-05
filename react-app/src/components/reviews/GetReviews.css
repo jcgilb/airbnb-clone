@@ -38,10 +38,6 @@
   align-items: flex-start;
 }
 
-.rvw-body {
-  margin-top: 5px;
-  margin-bottom: 25px;
-}
 .add-img {
   display: flex;
   flex-direction: row;
@@ -85,4 +81,14 @@
   align-items: center;
   justify-content: space-between;
   width: 632px;
+  margin-bottom: 20px;
+}
+
+.rvw-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
