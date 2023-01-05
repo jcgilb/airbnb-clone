@@ -94,9 +94,29 @@ const NavBar = ({ loaded }) => {
                 <div className="show-dropdown">
                   <div
                     onClick={() => history.push("/experiences/new")}
-                    className="create-exp"
+                    className="top create-exp"
                   >
                     Host an experience
+                  </div>
+                  <div
+                    onClick={() => history.push(`/users/${user?.id}/bookings`)}
+                    className="middle create-exp"
+                  >
+                    My bookings
+                  </div>
+                  <div
+                    onClick={() =>
+                      history.push(`/users/${user?.id}/experiences`)
+                    }
+                    className="middle create-exp"
+                  >
+                    My experiences
+                  </div>
+                  <div
+                    onClick={() => history.push(`/users/${user?.id}`)}
+                    className="bottom create-exp"
+                  >
+                    Profile
                   </div>
                   <div className="logout">
                     <LogoutButton />

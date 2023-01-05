@@ -5,8 +5,11 @@
   height: 100%;
   width: 92%;
 }
+
 .container-inner {
   /* height: 100vh; */
+  width: 100%;
+  margin: 0 auto;
 }
 
 .profile-title {
@@ -29,6 +32,7 @@
   font-weight: 600;
   line-height: 1.43;
   color: black;
+  margin-left: 30px;
 }
 
 .exp-name-profile {
@@ -66,6 +70,19 @@
   overflow-wrap: break-word;
 }
 
+.profile-delete-bkg-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  justify-content: space-between;
+  cursor: pointer;
+  border-bottom: 1px solid rgb(186, 209, 194);
+  inline-size: 100%;
+  overflow-wrap: break-word;
+  padding: 30px;
+  width: 92.5%;
+}
+
 .delete-bkg-profile:hover {
   /* text-shadow: 1px 1px #0000004c; */
 }
@@ -97,6 +114,7 @@
   height: 24px;
   border-radius: 10px;
   padding: 4px;
+  font-size: 14px;
 }
 
 .confirm-delete-bkg:hover {
@@ -107,31 +125,35 @@
 
 .inner-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   height: 100vh;
-  width: 80%;
+  width: 100%;
+  /* border: 3px solid rgb(34, 125, 139); */
 }
 
 .list-exp {
   display: flex;
   flex-direction: column;
   height: 90%;
-  width: 50%;
+  width: 347px;
+  /* border: 3px solid rgb(139, 34, 113); */
 }
 
 .list-bkg {
   display: flex;
   flex-direction: column;
   height: 90%;
-  width: 50%;
+  width: 55%;
+  /* border: 3px solid yellowgreen; */
 }
 
 .user-info {
   display: flex;
   flex-direction: column;
   height: 90%;
-  width: 50%;
-  border: 3px solid forestgreen;
+  width: 347px;
+  /* border: 3px solid forestgreen; */
 }
 
 .user-image {
@@ -140,4 +162,48 @@
   object-fit: cover;
   border: 1px solid hotpink;
   border-radius: 50%;
+}
+
+.carousel .control-dots {
+  position: absolute;
+  bottom: 0;
+  margin: 10px 0;
+  padding: 0;
+  text-align: center;
+  width: 100% !important;
+  z-index: 1;
+}
+
+.carousel.carousel-slider {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+}
+
+.carousel .slide {
+  min-width: 100%;
+  margin: 0;
+  position: relative;
+  text-align: center;
+}
+
+.carousel * {
+  box-sizing: border-box;
+}
+
+.carousel-exp-card {
+  height: 540px;
+  display: flex;
+  flex-direction: column;
+  max-width: 307px;
+  padding: 8px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.carousel-explore-card {
+  align-items: center;
+  justify-content: center;
 }
