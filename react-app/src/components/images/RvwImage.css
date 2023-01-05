@@ -1,5 +1,4 @@
 .dd-img-div {
-  border: 2px solid chartreuse;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -85,6 +84,7 @@
   padding: 8px;
   margin-top: 10px;
   margin-bottom: 8px;
+  margin-right: 10px;
   font-family: "M PLUS 1", sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -96,7 +96,7 @@
   width: 740px;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
 }

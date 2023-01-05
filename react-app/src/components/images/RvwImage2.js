@@ -104,7 +104,7 @@ function UploadReviewImage2() {
               {...dragProps}
               style={isDragging ? { color: "rgb(255, 22, 84)" } : undefined}
             >
-              Drag & Drop to Upload File
+              Drag & Drop to Upload Files*
             </div>
             <div>OR</div>
             <button
@@ -157,6 +157,7 @@ function UploadReviewImage2() {
         <button className="new-img-submit" type="submit">
           Submit
         </button>
+        <div>*(Max 6)</div>
       </form>
     </div>
   );

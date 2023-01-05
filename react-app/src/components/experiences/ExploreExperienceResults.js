@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useSearchResults } from "../../context/SearchResultsContext";
 import "./ExploreExp.css";
+import "../search/SearchResults.css";
 
 const ExploreExperienceResults = () => {
   const history = useHistory();
 
-  const experiences = useSelector((state) => state.experiences.experiences);
-  const [expArr, setExpArr] = useState(Object.values(experiences));
+  const { searchResults, setSearchResults } = useSearchResults();
+  const [expArr, setExpArr] = useState(searchResults);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("/api/experiences");
-      const responseData = await response.json();
-      setExpArr(responseData);
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   setExpArr(searchResults);
+  // }, [searchResults]);
 
   const getFirstImage = (exp) => {
     let image;
@@ -48,45 +45,59 @@ const ExploreExperienceResults = () => {
   //   // TODO: get total num reviews
   // };
 
-  return (
-    <div className="container">
-      <br></br>
-      <br></br>
-      <div className="explore-title">{"All Experiences"}</div>
-      <br></br>
-
-      <div className="flex-row-wrap">
-        {expArr.map((exp) => (
-          <div className="exp-card">
-            <div
-              className="explore-card"
-              key={"image"}
-              onClick={() => getExpDetails(exp.id)}
-            >
-              {getFirstImage(exp)}
-            </div>
-            <div
-              className="explore-card"
-              key={exp.id}
-              onClick={() => getExpDetails(exp.id)}
-            >
-              {exp?.name}
-            </div>
-            <div
-              className="explore-card"
-              key={exp.price}
-              onClick={() => getExpDetails(exp.id)}
-            >
-              {"Price: $"}
-              {exp?.price}/person
-            </div>
-          </div>
-        ))}
+  if (!searchResults)
+    return (
+      <div className="search-results-container">
+        <div className="container">
+          <br></br>
+          <br></br>
+          <div className="explore-title">{"No Results"}</div>
+          <br></br>
+        </div>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
+    );
+
+  return (
+    <div className="search-results-container">
+      <div className="container">
+        <br></br>
+        <br></br>
+        <div className="explore-title">{"Search Results"}</div>
+        <br></br>
+
+        <div className="flex-row-wrap">
+          {searchResults?.map((exp) => (
+            <div className="exp-card">
+              <div
+                className="explore-card"
+                key={"image"}
+                onClick={() => getExpDetails(exp.id)}
+              >
+                {getFirstImage(exp)}
+              </div>
+              <div
+                className="explore-card"
+                key={exp.id}
+                onClick={() => getExpDetails(exp.id)}
+              >
+                {exp?.name}
+              </div>
+              <div
+                className="explore-card"
+                key={exp.price}
+                onClick={() => getExpDetails(exp.id)}
+              >
+                {"Price: $"}
+                {exp?.price}/person
+              </div>
+            </div>
+          ))}
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
     </div>
   );
 };
