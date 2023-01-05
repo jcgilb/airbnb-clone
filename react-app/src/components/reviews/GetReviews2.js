@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
-// import {} from "../../store/images.js";
-
 import {
   clearReviews,
   getAllReviews,
   deleteRvwImage,
 } from "../../store/reviews.js";
 import CreateReview from "./CreateReview.js";
+import DeleteReview from "./DeleteReview.js";
 import "./GetReviews.css";
 
 function GetReviews2() {
@@ -77,61 +76,68 @@ function GetReviews2() {
     <div className="rvws-container">
       <div className="details">{getAvgStars(reviewArray)}</div>
       <CreateReview />
-      {Object.values(reviews).map((rvw) => (
-        <div className="each-rvw">
-          <div className="pic-name-timestamp">
-            <img
-              className="rvw-profile-pic"
-              alt="profile-pic"
-              onError={(e) => {
-                e.target.src = "../../assets/default-image-localXP.png";
-              }}
-              src={getProfilePic(rvw?.user_id)}
-            ></img>
-            <span className="rvw-username-timestamp">
-              <div>{getUsername(rvw?.user_id)}</div>
-              <div>{rvw.created_at}</div>
-            </span>
-          </div>
-          {rvw.user_id === user?.id && (
-            <div
-              className="add-img"
-              onClick={() =>
-                history.push(`/experiences/${expId}/reviews/${rvw?.id}/upload`)
-              }
-            >
-              <div className="add-rvw-img">Add review images</div>
-              <div className="add-rvw-img">
-                <i className="fa-solid fa-plus" />
-              </div>
+      {Object.values(reviews)
+        .reverse()
+        .map((rvw) => (
+          <div className="each-rvw">
+            <div className="pic-name-timestamp">
+              <img
+                className="rvw-profile-pic"
+                alt="profile-pic"
+                onError={(e) => {
+                  e.target.src = "../../assets/default-image-localXP.png";
+                }}
+                src={getProfilePic(rvw?.user_id)}
+              ></img>
+              <span className="rvw-username-timestamp">
+                <div>{getUsername(rvw?.user_id)}</div>
+                <div>{rvw.created_at}</div>
+              </span>
             </div>
-          )}
-          <div className="rvw-images">
-            {rvw?.review_images?.map((image, index) => (
-              <div key={index} className="image-item">
-                <div className="image-item">
-                  <div
-                    className="delete-rvw-image"
-                    onClick={async () => {
-                      await dispatch(deleteRvwImage(rvw.id, image.id));
-                      await dispatch(getAllReviews(expId));
-                      history.push(`/experiences/${expId}`);
-                    }}
-                  >
-                    <i className="fa-solid fa-x" />
-                  </div>
-                  <img
-                    className="rvw-image-uploads"
-                    src={image.image_url}
-                    alt="rvw-img"
-                  />
+            {rvw.user_id === user?.id && (
+              <div
+                className="add-img"
+                onClick={() =>
+                  history.push(
+                    `/experiences/${expId}/reviews/${rvw?.id}/upload`
+                  )
+                }
+              >
+                <div className="add-rvw-img">Add review images</div>
+                <div className="add-rvw-img">
+                  <i className="fa-solid fa-plus" />
                 </div>
               </div>
-            ))}
+            )}
+            <div className="rvw-images">
+              {rvw?.review_images?.map((image, index) => (
+                <div key={index} className="image-item">
+                  <div className="image-item">
+                    <div
+                      className="delete-rvw-image"
+                      onClick={async () => {
+                        await dispatch(deleteRvwImage(rvw.id, image.id));
+                        await dispatch(getAllReviews(expId));
+                        history.push(`/experiences/${expId}`);
+                      }}
+                    >
+                      <i className="fa-solid fa-x" />
+                    </div>
+                    <img
+                      className="rvw-image-uploads"
+                      src={image.image_url}
+                      alt="rvw-img"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="review-section">
+              <div className="rvw-body">{rvw.review_body}</div>
+              <DeleteReview rvw={rvw} />
+            </div>
           </div>
-          <div className="rvw-body">{rvw.review_body}</div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 }
