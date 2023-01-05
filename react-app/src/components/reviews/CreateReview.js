@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import { getAllExperiences } from "../../store/experiences";
 import { createOneReview, getAllReviews } from "../../store/reviews.js";
+import "./CreateReview.css";
 
 function CreateReview() {
   const dispatch = useDispatch();
@@ -78,9 +79,18 @@ function CreateReview() {
   return (
     <div className="">
       <form className="create-comment-form" onSubmit={handleSubmit}>
-        <input
+        {/* <input
+          className="review-input"
           type="body"
-          placeholder="Write a comment"
+          placeholder="Leave a review"
+          value={body}
+          required // simple error handling for when a user tries to post a comment without a body
+          onChange={(e) => setBody(e.target.value)}
+        /> */}
+        <textarea
+          className="exp-description"
+          type="text"
+          placeholder="Leave a review"
           value={body}
           required // simple error handling for when a user tries to post a comment without a body
           onChange={(e) => setBody(e.target.value)}
