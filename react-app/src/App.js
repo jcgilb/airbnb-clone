@@ -17,6 +17,8 @@ import LandingPage from "./components/LandingPage";
 import NotFoundPage from "./components/NotFoundPage";
 import UploadReviewImage2 from "./components/images/RvwImage2";
 import ExploreExperienceResults from "./components/experiences/ExploreExperienceResults";
+import UserExperiences from "./components/users/UserExperiences";
+import UserBookings from "./components/users/UserBookings";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -77,6 +79,12 @@ function App() {
         </Route>
         <Route path="/users/:userId" exact={true}>
           <UserProfile />
+        </Route>
+        <Route path="/users/:userId/experiences" exact={true}>
+          <UserExperiences />
+        </Route>
+        <Route path="/users/:userId/bookings" exact={true}>
+          <UserBookings />
         </Route>
         <Route path="/experiences/:expId/reviews/:rvwId/upload" exact={true}>
           <UploadReviewImage2 />

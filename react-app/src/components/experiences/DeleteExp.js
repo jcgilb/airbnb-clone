@@ -39,7 +39,7 @@ const DeleteExperience = () => {
   };
 
   return (
-    <>
+    <div className="delete-rvw-container">
       <i
         className="exp-trash fa-regular fa-trash-can"
         onClick={() => setShowDelete(true)}
@@ -49,7 +49,7 @@ const DeleteExperience = () => {
           Delete this experience
         </div>
       )}
-    </>
+    </div>
   );
 };
 

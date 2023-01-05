@@ -229,7 +229,7 @@ hr.navbar {
   margin-right: 0px;
 }
 
-.create-exp {
+/* .create-exp {
   cursor: pointer;
   border: 1px solid rgb(79, 160, 149);
   color: rgb(79, 160, 149);
@@ -238,6 +238,44 @@ hr.navbar {
   font-size: 16px;
   height: 24px;
   border-radius: 10px;
+  padding: 4px;
+} */
+
+.top.create-exp {
+  cursor: pointer;
+  border: 1px solid rgb(79, 160, 149);
+  color: rgb(79, 160, 149);
+  font-family: "M PLUS 1", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  height: 24px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 4px;
+}
+
+.middle.create-exp {
+  cursor: pointer;
+  border: 1px solid rgb(79, 160, 149);
+  border-top: none;
+  color: rgb(79, 160, 149);
+  font-family: "M PLUS 1", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  height: 24px;
+  padding: 4px;
+}
+.bottom.create-exp {
+  cursor: pointer;
+  border: 1px solid rgb(79, 160, 149);
+  border-top: none;
+  color: rgb(79, 160, 149);
+  font-family: "M PLUS 1", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  height: 24px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   padding: 4px;
 }
 

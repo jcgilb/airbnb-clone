@@ -190,7 +190,7 @@ const reviewReducer = (state = initialState, action) => {
       return newState;
     case REMOVE:
       newState = { ...state };
-      delete newState[action.rvwId];
+      delete newState.reviews[action.rvwId];
       return newState;
     case CLEAR_RVWS:
       newState = { ...state };

@@ -5,6 +5,9 @@ import { useHistory, useParams } from "react-router-dom";
 import { getUserBookings } from "../../store/bookings";
 import { getAllExperiences, getUserExperiences } from "../../store/experiences";
 import DeleteBooking from "../bookings/DeleteBooking";
+import UserExperiences from "./UserExperiences";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import "./UserProfile.css";
 
 const UserProfile = () => {
@@ -44,6 +47,27 @@ const UserProfile = () => {
   const bkgArray = Object.values(bookings);
   const allExpArr = Object.values(allExps);
 
+  const getFirstImage = (exp) => {
+    let image;
+    if (exp["images"]?.length) {
+      image = exp["images"][0];
+    }
+    return (
+      <img
+        onError={(e) => {
+          e.target.src = "../../assets/default-image-localXP.png";
+        }}
+        className="experience-img"
+        alt={exp.id}
+        src={
+          !image?.image_url
+            ? "../../../assets/default-image-localXP.png"
+            : image?.image_url
+        }
+      ></img>
+    );
+  };
+
   const bookingInfo = (bkg) => {
     let oneExp = allExpArr?.find((exp) => exp.id === bkg.exp_id);
     let timeSlot;
@@ -70,6 +94,10 @@ const UserProfile = () => {
     );
   };
 
+  const getExpDetails = (id) => {
+    history.push(`/experiences/${id}`);
+  };
+
   return (
     <>
       <div className="container">
@@ -94,32 +122,73 @@ const UserProfile = () => {
           )}
 
           <div className="inner-container">
+            <div className="user-info">
+              <div className="title"></div>
+              <div className="user-image"></div>
+              <div className="user-details">
+                {user?.id === userId ? user?.first_name : oneUser?.first_name}{" "}
+                {user?.id === userId ? user?.last_name : oneUser?.last_name}{" "}
+              </div>
+              <div>
+                Total XP:{" "}
+                {user?.id === userId ? user?.total_exp : oneUser?.total_exp}
+              </div>
+              <div>Badges: {""}</div>
+            </div>
             <div className="list-exp">
-              <div className="title">All Experiences:</div>
-
-              {expArray.map((exp) => (
-                <>
-                  <li key={exp.id}>
+              <div className="title">Experiences</div>
+              <Carousel infiniteLoop>
+                {expArray?.map((exp) => (
+                  <div className="carousel-exp-card">
                     <div
-                      className="exp-list-profile"
-                      onClick={(e) => history.push(`/experiences/${exp.id}`)}
+                      className="carousel-explore-card"
+                      key={"image"}
+                      onClick={() => getExpDetails(exp.id)}
                     >
-                      <div>
-                        <div className="exp-name-profile">{exp.name}</div>
-                        <div className="exp-location-profile">
-                          {exp.city}, {exp.state}, {exp.country}
+                      {getFirstImage(exp)}
+                    </div>
+                    <div
+                      className="explore-card"
+                      key={exp.id}
+                      onClick={() => getExpDetails(exp.id)}
+                    >
+                      {exp?.name}
+                    </div>
+                    <div
+                      className="explore-card"
+                      key={exp.price}
+                      onClick={() => getExpDetails(exp.id)}
+                    >
+                      {"Price: $"}
+                      {exp?.price}/person
+                    </div>
+                    <br />
+                  </div>
+                ))}
+                {/* {expArray.map((exp) => (
+                  <>
+                    <li key={exp.id}>
+                      <div
+                        className="exp-list-profile"
+                        onClick={(e) => history.push(`/experiences/${exp.id}`)}
+                      >
+                        <div>
+                          <div className="exp-name-profile">{exp.name}</div>
+                          <div className="exp-location-profile">
+                            {exp.city}, {exp.state}, {exp.country}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                </>
-              ))}
+                    </li>
+                  </>
+                ))} */}
+              </Carousel>
             </div>
             <br />
             <div className="list-bkg">
-              <div className="title">All Bookings:</div>
+              <div className="title">Bookings</div>
               {bkgArray.map((bkg) => (
-                <div className="delete-bkg-profile">
+                <div className="profile-delete-bkg-profile">
                   <li key={bkg.id}>{bookingInfo(bkg)}</li>
                   {user?.id === userId && (
                     <div className="delete-bkg">
@@ -133,18 +202,6 @@ const UserProfile = () => {
                 </div>
               ))}
             </div>
-            {/* <div className="user-info">
-            <div className="user-image"></div>
-            <div className="user-details">
-              {user?.id === userId ? user?.first_name : oneUser?.first_name}{" "}
-              {user?.id === userId ? user?.last_name : oneUser?.last_name}{" "}
-              </div>
-              <div>
-              Total XP:{" "}
-              {user?.id === userId ? user?.total_exp : oneUser?.total_exp}
-              </div>
-              <div>Badges: {""}</div>
-          </div> */}
           </div>
           <br />
           <br />

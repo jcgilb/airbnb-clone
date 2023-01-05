@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getOneExperience } from "../../store/experiences.js";
-import { deleteReview } from "../../store/reviews.js";
+import { deleteReview, getAllReviews } from "../../store/reviews.js";
 import "./DeleteReview.css";
 
 const DeleteReview = ({ rvw }) => {
@@ -13,6 +13,14 @@ const DeleteReview = ({ rvw }) => {
   // identify the experience from the url
   let { expId } = useParams();
   expId = parseInt(expId);
+
+  // get reviews
+  useEffect(() => {
+    dispatch(getAllReviews(expId));
+    return () => {
+      dispatch(getAllReviews(expId));
+    };
+  }, [dispatch]);
 
   // close the menu if a user clicks anywhere outside of it
   useEffect(() => {
@@ -28,7 +36,7 @@ const DeleteReview = ({ rvw }) => {
   const handleClick = async (e) => {
     e.preventDefault();
     await dispatch(deleteReview(expId, rvw.id));
-    dispatch(getOneExperience(expId));
+    await dispatch(getAllReviews(expId));
     return history.push(`/experiences/${expId}`);
   };
 
@@ -36,10 +44,11 @@ const DeleteReview = ({ rvw }) => {
     <>
       <i
         className="review fa-regular fa-trash-can"
+        // onClick={handleClick}
         onClick={() => setShowDelete(true)}
       ></i>
       {showDelete && (
-        <div className="confirm-delete" onClick={handleClick}>
+        <div className="rvw-confirm-delete" onClick={handleClick}>
           Delete review
         </div>
       )}
