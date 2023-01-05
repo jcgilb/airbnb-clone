@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router";
 import ImageUploading from "react-images-uploading";
-import { deleteRvwImage, uploadReviewImage } from "../../store/images.js";
 import { getAllReviews, uploadRvwImage } from "../../store/reviews.js";
+import "./RvwImage.css";
 
 function UploadReviewImage2() {
   const [images, setImages] = useState([]);
@@ -73,13 +73,17 @@ function UploadReviewImage2() {
   };
 
   return (
-    <>
-      <div className="dd-img-div"></div>
+    <div className="dd-img-div">
+      <br></br>
+      <br></br>
+      <div className="exp-details">Upload Review Images</div>
+      <br></br>
+      <br></br>
       <ImageUploading
         multiple
         value={images}
         onChange={onChange}
-        maxNumber={5}
+        maxNumber={6}
         dataURLKey="data_url"
         acceptType={["jpg", "png", "jpeg"]}
       >
@@ -91,14 +95,25 @@ function UploadReviewImage2() {
           isDragging,
           dragProps,
         }) => (
-          <div className="upload__image-wrapper">
+          <div
+            className="upload-image-wrapper"
+            {...dragProps}
+            style={isDragging ? { color: "rgb(255, 22, 84)" } : undefined}
+          >
+            <div
+              {...dragProps}
+              style={isDragging ? { color: "rgb(255, 22, 84)" } : undefined}
+            >
+              Drag & Drop to Upload Files*
+            </div>
+            <div>OR</div>
             <button
-              style={isDragging ? { color: "red" } : undefined}
+              style={isDragging ? { color: "rgb(255, 22, 84)" } : undefined}
               onClick={onImageUpload}
               {...dragProps}
-              className="add-img-container"
+              className="add-img-button"
             >
-              Click or Drop here
+              Browse
             </button>
             <ul className="errors">
               {errors.length > 0 &&
@@ -108,31 +123,43 @@ function UploadReviewImage2() {
                   </div>
                 ))}
             </ul>
-            {imageList?.map((image, index) => (
-              <div key={index} className="image-item">
-                <img src={image["data_url"]} alt="" width="100" />
-                <div className="images-to-submit">
-                  <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button
-                    onClick={() => {
-                      onImageRemove(index);
-                    }}
-                  >
-                    Remove
-                  </button>
+            <div className="image-area">
+              {imageList?.map((image, index) => (
+                <div key={index} className="image-item">
+                  <img
+                    className="rvw-img-preview"
+                    src={image["data_url"]}
+                    alt=""
+                  />
+                  <div className="images-to-submit">
+                    <button
+                      className="rm-update"
+                      onClick={() => onImageUpdate(index)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className="rm-update"
+                      onClick={() => {
+                        onImageRemove(index);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
       </ImageUploading>
       <form className="upload-rvw-form" onSubmit={handleSubmit}>
-        <div className="dd-area"></div>
         <button className="new-img-submit" type="submit">
           Submit
         </button>
+        <div>*(Max 6)</div>
       </form>
-    </>
+    </div>
   );
 }
 

@@ -1,0 +1,102 @@
+.dd-img-div {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.upload-image-wrapper {
+  width: 700px;
+  display: flex;
+  padding: 20px;
+  margin: 0 auto;
+  align-items: center;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px dashed black;
+  background-color: rgb(255, 255, 231);
+}
+
+.rvw-img-preview {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  padding: 10px;
+}
+
+.add-img-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 32px;
+  width: 80px;
+  border-radius: 10px;
+  background-color: rgb(79, 160, 149);
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-family: "M PLUS 1", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.rm-update {
+  margin-left: 10px;
+
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
+  height: 24px;
+  width: 60px;
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
+  font-family: "M PLUS 1", sans-serif;
+  font-size: 14px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.image-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-img-submit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 32px;
+  width: 80px;
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0);
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  margin-right: 10px;
+  font-family: "M PLUS 1", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.upload-rvw-form {
+  width: 740px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}

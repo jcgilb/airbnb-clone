@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { getAllExperiences } from "../../store/experiences";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useSearchResults } from "../../context/SearchResultsContext";
@@ -8,18 +8,25 @@ import { useSearchResults } from "../../context/SearchResultsContext";
 function Search() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const navigate = useLocation();
+
+  const experiences = useSelector((state) => state.experiences.experiences);
+  const keywordList = {};
 
   const { searchResults, setSearchResults } = useSearchResults();
-  const [search, setSearch] = useState();
+  const [expArr, setExpArr] = useState(Object.values(experiences));
 
   useEffect(() => {
     dispatch(getAllExperiences());
   }, [dispatch]);
 
-  const experiences = useSelector((state) => state.experiences.experiences);
-  const expArr = Object.values(experiences);
-  const keywordList = {};
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("/api/experiences");
+      const responseData = await response.json();
+      setExpArr(responseData);
+    }
+    fetchData();
+  }, []);
 
   expArr.map((exp, i) => {
     // cities
@@ -73,6 +80,7 @@ function Search() {
 
   const handleOnSelect = (item) => {
     // the item selected
+    setSearchResults(item.exps);
     return history.push(`/experiences/results`);
   };
 
@@ -86,13 +94,13 @@ function Search() {
 
   if (!experiences) return null;
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="search-container">
+      <header className="search-header">
         <div style={{ width: 400 }}>
           <ReactSearchAutocomplete
             searchResults={searchResults}
             items={items}
-            onSearch={(e) => setSearchResults(e)}
+            // onSearch={(e) => setSearchResults(e)}
             onSelect={handleOnSelect}
             autoFocus
             formatResult={formatResult}
