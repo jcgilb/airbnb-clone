@@ -124,7 +124,16 @@ const UserProfile = () => {
           <div className="inner-container">
             <div className="user-info">
               <div className="title"></div>
-              <div className="user-image"></div>
+              <div className="user-image">
+                <img
+                  className="user-image"
+                  src={
+                    oneUser?.image_url
+                      ? oneUser?.image_url
+                      : "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+                  }
+                ></img>
+              </div>
               <div className="user-details">
                 {user?.id === userId ? user?.first_name : oneUser?.first_name}{" "}
                 {user?.id === userId ? user?.last_name : oneUser?.last_name}{" "}
