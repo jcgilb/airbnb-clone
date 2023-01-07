@@ -8,7 +8,7 @@
 
 .container-inner {
   /* height: 100vh; */
-  width: 100%;
+  width: 92.5%;
   margin: 0 auto;
 }
 
@@ -157,10 +157,10 @@
 }
 
 .user-image {
-  height: 100px;
-  width: 100px;
+  height: 300px;
+  width: 300px;
   object-fit: cover;
-  border: 1px solid hotpink;
+  /* border: 1px solid hotpink; */
   border-radius: 50%;
 }
 
