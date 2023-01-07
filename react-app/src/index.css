@@ -67,6 +67,7 @@ select {
   background-color: white;
 }
 
+/* local */
 .sc-hLBbgP.fDbOPw {
   min-height: 38px !important;
   max-height: 34px !important;
@@ -74,6 +75,15 @@ select {
   flex-direction: row-reverse !important;
 }
 
+/* heroku */
+.lmCTmJ {
+  min-height: 38px !important;
+  max-height: 34px !important;
+  display: flex;
+  flex-direction: row-reverse !important;
+}
+
+/* local */
 .fDbOPw > input {
   width: 100%;
   padding: 0 0 0 17px !important;
@@ -83,6 +93,18 @@ select {
   font-size: inherit;
   font-family: inherit;
   color: #212121;
+}
+
+/* heroku */
+.lmCTmJ > input {
+  width: 100%;
+  padding: 0px 0px 0px 13px;
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: inherit;
+  font-family: inherit;
+  color: rgb(33, 33, 33);
 }
 
 .hCpHso .ellipsis {
@@ -106,10 +128,22 @@ select {
   font-family: "M PLUS 1", sans-serif !important;
 }
 
+/* local */
 .eWFcRu {
   fill: white !important;
   border: 1px solid rgb(255, 22, 84);
   background-color: rgb(255, 22, 84);
+  border-radius: 50%;
+  margin: 7px 7px 7px 7px !important;
+  padding: 3px;
+}
+
+/* heroku */
+.hVRzLL {
+  flex-shrink: 0;
+  fill: rgb(255, 255, 255) !important;
+  border: 1px solid rgb(255, 22, 84) !important;
+  background-color: rgb(255, 22, 84) !important;
   border-radius: 50%;
   margin: 7px 7px 7px 7px !important;
   padding: 3px;
