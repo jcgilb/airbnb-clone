@@ -95,7 +95,7 @@ const LandingPage = () => {
 
   console.log(pos);
   return (
-    <div className="container">
+    <div className="container-landing">
       <br />
       <br />
       <div clasName="top-row">
@@ -108,14 +108,14 @@ const LandingPage = () => {
             {pos > 0 && (
               <i
                 className="fa-solid fa-chevron-left"
-                onClick={() => updatePos(pos - 515 / 1257)}
+                onClick={() => updatePos(pos - 520 / 1257)}
               ></i>
             )}
             <div
               style={{ transform: `translateX(-${pos * 100}%)` }}
               className="flex-row"
             >
-              {reversed?.slice(0, 10).map((exp) => (
+              {reversed?.slice(0, 8).map((exp) => (
                 <div className="splash-exp-card">
                   <div key={"image"} onClick={() => getExpDetails(exp.id)}>
                     {getFirstImage(exp)}
@@ -141,7 +141,7 @@ const LandingPage = () => {
             {pos < 3.27 && (
               <i
                 className="fa-solid fa-chevron-right"
-                onClick={() => updatePos(pos + 515 / 1257)}
+                onClick={() => updatePos(pos + 520 / 1257)}
               ></i>
             )}
             {pos >= 3.27 && <div className="nondescript-div"></div>}

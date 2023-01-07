@@ -138,11 +138,11 @@ const UserProfile = () => {
                 {user?.id === userId ? user?.first_name : oneUser?.first_name}{" "}
                 {user?.id === userId ? user?.last_name : oneUser?.last_name}{" "}
               </div>
-              <div>
+              {/* <div>
                 Total XP:{" "}
                 {user?.id === userId ? user?.total_exp : oneUser?.total_exp}
               </div>
-              <div>Badges: {""}</div>
+              <div>Badges: {""}</div> */}
             </div>
             <div className="list-exp">
               <div className="title">Experiences</div>
