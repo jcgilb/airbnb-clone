@@ -144,9 +144,11 @@ function GetReviews2() {
             </div>
             <div className="review-section">
               <div className="rvw-body">{rvw.review_body}</div>
-              <div className="delete-review">
-                <DeleteReview rvw={rvw} />
-              </div>
+              {rvw.user_id === user.id && (
+                <div className="delete-review">
+                  <DeleteReview rvw={rvw} />
+                </div>
+              )}
             </div>
           </div>
         ))}

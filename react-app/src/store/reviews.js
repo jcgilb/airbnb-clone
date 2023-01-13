@@ -98,13 +98,13 @@ export const updateOneReview = (expId, rvwId, payload) => async (dispatch) => {
   return response;
 };
 
-export const uploadRvwImage = (rvwId, payload) => async (dispatch) => {
-  const { review_id, file, newFile } = payload;
+export const uploadRvwImage = (rvwId, form) => async (dispatch) => {
+  // const { review_id, file, newFile } = payload;
 
-  const form = new FormData();
-  form.append("file", file);
-  form.append("review_id", review_id);
-  form.append("newFile", newFile);
+  // const form = new FormData();
+  // form.append("file", file);
+  // form.append("review_id", review_id);
+  // form.append("newFile", newFile);
 
   const res = await fetch(`/api/reviews/${rvwId}/images`, {
     method: "POST",
