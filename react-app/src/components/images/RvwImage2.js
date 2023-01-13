@@ -63,12 +63,22 @@ function UploadReviewImage2() {
   const uploadImages = async (rvwId, imageFiles) => {
     for (let i = 0; i < imageFiles.length; i++) {
       let img = imageFiles[i];
+
       const newRvwImage = {
         file: img,
         review_id: rvwId,
         newFile: true,
       };
-      await dispatch(uploadRvwImage(rvwId, newRvwImage));
+
+      const { review_id, file, newFile } = newRvwImage;
+
+      const form = new FormData();
+
+      form.append("file", file);
+      form.append("review_id", review_id);
+      form.append("newFile", newFile);
+
+      await dispatch(uploadRvwImage(rvwId, form));
     }
   };
 
