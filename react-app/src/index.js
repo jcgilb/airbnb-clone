@@ -6,6 +6,7 @@ import { ModalProvider } from "./context/Modal";
 import App from "./App";
 import "./index.css";
 import SearchResultsProvider from "./context/SearchResultsContext";
+import SubmittedProvider from "./context/SubmittedContext";
 
 const store = configureStore();
 
@@ -14,7 +15,9 @@ ReactDOM.render(
     <Provider store={store}>
       <ModalProvider>
         <SearchResultsProvider>
-          <App />
+          <SubmittedProvider>
+            <App />
+          </SubmittedProvider>
         </SearchResultsProvider>
       </ModalProvider>
     </Provider>
