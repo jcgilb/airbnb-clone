@@ -554,7 +554,7 @@ def edit_one_rvw(exp_id, rvw_id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @experience_routes.route('/<int:exp_id>/reviews/<int:rvw_id>', methods=["DELETE"])
-def delete_a_rvw(exp_id, rvw_id):
+def delete_one_rvw(exp_id, rvw_id):
     """Delete a review"""
 
     experience = Experience.query.get(exp_id)
@@ -578,7 +578,7 @@ def delete_a_rvw(exp_id, rvw_id):
 
 
 @experience_routes.route('/<int:exp_id>/reviews/<int:rvw_id>/images/<int:img_id>', methods=["DELETE"])
-def delete_a_rvw_image(exp_id, rvw_id, img_id):
+def delete_rvw_image(exp_id, rvw_id, img_id):
     """Delete a review image"""
 
     experience = Experience.query.get(exp_id)
@@ -601,7 +601,7 @@ def delete_a_rvw_image(exp_id, rvw_id, img_id):
       return "Permission denied.", 401  
 
 @experience_routes.route('/<int:exp_id>/images/<int:img_id>', methods=["DELETE"])
-def delete_a_exp_image(exp_id, img_id):
+def delete_exp_image(exp_id, img_id):
     """Delete an experience image"""
 
     experience = Experience.query.get(exp_id)
