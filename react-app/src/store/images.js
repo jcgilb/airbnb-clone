@@ -45,7 +45,7 @@ export const ceateExpImage = (expId, payload) => async (dispatch) => {
 
 // AWS upload
 export const uploadExpImage = (expId, form) => async (dispatch) => {
-  const res = await fetch(`/api/experiences/${expId}/images`, {
+  const res = await fetch(`/api/experiences/${expId}/upload`, {
     method: "POST",
     body: form,
   });
