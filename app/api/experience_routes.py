@@ -5,6 +5,7 @@ from app.models.bookings import db, Booking, booking_schema, bookings_schema
 from app.models.reviews import db, Review, ReviewImage, review_schema, reviews_schema, review_image_schema, reviews_images_schema
 from flask_login import login_required, current_user
 from app.models import User
+from app.cool import *
 
 experience_routes = Blueprint('experiences', __name__)
 
@@ -412,37 +413,72 @@ def create_one_rvw_img(exp_id, rvw_id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401    
 
 
-@experience_routes.route('/<int:exp_id>/images', methods=["POST"])
-def create_one_exp_img(exp_id):
-    """Add an image to an experience"""
-
+@experience_routes.route("/<int:exp_id>/images", methods=['POST'])
+@login_required
+def upload_exp_image(exp_id):
     experience = Experience.query.get(exp_id)
-    if not experience: 
-      return "Experience does not exist", 404
+    newFile = request.form.get('newFile')
+    if newFile == 'true':
+        if "file" not in request.files:
+            return "No file key in request.files"
+        file = request.files['file']
+        exp_dict = experience.to_dict()
+        images = exp_dict["images"]
+        if file:
+            experience_id = request.form.get('experience_id')
+            file_url = upload_file_to_s3(file)
+            image = ExperienceImage(
+                exp_id=exp_id, 
+                image_url=file_url["url"]
+            )
+            db.session.add(image)
+            db.session.commit()
+            images.append(image.to_dict())
+            return experience.to_dict()
 
-    form = ExperienceImageForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-      if experience.host_id == current_user.id:
-        data = form.data
-        preview=data['preview']
-        
-        new_exp_image = ExperienceImage(
-            exp_id=exp_id,
-            image_url=data['image_url'], 
-            preview=preview
+    if newFile == 'false':
+        exp_id = request.form.get('exp_id')
+        image_url = request.form.get('file')
+        image = ExpierienceImage(
+            exp_id=exp_id, 
+            image_url=image_url
         )
-
-        new_exp_image.preview = preview
-
-        db.session.add(new_exp_image)
+        db.session.add(image)
         db.session.commit()
-          
-        return jsonify(experience_image_schema.dump(new_exp_image))
-      else: 
-        return "Only the experience host can add an image to an experience.", 401  
+        return jsonify(experience_image_schema.dump(image))
 
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401    
+
+# @experience_routes.route('/<int:exp_id>/images', methods=["POST"])
+# def create_one_exp_img(exp_id):
+#     """Add an image to an experience"""
+
+#     experience = Experience.query.get(exp_id)
+#     if not experience: 
+#       return "Experience does not exist", 404
+
+#     form = ExperienceImageForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#       if experience.host_id == current_user.id:
+#         data = form.data
+#         preview=data['preview']
+        
+#         new_exp_image = ExperienceImage(
+#             exp_id=exp_id,
+#             image_url=data['image_url'], 
+#             preview=preview
+#         )
+
+#         new_exp_image.preview = preview
+
+#         db.session.add(new_exp_image)
+#         db.session.commit()
+          
+#         return jsonify(experience_image_schema.dump(new_exp_image))
+#       else: 
+#         return "Only the experience host can add an image to an experience.", 401  
+
+#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401    
 
 
 @experience_routes.route('/<int:exp_id>/reviews', methods=["POST"])

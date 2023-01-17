@@ -11,7 +11,7 @@ const addOrUpdate = (image) => {
   };
 };
 
-const uploadRvwImg = (image) => {
+const uploadExpImg = (image) => {
   return {
     type: UPLOAD,
     image,
@@ -43,39 +43,37 @@ export const ceateExpImage = (expId, payload) => async (dispatch) => {
   return response;
 };
 
-// // upload a review image
-// export const uploadRvwImage = (rvwId, payload) => async (dispatch) => {
-//   const response = await fetch(`/api/reviews/${rvwId}/images`, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(payload),
-//   });
-//   console.log(response, "response in thunk");
-//   if (response.ok) {
-//     const image = await response.json();
-//     dispatch(uploadRvwImg(image));
-//   }
-//   return response;
-// };
-
-export const uploadReviewImage = (rvwId, payload) => async (dispatch) => {
-  const { review_id, file, newFile } = payload;
-
-  const form = new FormData();
-  form.append("file", file);
-  form.append("review_id", review_id);
-  form.append("newFile", newFile);
-
-  const res = await fetch(`/api/reviews/${rvwId}/images`, {
+// AWS upload
+export const uploadExpImage = (expId, form) => async (dispatch) => {
+  const res = await fetch(`/api/experiences/${expId}/images`, {
     method: "POST",
     body: form,
   });
 
   if (res.ok) {
-    const image = await res.json();
-    dispatch(uploadRvwImg(image));
+    const img = await res.json();
+    dispatch(uploadExpImg(img));
   }
 };
+
+// export const uploadReviewImage = (rvwId, payload) => async (dispatch) => {
+//   const { review_id, file, newFile } = payload;
+
+//   const form = new FormData();
+//   form.append("file", file);
+//   form.append("review_id", review_id);
+//   form.append("newFile", newFile);
+
+//   const res = await fetch(`/api/reviews/${rvwId}/images`, {
+//     method: "POST",
+//     body: form,
+//   });
+
+//   if (res.ok) {
+//     const image = await res.json();
+//     dispatch(uploadRvwImg(image));
+//   }
+// };
 
 // delete an exp image
 export const deleteExpImage = (expId, imgId) => async (dispatch) => {
@@ -115,11 +113,11 @@ const imageReducer = (state = initialState, action) => {
     case UPLOAD:
       if (!state[action.image.id]) {
         newState = { ...state };
-        newState.rvwImages[action.image.id] = action.image;
+        newState.expImages[action.image.id] = action.image;
         return newState;
       } else {
         newState = { ...state };
-        newState.rvwImages[action.image.id] = action.image;
+        newState.expImages[action.image.id] = action.image;
         return newState;
       }
     case REMOVE_EXP_IMG:

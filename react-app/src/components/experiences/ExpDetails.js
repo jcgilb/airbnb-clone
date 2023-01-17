@@ -1,18 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getOneExperience } from "../../store/experiences.js";
 import AvailableTimes from "../timeSlots/AvailableTimes.js";
 import DeleteExpImg from "../images/DeleteExpImage.js";
 import AllImages from "../images/AllImages.js";
-import "./ExpDetails.css";
 import GetReviews2 from "../reviews/GetReviews2.js";
+import ExpImages2 from "../images/ExpImage2.js";
+import { Modal } from "../../context/Modal";
+import { useSubmitted } from "../../context/SubmittedContext.js";
+import "./ExpDetails.css";
 
 const ExperienceDetails = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   let { expId } = useParams();
   expId = parseInt(expId);
+
+  const [showModal, setShowModal] = useState(false);
+  const { submitted, setSubmitted } = useSubmitted();
 
   useEffect(() => {
     dispatch(getOneExperience(expId));
@@ -23,6 +29,10 @@ const ExperienceDetails = () => {
       dispatch(getOneExperience(expId));
     };
   }, []);
+
+  useEffect(() => {
+    if (submitted && showModal) setShowModal(false);
+  }, [submitted]);
 
   const exp = useSelector((state) => state.experiences.oneExperience);
   const user = useSelector((state) => state.session.user);
@@ -46,6 +56,7 @@ const ExperienceDetails = () => {
       </div>
       <div className="details-images">
         <div className="pic-1">
+          {/* display default image for other users if no photos */}
           {expImgArr.length === 0 && user?.id !== exp.host_id && (
             <>
               <img
@@ -54,6 +65,7 @@ const ExperienceDetails = () => {
               ></img>
             </>
           )}
+          {/* if there is at least one photo */}
           {expImgArr.length >= 1 && (
             <>
               <img
@@ -69,14 +81,21 @@ const ExperienceDetails = () => {
               )}
             </>
           )}
+          {/* if the user is the host and there are no photos */}
           {expImgArr.length === 0 && user?.id === exp.host_id && (
             <i
               className="pic1 fa fa-plus"
-              onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+              // onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+              onClick={() => {
+                if (!user) return alert("You must be logged in first.");
+                setShowModal(true);
+                setSubmitted(false);
+              }}
             ></i>
           )}
         </div>
         <div className="pic2">
+          {/* if there are at least two photos */}
           {expImgArr.length >= 2 && (
             <>
               <img
@@ -92,13 +111,20 @@ const ExperienceDetails = () => {
               )}
             </>
           )}
+          {/* if the user is the host and there are not 2 photos */}
           {!expImgArr[1] && user?.id === exp.host_id && (
             <i
               className="pic-2 fa fa-plus"
-              onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+              // onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+              onClick={() => {
+                if (!user) return alert("You must be logged in first.");
+                setShowModal(true);
+                setSubmitted(false);
+              }}
             ></i>
           )}
         </div>
+        {/* if there are 4 photos */}
         {expImgArr.length === 4 && (
           <div className="img3-img4">
             {expImgArr.length >= 3 && (
@@ -116,6 +142,7 @@ const ExperienceDetails = () => {
                 )}
               </div>
             )}
+            {/* if there are at least 4 photos */}
             {expImgArr.length >= 4 && (
               <div className="pic4">
                 <img
@@ -133,6 +160,7 @@ const ExperienceDetails = () => {
             )}
           </div>
         )}
+        {/* if the array length is not 4 */}
         {expImgArr.length !== 4 && (
           <div className={expImgArr.length === 3 ? "img3" : "pic3-pic4"}>
             {expImgArr.length >= 3 && (
@@ -150,6 +178,7 @@ const ExperienceDetails = () => {
                 )}
               </div>
             )}
+            {/* if the array length is at least 4 */}
             {expImgArr.length >= 4 && (
               <div className="pic4">
                 <img
@@ -165,10 +194,16 @@ const ExperienceDetails = () => {
                 )}
               </div>
             )}
+            {/* if there is no third photo */}
             {!expImgArr[2] && user?.id === exp.host_id && (
               <i
                 className="pic3 fa fa-plus"
-                onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+                // onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+                onClick={() => {
+                  if (!user) return alert("You must be logged in first.");
+                  setShowModal(true);
+                  setSubmitted(false);
+                }}
               ></i>
             )}
             {/* {expImgArr[3] && user?.id === exp.host_id && (
@@ -177,18 +212,25 @@ const ExperienceDetails = () => {
                 onClick={(e) => history.push(`/experiences/${expId}/edit`)}
               ></i>
             )} */}
+            {/* if there are less than 3 photos */}
             {expImgArr.length < 3 &&
               !expImgArr[3] &&
               user?.id === exp.host_id && (
                 <i
                   className="pic4 fa fa-plus"
-                  onClick={(e) => history.push(`/experiences/${expId}/edit`)}
+                  onClick={() => {
+                    if (!user) return alert("You must be logged in first.");
+                    setShowModal(true);
+                    setSubmitted(false);
+                  }}
+                  // onClick={(e) => history.push(`/experiences/${expId}/edit`)}
                 ></i>
               )}
           </div>
         )}
 
         <div className="pic5">
+          {/* if there are at least 5 photos */}
           {expImgArr.length >= 5 && (
             <>
               <img
@@ -208,6 +250,7 @@ const ExperienceDetails = () => {
               )}
             </>
           )}
+          {/* if there is no 5th photo */}
           {!expImgArr[4] && user?.id === exp.host_id && (
             <i
               className={
@@ -215,11 +258,21 @@ const ExperienceDetails = () => {
                   ? "pic-3-pic-4 fa fa-plus"
                   : "pic-5 fa fa-plus"
               }
-              onClick={() => history.push(`/experiences/${expId}/edit`)}
+              onClick={() => {
+                if (!user) return alert("You must be logged in first.");
+                setShowModal(true);
+                setSubmitted(false);
+              }}
+              // onClick={() => history.push(`/experiences/${expId}/edit`)}
             ></i>
           )}
         </div>
       </div>
+      {!submitted && showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <ExpImages2 setShowModal={setShowModal} />
+        </Modal>
+      )}
       <div>
         <AllImages exp={exp} />
       </div>

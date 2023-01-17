@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getOneExperience } from "../../store/experiences.js";
-import { deleteRvwImage } from "../../store/images.js";
+import { deleteExpImage } from "../../store/images.js";
 import "./DeleteImage.css";
 
 const DeleteExpImg = ({ imgId }) => {
