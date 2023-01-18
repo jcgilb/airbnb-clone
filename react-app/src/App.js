@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -99,22 +99,30 @@ function App() {
       </Switch>
       <footer>
         Aribnb clone by Joanna Gilbert
-        <img
-          onClick={() => window.location.replace("https://github.com/jcgilb")}
-          className="about-me github"
-          alt="linkedin"
-          src="../assets/github-icon.png"
-        ></img>
-        <img
-          onClick={() =>
-            window.location.replace(
-              "https://www.linkedin.com/in/joanna-gilbert-7b2053255/"
-            )
-          }
-          className="about-me linkedin"
-          alt="linkedin"
-          src="../assets/linkedin-icon.png"
-        ></img>
+        <Link
+          to={{
+            pathname: "https://github.com/jcgilb",
+          }}
+          target="_blank"
+        >
+          <img
+            className="about-me github"
+            alt="linkedin"
+            src="../assets/github-icon.png"
+          ></img>
+        </Link>
+        <Link
+          to={{
+            pathname: "https://www.linkedin.com/in/joanna-gilbert-7b2053255/",
+          }}
+          target="_blank"
+        >
+          <img
+            className="about-me linkedin"
+            alt="linkedin"
+            src="../assets/linkedin-icon.png"
+          ></img>
+        </Link>
       </footer>
     </BrowserRouter>
   );
