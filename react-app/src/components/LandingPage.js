@@ -93,7 +93,6 @@ const LandingPage = () => {
   //   // TODO: get total num reviews
   // };
 
-  console.log(pos);
   return (
     <div className="container-landing">
       <br />
