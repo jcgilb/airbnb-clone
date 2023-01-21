@@ -40,7 +40,6 @@ function GetReviews2() {
       const response = await fetch(`/api/experiences/${expId}/reviews`);
       const responseData = await response.json();
       setReviewArr(responseData);
-      console.log("reviewArr", reviewArr);
     }
     fetchData();
   }, [reviews]);
