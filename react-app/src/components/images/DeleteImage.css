@@ -4,13 +4,13 @@
   top: 20px;
   left: 20px;
   opacity: 0.5;
+  text-shadow: 1px 1px #ffffff;
 }
 
 .fa-x:hover {
   opacity: 1;
   color: rgb(255, 22, 84);
   cursor: pointer;
-  text-shadow: 1px 1px #ffffff;
 }
 .confirm-delete {
   position: absolute;
