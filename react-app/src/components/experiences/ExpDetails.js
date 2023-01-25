@@ -10,6 +10,7 @@ import ExpImages2 from "../images/ExpImage2.js";
 import { Modal } from "../../context/Modal";
 import { useSubmitted } from "../../context/SubmittedContext.js";
 import "./ExpDetails.css";
+import Map from "../map/Map.js";
 
 const ExperienceDetails = () => {
   const dispatch = useDispatch();
@@ -300,6 +301,7 @@ const ExperienceDetails = () => {
       <div className="details">Choose from available dates</div>
       <AvailableTimes />
       <hr></hr>
+      {/* <Map exp={exp} /> */}
       <GetReviews2 />
       <br />
       <br />
