@@ -301,7 +301,7 @@ const ExperienceDetails = () => {
       <div className="details">Choose from available dates</div>
       <AvailableTimes />
       <hr></hr>
-      <Map exp={exp} />
+      {/* <Map exp={exp} /> */}
       <GetReviews2 />
       <br />
       <br />
