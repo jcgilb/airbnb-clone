@@ -1,24 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
-import { uploadExpImage } from "../../store/images.js";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router";
 import ImageUploading from "react-images-uploading";
-import "../experiences/NewExp.css";
-import { getOneExperience } from "../../store/experiences.js";
-import { useSubmitted } from "../../context/SubmittedContext.js";
+import { getAllReviews, uploadRvwImage } from "../../store/reviews.js";
+import "./RvwImage.css";
 
-const ExpImages2 = (showModal, setShowModal) => {
+function UploadReviewImage() {
   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState([]);
-
-  const { submitted, setSubmitted } = useSubmitted();
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   // parse exp id from url
-  let { expId } = useParams();
+  let { expId, rvwId } = useParams();
+  rvwId = parseInt(rvwId);
   expId = parseInt(expId);
+
+  useEffect(() => {
+    dispatch(getAllReviews(expId));
+  }, [dispatch, expId, rvwId]);
+
+  // state objs
+  // const user = useSelector((state) => state.session.user);
+  // const rvwImages = useSelector((state) => state.images.rvwImages);
+  const reviews = useSelector((state) => state.reviews.reviews);
+  const rvwArr = Object.values(reviews);
+  const rvw = rvwArr.find((item) => item.id === rvwId);
+  const exps = useSelector((state) => state.experiences.experiences);
+  const expArr = Object.values(exps);
+  const exp = expArr.find((item) => item.id === rvw?.exp_id);
 
   // handle add/update image
   const onChange = (imageList, addUpdateIndex) => {
@@ -42,36 +53,40 @@ const ExpImages2 = (showModal, setShowModal) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let imageFiles = images?.map((img) => img.file);
-    await uploadImages(expId, imageFiles);
-    await dispatch(getOneExperience(expId));
+    await uploadImages(rvwId, imageFiles);
     history.push(`/experiences/${expId}`);
   };
 
   // send image files to thunk
-  const uploadImages = async (expId, imageFiles) => {
+  const uploadImages = async (rvwId, imageFiles) => {
     for (let i = 0; i < imageFiles.length; i++) {
       let img = imageFiles[i];
 
-      let newExpImage = {
-        exp_id: expId,
+      const newRvwImage = {
         file: img,
+        review_id: rvwId,
         newFile: true,
       };
 
-      const { review_id, file, newFile } = newExpImage;
+      const { review_id, file, newFile } = newRvwImage;
 
       const form = new FormData();
+
       form.append("file", file);
       form.append("review_id", review_id);
       form.append("newFile", newFile);
 
-      await dispatch(uploadExpImage(expId, form));
-      await setSubmitted(true);
+      await dispatch(uploadRvwImage(rvwId, form));
     }
   };
 
   return (
-    <form className="exp-form" onSubmit={handleSubmit}>
+    <div className="dd-img-div">
+      <br></br>
+      <br></br>
+      <div className="exp-details">Upload Review Images</div>
+      <br></br>
+      <br></br>
       <ImageUploading
         multiple
         value={images}
@@ -97,7 +112,7 @@ const ExpImages2 = (showModal, setShowModal) => {
               {...dragProps}
               style={isDragging ? { color: "rgb(255, 22, 84)" } : undefined}
             >
-              Drag & Drop to Upload Files
+              Drag & Drop to Upload Files*
             </div>
             <div>OR</div>
             <button
@@ -146,18 +161,14 @@ const ExpImages2 = (showModal, setShowModal) => {
           </div>
         )}
       </ImageUploading>
-      <ul className="errors">
-        {errors.length > 0 &&
-          errors.map((err) => (
-            <div id="err" key={err}>
-              {err}
-            </div>
-          ))}
-      </ul>
-      <button className="exp-image" type="submit" disabled={!!errors.length}>
-        Upload
-      </button>
-    </form>
+      <form className="upload-rvw-form" onSubmit={handleSubmit}>
+        <button className="new-img-submit" type="submit">
+          Submit
+        </button>
+        <div>*(Max 6)</div>
+      </form>
+    </div>
   );
-};
-export default ExpImages2;
+}
+
+export default UploadReviewImage;
