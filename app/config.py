@@ -14,4 +14,4 @@ class Config:
     S3_KEY = os.environ.get("S3_ACCESS_KEY")
     S3_SECRET = os.environ.get("S3_SECRET_ACCESS_KEY")
     S3_LOCATION = f"http://{S3_BUCKET}.s3.amazonaws.com/"
-    REACT_APP_GOOGLE_MAPS_API=os.environ.get("REACT_APP_GOOGLE_MAPS_API")
+    MAPS_API_KEY = os.environ.get("MAPS_API_KEY")
