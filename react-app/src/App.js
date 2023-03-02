@@ -15,10 +15,11 @@ import { getAllExperiences } from "./store/experiences";
 import DeleteExperience from "./components/experiences/DeleteExp";
 import LandingPage from "./components/LandingPage";
 import NotFoundPage from "./components/NotFoundPage";
-import UploadReviewImage2 from "./components/images/RvwImage2";
+import UploadReviewImage from "./components/images/RvwImageAWS";
 import ExploreExperienceResults from "./components/experiences/ExploreExperienceResults";
 import UserExperiences from "./components/users/UserExperiences";
 import UserBookings from "./components/users/UserBookings";
+import Map from "./components/map/Map";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -87,12 +88,14 @@ function App() {
           <UserBookings />
         </Route>
         <Route path="/experiences/:expId/reviews/:rvwId/upload" exact={true}>
-          <UploadReviewImage2 />
+          <UploadReviewImage />
+        </Route>
+        <Route path="/map">
+          <Map />
         </Route>
         <Route path="/" exact={true}>
           <LandingPage />
         </Route>
-
         <Route path="">
           <NotFoundPage />
         </Route>

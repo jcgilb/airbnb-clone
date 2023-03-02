@@ -6,10 +6,11 @@ import AvailableTimes from "../timeSlots/AvailableTimes.js";
 import DeleteExpImg from "../images/DeleteExpImage.js";
 import AllImages from "../images/AllImages.js";
 import GetReviews2 from "../reviews/GetReviews2.js";
-import ExpImages2 from "../images/ExpImage2.js";
+import ExpImageUpload from "../images/ExpImageAWS.js";
 import { Modal } from "../../context/Modal";
 import { useSubmitted } from "../../context/SubmittedContext.js";
 import "./ExpDetails.css";
+import Map from "../map/Map.js";
 
 const ExperienceDetails = () => {
   const dispatch = useDispatch();
@@ -270,7 +271,7 @@ const ExperienceDetails = () => {
       </div>
       {!submitted && showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <ExpImages2 setShowModal={setShowModal} />
+          <ExpImageUpload setShowModal={setShowModal} />
         </Modal>
       )}
       <div>
@@ -300,6 +301,7 @@ const ExperienceDetails = () => {
       <div className="details">Choose from available dates</div>
       <AvailableTimes />
       <hr></hr>
+      {/* <Map exp={exp} /> */}
       <GetReviews2 />
       <br />
       <br />

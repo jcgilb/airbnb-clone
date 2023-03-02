@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
-import ExpImage2 from "./ExpImage2";
+import ExpImageAWS from "./ExpImageAWS";
 
 function ExpImageModal() {
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +23,7 @@ function ExpImageModal() {
 
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <ExpImage2 />
+          <ExpImageAWS />
         </Modal>
       )}
     </>

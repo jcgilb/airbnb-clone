@@ -5,7 +5,3 @@ __pycache__/
 .DS_Store
 .vscode/
 dev.db
-cool.py
-review_routes.py
-RvwImage.js
-images.js
